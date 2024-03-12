@@ -1,4 +1,4 @@
-@include('layouts.style')
+@include('layouts.backend.data.style')
 
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <!-- SIDEBAR -->
@@ -6,34 +6,30 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="#" class="brand"><i class='bx bxs-smile icon'></i> Pergudangan</a>
+		<a href="#" class="brand"><i class='bx bxs-smile icon'></i> WI-MART </a>
 		<ul class="side-menu">
-			<li><a href="/admin" class="active"><i class='bx bxs-dashboard icon' ></i> Dashboard</a></li>
+			<li><a href="/admin" class="active"><i class='bx bxs-dashboard icon' ></i> Dashboard </a></li>
 			<li class="divider" data-text="main">Main</li>
+			<li><a href="/customer" ><i class='bx bxs-dashboard icon' ></i> Pelanggan </a></li>
 			<li>
 				<a href="#"><i class='bx bxs-inbox icon' ></i> Master Data <i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
-					<li><a href="/admin/user">Akun User</a></li>
-					<li><a href="/admin/pegawai">Pegawai</a></li>
-					<li><a href="/barang">Barang</a></li>
-					<li><a href="/rak">Rak</a></li>
+					<li><a href="/admin/user">kategori</a></li>
+					<li><a href="/admin/pegawai">produk</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#"><i class='bx bx-table icon' ></i> pesanan <i class='bx bx-chevron-right icon-right' ></i></a>
+				<ul class="side-dropdown">
+					<li><a href="/barang/in">semua pesanan</a></li>
+					<li><a href="/barang/out">pesanan pending</a></li>
 					
 				</ul>
 			</li>
 			<li>
-				<a href="#"><i class='bx bx-table icon' ></i> transaksi <i class='bx bx-chevron-right icon-right' ></i></a>
+				<a href="#"><i class='bx bxs-notepad icon' ></i> Setting <i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
-					<li><a href="/barang/in">Barang masuk</a></li>
-					<li><a href="/barang/out">Barang keluar</a></li>
-					
-				</ul>
-			</li>
-			<li>
-				<a href="#"><i class='bx bxs-notepad icon' ></i> Jurnal Movement <i class='bx bx-chevron-right icon-right' ></i></a>
-				<ul class="side-dropdown">
-					<li><a href="/penempatan">Penempatan</a></li>
-					<li><a href="/pemindahan">Pemindahan</a></li>
-					
+					<li><a href="/penempatan">Midtrans</a></li>
 				</ul>
 			</li>
 		</ul>

@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\CustomerController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/dashboard',[DashboardController::class,'index'])->name('admin.dashboard');
+Route::get('/customer',[CustomerController::class,'customer'])->name('admin.customer');
+Route::post('/customer/table', [CustomerController::class, 'table'])->name('admin.customer.table');
+
