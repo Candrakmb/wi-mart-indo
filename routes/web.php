@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Backend\DashboardController;
-use App\Http\Controllers\Backend\CustomerController;
+use App\Http\Controllers\frontend\HomeController;
+use App\Http\Controllers\backend\DashboardController;
+use App\Http\Controllers\backend\CustomerController;
 
 
 /*
@@ -16,7 +17,10 @@ use App\Http\Controllers\Backend\CustomerController;
 |
 */
 
-Route::get('/dashboard',[DashboardController::class,'index'])->name('admin.dashboard');
+Route::get('/',[HomeController::class,'index'])->name('home');
+Route::get('/product', [FrontendProductController::class,'index'])->name('product.index');
+Route::get('/category', [FrontendCategoryController::class,'index'])->name('category.index');
+Route::get('/dashboard',[DashboardController::class,'index'])->name('user.dashboard');
 Route::get('/customer',[CustomerController::class,'customer'])->name('admin.customer');
 Route::post('/customer/table', [CustomerController::class, 'table'])->name('admin.customer.table');
 
