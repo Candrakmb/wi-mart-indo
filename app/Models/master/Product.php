@@ -10,11 +10,11 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\master\Categori;
 
-class Products extends Model
+class Product extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    
+    protected $table = 'products';
     protected $fillable = [
         'name',
         'slug',
@@ -24,7 +24,7 @@ class Products extends Model
         'description',
     ];
 
-    public function Categori()
+    public function categori()
     {
         return $this->belongsTo(Categori::class,'categories_id');
     }

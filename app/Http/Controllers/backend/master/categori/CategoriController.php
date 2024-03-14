@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\master\categori;
+namespace App\Http\Controllers\backend\master\categori;
 
 
 use App\Http\Controllers\Controller;
@@ -23,7 +23,7 @@ class CategoriController extends Controller
         
     ];
     
-    function customer(){
+    function categori(){
         $this->data['type'] = "index";
         $this->data['data'] = null;
     	return view($this->data['sektor'].'.'.$this->data['parent'].'.'.$this->data['modul'].'.index', $this->data);
@@ -32,12 +32,19 @@ class CategoriController extends Controller
     function create(){
         $this->data['type'] = "create";
         $this->data['data'] = null;
+        $this->data['data_categori'] =Categori::get();
     	return view($this->data['sektor'].'.'.$this->data['parent'].'.'.$this->data['modul'].'.index', $this->data);
     }
 
-    function delete(){
-        $this->data['type'] = "delete";
+    function update($id){
+        $this->data['type'] = "update";
         $this->data['data'] = null;
+        $query = categori::query()
+                ->where('id', '=', $id)
+                ->orderBy('categories.id');
+        $query = $query->first();
+        $this->data['data'] = $query;
+
     	return view($this->data['sektor'].'.'.$this->data['parent'].'.'.$this->data['modul'].'.index', $this->data);
     }
 
@@ -53,10 +60,10 @@ class CategoriController extends Controller
         return DataTables::of($query)
             ->addIndexColumn()
             ->addColumn('action', function($row){
-                $btn = '';
+                $btn = '';      
                 $btn .= '<div class="text-center">';
                 $btn .= '<div class="btn-group btn-group-solid mx-5">';
-                $btn .= '<a class="btn btn-warning ml-1" href="/categori/update/'.$row->id.'"><i class="icon-edit"></i></a> ';
+                $btn .= '<a class="btn btn-warning ml-1" href="/categori/update/'.$row->id.'"><i class="icon-edit"></i></a> &nbsp';
                 $btn .= '<button class="btn btn-danger btn-raised btn-xs" id="btn-hapus" title="Hapus"><i class="icon-trash"></i></button>';
                 $btn .= '</div>';    
                 $btn .= '</div>';
@@ -74,7 +81,7 @@ class CategoriController extends Controller
             $validator = Validator::make($request->all(), [
                 'name' => 'required|string|max:255',
                 'slug' => 'required|string|max:255|unique:categories,slug', // Pastikan slug unik
-                'thumbnails' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
+                'gambar_kategori' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
             ]);
     
             // Jika validasi gagal
@@ -87,15 +94,15 @@ class CategoriController extends Controller
     
             // Jika kategori belum ada, simpan data baru
             if ($cek == null) {
-                // Simpan gambar ke dalam folder storage/app/public/thumbnailss
-                $thumbnailsName = time() . '.' . $request->thumbnails->extension();
-                $request->thumbnails->storeAs('public/thumbnailss', $thumbnailsName);
+                // Simpan gambar ke dalam folder storage/app/public/gambar_kategoris
+                $gambar_kategoriName = time() . '.' . $request->gambar_kategori->extension();
+                $request->gambar_kategori->storeAs('public/image/kategori', $gambar_kategoriName);
     
                 // Buat objek kategori baru
                 $categori = new Categori();
                 $categori->name = $request->name;
                 $categori->slug = $request->slug;
-                $categori->thumbnails = $thumbnailsName; // Simpan nama gambar ke dalam kolom thumbnails
+                $categori->thumbnails = $gambar_kategoriName; // Simpan nama gambar ke dalam kolom thumbnails
                 $categori->save();
     
                 DB::commit();
@@ -143,16 +150,16 @@ class CategoriController extends Controller
                 $category->slug = $request->slug;
 
                 // Update gambar jika ada
-                if ($request->hasFile('thumbnails')) {
+                if ($request->hasFile('gambar_kategori')) {
                     // Hapus gambar lama jika ada
                     if ($category->thumbnails) {
-                        Storage::delete('public/thumbnailss/' . $category->thumbnails);
+                        Storage::delete('public/image/kategori/' . $category->thumbnails);
                     }
 
                     // Simpan gambar baru
-                    $thumbnailsName = time() . '.' . $request->thumbnails->extension();
-                    $request->thumbnails->storeAs('public/thumbnailss', $thumbnailsName);
-                    $category->thumbnails = $thumbnailsName;
+                    $gambar_kategoriName = time() . '.' . $request->gambar_kategori->extension();
+                    $request->gambar_kategori->storeAs('public/image/kategori', $gambar_kategoriName);
+                    $category->thumbnails = $gambar_kategoriName;
                 }
 
                 // Simpan perubahan
@@ -179,11 +186,11 @@ class CategoriController extends Controller
     
         try {
             // Mengambil data kategori yang akan dihapus
-            $category = Categori::findOrFail($request->id);
-    
+            $category = Categori::where('id', $request->id)->first();
             // Menghapus gambar jika ada
-            if ($category->image) {
-                Storage::delete('public/images/' . $category->image);
+            // dd('public/image/kategori' . $category->thumbnails);
+            if( $category->thumbnails){
+                Storage::delete('public/image/kategori/' . $category->thumbnails);
             }
     
             // Menghapus kategori dari database

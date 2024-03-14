@@ -1,5 +1,5 @@
 <div class="col text-right" style="margin: 0 -3em 0 0;">
-    <a href="/rak/create" type="button" class="btn btn-primary btn-data" id="btn-create" style="margin: 1em 0 0 0;">
+    <a href="/categori/create" type="button" class="btn btn-primary btn-data" id="btn-create" style="margin: 1em 0 0 0;">
         <i class="fa fa-plus-square"></i> <span>Tambah</span>
     </a>
 </div>
@@ -22,9 +22,9 @@
                 </button>
                 <div class="dropdown-menu">
                     <label class="dropdown-item"><input class="toggle-vis" data-column="3" type="checkbox" checked> Nama </label>
-                    <label class="dropdown-item"><input class="toggle-vis" data-column="4" type="checkbox" checked> Email </label>
-                    <label class="dropdown-item"><input class="toggle-vis" data-column="5" type="checkbox" checked> Alamat </label>
-                    <label class="dropdown-item"><input class="toggle-vis" data-column="6" type="checkbox" checked> No.TLP </label>
+                    <label class="dropdown-item"><input class="toggle-vis" data-column="4" type="checkbox" checked> Slug </label>
+                    <label class="dropdown-item"><input class="toggle-vis" data-column="5" type="checkbox" checked> Image </label>
+                    {{-- <label class="dropdown-item"><input class="toggle-vis" data-column="6" type="checkbox" checked> No.TLP </label> --}}
                 </div>
             </div>
         </div>
@@ -36,9 +36,9 @@
                     <th class="th-table" style="font-size: 12px;">No</th>
                     <th class="th-table" style="font-size: 12px;">Aksi</th>
                     <th class="th-table" style="font-size: 12px;">Nama</th>
-                    <th class="th-table" style="font-size: 12px;">Email</th>
-                    <th class="th-table" style="font-size: 12px;">Alamat</th>
-                    <th class="th-table" style="font-size: 12px;">No.Tlp</th>
+                    <th class="th-table" style="font-size: 12px;">Slug</th>
+                    <th class="th-table" style="font-size: 12px;">Image</th>
+                    {{-- <th class="th-table" style="font-size: 12px;">No.Tlp</th> --}}
                 </tr>
             </thead>
             <tbody class="text-center">
