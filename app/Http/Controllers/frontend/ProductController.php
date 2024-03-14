@@ -12,13 +12,13 @@ class ProductController extends Controller
     protected $product;
     public function __construct()
     {
-        $this->product = new CrudRepositories(new Product());
+        // $this->product = new CrudRepositories(new Product());
     }
 
     public function index()
     {
-        $data['product'] = $this->product->getPaginate(12);
-        return view('frontend.product.index',compact('data'));
+        // $data['product'] = $this->product->getPaginate(12);
+        return view('frontend.product.index');
     }
 
     public function show($categoriSlug,$productSlug)

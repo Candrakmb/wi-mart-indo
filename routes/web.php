@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\ProductController as FrontendProductController;
+use App\Http\Controllers\frontend\CategoryController as FrontendCategoryController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\CustomerController;
 
@@ -26,3 +27,4 @@ Route::get('/dashboard',[DashboardController::class,'index'])->name('user.dashbo
 Route::get('/customer',[CustomerController::class,'customer'])->name('admin.customer');
 Route::post('/customer/table', [CustomerController::class, 'table'])->name('admin.customer.table');
 
+require __DIR__ . '/auth.php';

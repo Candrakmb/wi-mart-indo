@@ -21,19 +21,18 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12">
                     <div class="row">
-                        @foreach ($data['product'] as $product)
+                        @for ($i = 0; $i < 4; $i++)
                         <div class="col-lg-3 col-md-4">
                             @component('components.frontend.product-card')
-                            @slot('image', asset('storage/' . $product->thumbnails))
-                            @slot('route', route('product.show', ['categoriSlug' => $product->Category->slug, 'productSlug' =>
-                                $product->slug]))
-                                @slot('name', $product->name)
-                                @slot('price', $product->price)
+                                @slot('image', asset('img/product.jpg'))
+                                @slot('route', '#')
+                                    @slot('name', 'KAOS')
+                                    @slot('price', 120000)
                             @endcomponent
                         </div>
-                        @endforeach
+                        @endfor
                         <div class="col-lg-12 text-center">
-                          {{ $data['product']->links('vendor.pagination.custom') }}
+                          {{-- {{ $data['product']->links('vendor.pagination.custom') }} --}}
                         </div>
                     </div>
                 </div>

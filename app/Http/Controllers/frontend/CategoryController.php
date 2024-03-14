@@ -10,17 +10,17 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    protected $category,$product;
-    public function __construct(Category $category,Product $product)
-    {
-        $this->category = new CrudRepositories($category);
-        $this->product = new CrudRepositories($product);
-    }
+    // protected $category,$product;
+    // public function __construct(Category $category,Product $product)
+    // {
+    //     $this->category = new CrudRepositories($category);
+    //     $this->product = new CrudRepositories($product);
+    // }
 
     public function index()
     {
-        $data['category'] = $this->category->getPaginate(9);
-        return view('frontend.category.index',compact('data'));
+        // $data['category'] = $this->category->getPaginate(9);
+        return view('frontend.category.index');
     }
 
     public function show($slug)
