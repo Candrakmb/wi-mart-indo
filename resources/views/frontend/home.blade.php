@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-lg-6 p-0">
                     <div class="categories__item categories__large__item set-bg"
-                        data-setbg="{{ asset('me') }}/img/goku.png">
+                        data-setbg="{{ asset('img') }}/goku.png">
                         <div class="categories__text">
                             <p>Beragam Merchandise Anime Mulai Dari Tshirt, Hoddie, Action Figure Semuanya Tersedia Di Anime
                                 Store.</p>
@@ -16,10 +16,10 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="row">
-                        {{-- @foreach ($data['new_categories'] as $category) --}}
+                        @for ($i = 0; $i < 4; $i++)
                             <div class="col-lg-6 col-md-6 col-sm-6 p-0">
                                 <div class="categories__item set-bg"
-                                    data-setbg="{{ asset('storage/Screenshot from 2024-02-04 13-00-55.png') }}">
+                                    data-setbg="{{ asset('img') }}/goku.png">
                                     <div class="categories__text">
                                         <h4>KAOS</h4>
                                         <p>10 item</p>
@@ -27,7 +27,7 @@
                                     </div>
                                 </div>
                             </div>
-                        {{-- @endforeach --}}
+                        @endfor
                     </div>
                 </div>
             </div>
@@ -56,17 +56,18 @@
             <div class="row property__gallery">
                 {{-- @foreach ($data['new_categories'] as $new_categories2) --}}
                     {{-- @foreach ($new_categories2->Products()->limit(4)->get() as $product) --}}
-                        {{-- <div class="col-lg-3 col-md-4 col-sm-6 mix {{ $new_categories2->slug }}">
+                    @for ($i = 0; $i < 4; $i++)
+                        <div class="col-lg-3 col-md-4 col-sm-6 mix {{-- $new_categories2->slug --}}">
                             @component('components.frontend.product-card')
-                                @slot('image', asset('storage/' . $product->thumbnails))
-                                @slot('route', route('product.show', ['categoriSlug' => $new_categories2->slug, 'productSlug' =>
-                                    $product->slug]))
-                                    @slot('name', $product->name)
-                                    @slot('price', $product->price)
+                                @slot('image', asset('img/product.jpg'))
+                                @slot('route', '#')
+                                    @slot('name', 'KAOS')
+                                    @slot('price', 120000)
                                 @endcomponent
-                            </div> --}}
+                            </div>
                         {{-- @endforeach --}}
                     {{-- @endforeach --}}
+                    @endfor
                 </div>
             </div>
         </section>
