@@ -1,19 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Backend\DashboardController;
-use App\Http\Controllers\Backend\CustomerController;
 use App\Http\Controllers\Backend\master\categori\CategoriController;
 use App\Http\Controllers\Backend\master\product\ProductController as BackendProductController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\ProductController as FrontendProductController;
-<<<<<<< HEAD
 use App\Http\Controllers\frontend\CategoryController as FrontendCategoryController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\CustomerController;
-
-=======
->>>>>>> 063d4f6ffc35c834a39f146b0a5dc544e9d54e62
 
 
 /*
@@ -34,9 +28,7 @@ Route::get('/dashboard',[DashboardController::class,'index'])->name('user.dashbo
 Route::get('/customer',[CustomerController::class,'customer'])->name('admin.customer');
 Route::post('/customer/table', [CustomerController::class, 'table'])->name('admin.customer.table');
 
-<<<<<<< HEAD
-require __DIR__ . '/auth.php';
-=======
+
 Route::prefix('categori')->name('categori.')->group(function(){
     Route::get('/',[CategoriController::class,'categori'])->name('categori');
     Route::post('/table', [CategoriController::class, 'table'])->name('table');
@@ -56,4 +48,5 @@ Route::prefix('product')->name('product.')->group(function(){
     Route::post('/createform',[BackendProductController::class,'createform'])->name('createform');
     Route::post('/deleteform',[BackendProductController::class,'deleteform'])->name('deleteform');
 });
->>>>>>> 063d4f6ffc35c834a39f146b0a5dc544e9d54e62
+
+require __DIR__ . '/auth.php';
