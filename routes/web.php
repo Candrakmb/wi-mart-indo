@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\CustomerController;
+use App\Http\Controllers\Backend\master\categori\CategoriController;
+use App\Http\Controllers\Backend\master\product\ProductController as BackendProductController;
+use App\Http\Controllers\frontend\HomeController;
+use App\Http\Controllers\frontend\ProductController as FrontendProductController;
 
 
 /*
@@ -34,11 +38,11 @@ Route::prefix('categori')->name('categori.')->group(function(){
 });
 
 Route::prefix('product')->name('product.')->group(function(){
-    Route::get('/',[ProductController::class,'product'])->name('product');
-    Route::post('/table', [ProductController::class, 'table'])->name('table');
-    Route::get('/create',[ProductController::class,'create'])->name('create');
-    Route::get('/update/{id}',[ProductController::class,'update'])->name('update');
-    Route::post('/updateform',[ProductController::class,'updateform'])->name('updateform');
-    Route::post('/createform',[ProductController::class,'createform'])->name('createform');
-    Route::post('/deleteform',[ProductController::class,'deleteform'])->name('deleteform');
+    Route::get('/',[BackendProductController::class,'product'])->name('product');
+    Route::post('/table', [BackendProductController::class, 'table'])->name('table');
+    Route::get('/create',[BackendProductController::class,'create'])->name('create');
+    Route::get('/update/{id}',[BackendProductController::class,'update'])->name('update');
+    Route::post('/updateform',[BackendProductController::class,'updateform'])->name('updateform');
+    Route::post('/createform',[BackendProductController::class,'createform'])->name('createform');
+    Route::post('/deleteform',[BackendProductController::class,'deleteform'])->name('deleteform');
 });
