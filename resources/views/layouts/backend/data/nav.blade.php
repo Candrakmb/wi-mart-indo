@@ -14,8 +14,8 @@
 			<li>
 				<a href="#"><i class='bx bxs-inbox icon' ></i> Master Data <i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
-					<li><a href="/admin/user">kategori</a></li>
-					<li><a href="/admin/pegawai">produk</a></li>
+					<li><a href="/categori">kategori</a></li>
+					<li><a href="/product">produk</a></li>
 				</ul>
 			</li>
 			<li>
