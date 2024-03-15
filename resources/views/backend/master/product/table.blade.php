@@ -1,5 +1,5 @@
 <div class="col text-right" style="margin: 0 -3em 0 0;">
-    <a href="/categori/create" type="button" class="btn btn-primary btn-data" id="btn-create" style="margin: 1em 0 0 0;">
+    <a href="/product/create" type="button" class="btn btn-primary btn-data" id="btn-create" style="margin: 1em 0 0 0;">
         <i class="fa fa-plus-square"></i> <span>Tambah</span>
     </a>
 </div>
@@ -7,7 +7,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-6">
-                <h3 class="card-title">Data Category</h3>
+                <h3 class="card-title">Data Product</h3>
             </div>
             <div class="col-6 text-right">
             <button type="button" class="btn btn-data-sec" id="btn-muat-ulang" style="margin: 1em 0 0 0;">
@@ -22,9 +22,12 @@
                 </button>
                 <div class="dropdown-menu">
                     <label class="dropdown-item"><input class="toggle-vis" data-column="2" type="checkbox" checked> Nama </label>
-                    <label class="dropdown-item"><input class="toggle-vis" data-column="3" type="checkbox" checked> Slug </label>
-                    <label class="dropdown-item"><input class="toggle-vis" data-column="4" type="checkbox" checked> Image </label>
-                    {{-- <label class="dropdown-item"><input class="toggle-vis" data-column="6" type="checkbox" checked> No.TLP </label> --}}
+                    <label class="dropdown-item"><input class="toggle-vis" data-column="3" type="checkbox" checked> kategori </label>
+                    <label class="dropdown-item"><input class="toggle-vis" data-column="4" type="checkbox" checked> Slug </label>
+                    <label class="dropdown-item"><input class="toggle-vis" data-column="5" type="checkbox" checked> Harga </label>
+                    <label class="dropdown-item"><input class="toggle-vis" data-column="6" type="checkbox" checked> Berat </label>
+                    <label class="dropdown-item"><input class="toggle-vis" data-column="7" type="checkbox" checked> Stok </label>
+                    <label class="dropdown-item"><input class="toggle-vis" data-column="8" type="checkbox" checked> Deskripsi </label>
                 </div>
             </div>
         </div>
@@ -36,9 +39,12 @@
                     <th class="th-table" style="font-size: 12px;">No</th>
                     <th class="th-table" style="font-size: 12px;">Aksi</th>
                     <th class="th-table" style="font-size: 12px;">Nama</th>
+                    <th class="th-table" style="font-size: 12px;">Kategori</th>
                     <th class="th-table" style="font-size: 12px;">Slug</th>
-                    <th class="th-table" style="font-size: 12px;">Image</th>
-                    {{-- <th class="th-table" style="font-size: 12px;">No.Tlp</th> --}}
+                    <th class="th-table" style="font-size: 12px;">Harga</th>
+                    <th class="th-table" style="font-size: 12px;">Berat</th>
+                    <th class="th-table" style="font-size: 12px;">Stok</th>
+                    <th class="th-table" style="font-size: 12px;">Deskripsi</th>
                 </tr>
             </thead>
             <tbody class="text-center">

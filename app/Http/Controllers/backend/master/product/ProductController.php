@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Backend\master\categori;
+namespace App\Http\Controllers\Backend\master\product;
 
 
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 use App\Models\master\Categori;
-use App\Models\master\Products;
+use App\Models\master\Product;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
-class CategoriController extends Controller
+class ProductController extends Controller
 {
 
     public $data = [
@@ -24,21 +24,29 @@ class CategoriController extends Controller
         
     ];
     
-    function customer(){
+    function product(){
         $this->data['type'] = "index";
         $this->data['data'] = null;
+        $this->data['data_categori'] =Product::get();
     	return view($this->data['sektor'].'.'.$this->data['parent'].'.'.$this->data['modul'].'.index', $this->data);
     }
 
     function create(){
         $this->data['type'] = "create";
         $this->data['data'] = null;
+        $this->data['data_categori'] =Categori::get();
     	return view($this->data['sektor'].'.'.$this->data['parent'].'.'.$this->data['modul'].'.index', $this->data);
     }
 
-    function delete(){
-        $this->data['type'] = "delete";
+    function update($id){
+        $this->data['type'] = "update";
         $this->data['data'] = null;
+        $this->data['data_categori'] =Categori::get();
+        $query = Product::with(['categori'])
+                ->where('id', '=', $id)
+                ->orderBy('products.id');
+        $query = $query->first();
+        $this->data['data'] = $query;
     	return view($this->data['sektor'].'.'.$this->data['parent'].'.'.$this->data['modul'].'.index', $this->data);
     }
 
@@ -49,7 +57,8 @@ class CategoriController extends Controller
 
 
     function table(){
-        $query = Products::orderBy('products.id','desc');
+        $query = Product::with(['categori'])
+                ->orderBy('products.id','desc');
         $query = $query->get();
         return DataTables::of($query)
             ->addIndexColumn()
@@ -57,7 +66,7 @@ class CategoriController extends Controller
                 $btn = '';
                 $btn .= '<div class="text-center">';
                 $btn .= '<div class="btn-group btn-group-solid mx-5">';
-                $btn .= '<a class="btn btn-warning ml-1" href="/product/update/'.$row->id.'"><i class="icon-edit"></i></a> ';
+                $btn .= '<a class="btn btn-warning ml-1" href="/product/update/'.$row->id.'"><i class="icon-edit"></i></a> &nbsp';
                 $btn .= '<button class="btn btn-danger btn-raised btn-xs" id="btn-hapus" title="Hapus"><i class="icon-trash"></i></button>';
                 $btn .= '</div>';    
                 $btn .= '</div>';
@@ -73,9 +82,14 @@ class CategoriController extends Controller
         try {
             // Validasi input
             $validator = Validator::make($request->all(), [
+                'categories_id' => 'required|integer',
                 'name' => 'required|string|max:255',
-                'slug' => 'required|string|max:255|unique:categories,slug', // Pastikan slug unik
-                'thumbnails' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
+                'slug' => 'required|string|max:255|unique:categories,slug',
+                'price' => 'required|integer',
+                'weight'=> 'required|integer',
+                'stok'=> 'required|integer',
+                'description' => 'required',
+                'gambar_product' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
             ]);
     
             // Jika validasi gagal
@@ -84,20 +98,25 @@ class CategoriController extends Controller
             }
     
             // Mengecek apakah kategori sudah ada berdasarkan nama
-            $cek = Categori::where('name', $request->name)->first();
+            $cek = Product::where('name', $request->name)->first();
     
             // Jika kategori belum ada, simpan data baru
             if ($cek == null) {
-                // Simpan gambar ke dalam folder storage/app/public/thumbnailss
-                $thumbnailsName = time() . '.' . $request->thumbnails->extension();
-                $request->thumbnails->storeAs('public/thumbnailss', $thumbnailsName);
+                // Simpan gambar ke dalam folder storage/app/public/
+                $gambar_productName = time() . '.' . $request->gambar_product->extension();
+                $request->gambar_product->storeAs('public/image/product', $gambar_productName);
     
                 // Buat objek kategori baru
-                $categori = new Categori();
-                $categori->name = $request->name;
-                $categori->slug = $request->slug;
-                $categori->thumbnails = $thumbnailsName; // Simpan nama gambar ke dalam kolom thumbnails
-                $categori->save();
+                $product = new Product;
+                $product->categories_id = $request->categories_id;
+                $product->name = $request->name;
+                $product->slug = $request->slug;
+                $product->price = $request->price;
+                $product->weight = $request->weight;
+                $product->stok = $request->stok;
+                $product->description = $request->description;
+                $product->thumbnails = $gambar_productName; // Simpan nama gambar ke dalam kolom thumbnails
+                $product->save();
     
                 DB::commit();
                 return response()->json(['title' => 'Success!', 'icon' => 'success', 'text' => 'Data Berhasil Ditambah!', 'ButtonColor' => '#66BB6A', 'type' => 'success']);
@@ -121,9 +140,15 @@ class CategoriController extends Controller
         try {
             // Validasi input
             $validator = Validator::make($request->all(), [
+                'categories_id' => 'required|integer',
                 'name' => 'required|string|max:255',
                 'slug' => 'required|string|max:255|unique:categories,slug,' . $request->id . ',id',
-                'thumbnails' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
+                'price' => 'required|numeric',
+                'weight' => 'required|numeric',
+                'stok' => 'required|integer',
+                'description' => 'required|string',
+                'gambar_product' => 'nullabel|image|mimes:jpeg,png,jpg,gif|max:2048',
+
             ]);
 
             // Jika validasi gagal
@@ -132,32 +157,37 @@ class CategoriController extends Controller
             }
 
             // Mengecek apakah nama sudah digunakan selain oleh id yang sedang diperbarui
-            $cek = Categori::where('name', $request->name)
+            $cek = Product::where('name', $request->name)
                 ->where('id', '!=', $request->id)
                 ->first();
 
             // Jika nama belum digunakan selain oleh id yang sedang diperbarui, update data
             if ($cek == null) {
                 // Update data category
-                $category = Categori::findOrFail($request->id);
-                $category->name = $request->name;
-                $category->slug = $request->slug;
+                $product = Product::findOrFail($request->id);
+                $product->categories_id = $request->categories_id;
+                $product->name = $request->name;
+                $product->slug = $request->slug;
+                $product->price = $request->price;
+                $product->weight = $request->weight;
+                $product->stok = $request->stok;
+                $product->description = $request->description;
 
                 // Update gambar jika ada
-                if ($request->hasFile('thumbnails')) {
+                if ($request->hasFile('gambar_product')) {
                     // Hapus gambar lama jika ada
-                    if ($category->thumbnails) {
-                        Storage::delete('public/thumbnailss/' . $category->thumbnails);
+                    if ($product->thumbnails) {
+                        Storage::delete('public/image/product/' . $product->thumbnails);
                     }
 
                     // Simpan gambar baru
-                    $thumbnailsName = time() . '.' . $request->thumbnails->extension();
-                    $request->thumbnails->storeAs('public/thumbnailss', $thumbnailsName);
-                    $category->thumbnails = $thumbnailsName;
+                    $gambar_productName = time() . '.' . $request->gambar_product->extension();
+                    $request->gambar_product->storeAs('public/image/product', $gambar_productName);
+                    $product->thumbnails = $gambar_productName;
                 }
 
                 // Simpan perubahan
-                $category->save();
+                $product->save();
 
                 DB::commit();
                 return response()->json(['title' => 'Success!', 'icon' => 'success', 'text' => 'Data Berhasil Diubah!', 'ButtonColor' => '#66BB6A', 'type' => 'success']);
@@ -180,15 +210,15 @@ class CategoriController extends Controller
     
         try {
             // Mengambil data kategori yang akan dihapus
-            $category = Categori::findOrFail($request->id);
+            $product = Product::findOrFail($request->id);
     
             // Menghapus gambar jika ada
-            if ($category->image) {
-                Storage::delete('public/images/' . $category->image);
+            if ($product->thumbnails) {
+                Storage::delete('public/image/product/' . $product->thumbnails);
             }
     
             // Menghapus kategori dari database
-            Categori::where('id', $request->id)->delete();
+            Product::where('id', $request->id)->delete();
     
             DB::commit();
             return response()->json(['title' => 'Success!', 'icon' => 'success', 'text' => 'Data Berhasil Dihapus!', 'ButtonColor' => '#66BB6A', 'type' => 'success']); 

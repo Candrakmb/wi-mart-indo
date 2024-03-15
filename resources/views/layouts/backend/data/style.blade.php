@@ -583,7 +583,9 @@
         border-radius: 20px;
     }
     
-    
+    .required{
+        color: #FC3B56;
+    }
     
     
     

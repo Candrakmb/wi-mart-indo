@@ -80,7 +80,7 @@ class CategoriController extends Controller
             // Validasi input
             $validator = Validator::make($request->all(), [
                 'name' => 'required|string|max:255',
-                'slug' => 'required|string|max:255|unique:categories,slug', // Pastikan slug unik
+                'slug' => 'required|string|max:255|unique:categories,slug',
                 'gambar_kategori' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
             ]);
     

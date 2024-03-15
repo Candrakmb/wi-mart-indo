@@ -12,7 +12,7 @@
                 <i class="fa fa-file-excel-o"></i>
             </button>
             <div class="btn dropdown" >
-                <button style="margin: 1em 0 0 0" class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                <button style="margin: 1em 0 0 0" class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-filter"></i>
                 </button>
                 <div class="dropdown-menu">
