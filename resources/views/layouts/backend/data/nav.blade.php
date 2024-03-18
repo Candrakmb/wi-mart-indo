@@ -21,15 +21,19 @@
 			<li>
 				<a href="#"><i class='bx bx-table icon' ></i> pesanan <i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
-					<li><a href="/barang/in">semua pesanan</a></li>
-					<li><a href="/barang/out">pesanan pending</a></li>
+					<li><a href="/order/all">semua pesanan</a></li>
+					<li><a href="/order/0">pesanan pending</a></li>
+					<li><a href="/order/1">pesanan kemas</a></li>
+					<li><a href="/order/2">pesanan kirim</a></li>
+					<li><a href="/order/3">pesanan selesai</a></li>
+					<li><a href="/order/4">pesanan batal</a></li>
 					
 				</ul>
 			</li>
 			<li>
 				<a href="#"><i class='bx bxs-notepad icon' ></i> Setting <i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
-					<li><a href="/penempatan">Midtrans</a></li>
+					<li><a href="/penempatan">Alamat pengirim</a></li>
 				</ul>
 			</li>
 		</ul>

@@ -8,6 +8,7 @@ use App\Http\Controllers\frontend\ProductController as FrontendProductController
 use App\Http\Controllers\frontend\CategoryController as FrontendCategoryController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\CustomerController;
+use App\Http\Controllers\backend\order\OrderController;
 
 
 /*
@@ -47,6 +48,14 @@ Route::prefix('product')->name('product.')->group(function(){
     Route::post('/updateform',[BackendProductController::class,'updateform'])->name('updateform');
     Route::post('/createform',[BackendProductController::class,'createform'])->name('createform');
     Route::post('/deleteform',[BackendProductController::class,'deleteform'])->name('deleteform');
+});
+
+Route::prefix('order')->name('order.')->group(function(){
+    Route::get('/{status}',[OrderController::class,'order'])->name('order');
+    Route::post('/table/{status}', [OrderController::class, 'table'])->name('table');
+    Route::get('/update/{id}',[OrderController::class,'update'])->name('update');
+    Route::post('/updateform',[OrderController::class,'updateform'])->name('updateform');
+    Route::post('/createform',[OrderController::class,'createform'])->name('createform');
 });
 
 require __DIR__ . '/auth.php';
