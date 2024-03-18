@@ -3,20 +3,16 @@
         data-setbg="{{ $image }}">
         <div class="label new">New</div>
         <ul class="product__hover">
-            <li><a href="{{ $image }}"
-                    class="image-popup"><span class="arrow_expand"></span></a></li>
-            <li><a href="{{ $route }}"><span><i class="fa-regular fa-eye"></i></span></a></li>
+            <a href="{{ $image }}" class="btn btn-info image-popup" style="color: black;" onmouseover="this.style.color='white';" onmouseout="this.style.color='black';">Primary</a>
+            {{-- <a href="{{ $route }}" class="btn btn-warning" style="color: black;">Primary</a> --}}
+            <a href="/product/baju/baju" class="btn btn-warning" style="color: black;">Primary</a>
         </ul>
+        
+
     </div>
+    
     <div class="product__item__text">
         <h6><a href="{{ $route }}">{{ $name }}</a></h6>
-        <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-        </div>
-        <div class="product__price">{{ $price }}</div>
+        <div class="product__price">Rp.{{ $price }}</div>
     </div>
 </div>

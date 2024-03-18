@@ -22,13 +22,6 @@ use App\Http\Controllers\backend\order\OrderController;
 |
 */
 
-Route::get('/',[HomeController::class,'index'])->name('home');
-Route::get('/product', [FrontendProductController::class,'index'])->name('product.index');
-Route::get('/category', [FrontendCategoryController::class,'index'])->name('category.index');
-Route::get('/dashboard',[DashboardController::class,'index'])->name('user.dashboard');
-Route::get('/customer',[CustomerController::class,'customer'])->name('admin.customer');
-Route::post('/customer/table', [CustomerController::class, 'table'])->name('admin.customer.table');
-
 
 Route::prefix('categori')->name('categori.')->group(function(){
     Route::get('/',[CategoriController::class,'categori'])->name('categori');
@@ -57,5 +50,14 @@ Route::prefix('order')->name('order.')->group(function(){
     Route::post('/updateform',[OrderController::class,'updateform'])->name('updateform');
     Route::post('/createform',[OrderController::class,'createform'])->name('createform');
 });
+Route::get('/',[HomeController::class,'index'])->name('home');
+Route::get('/product', [FrontendProductController::class,'index'])->name('product.index');
+Route::get('/category', [FrontendCategoryController::class,'index'])->name('category.index');
+Route::get('/dashboard',[DashboardController::class,'index'])->name('user.dashboard');
+Route::get('/customer',[CustomerController::class,'customer'])->name('admin.customer');
+Route::post('/customer/table', [CustomerController::class, 'table'])->name('admin.customer.table');
+
+// Route::get('/product/{categoriSlug}/{productSlug}',[FrontendProductController::class,'show'])->name('product.show');
+Route::get('/product/baju/baju',[FrontendProductController::class,'show'])->name('product.show');
 
 require __DIR__ . '/auth.php';
