@@ -1775,9 +1775,12 @@ ol {
 	font-size: 14px;
 	color: #666666;
 	cursor: pointer;
-	float: left;
 	width: 12px;
 	line-height: 46px;
+}
+
+.pro-qty .dec{
+	float: left;
 }
 
 .pro-qty input {
