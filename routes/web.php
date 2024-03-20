@@ -9,7 +9,7 @@ use App\Http\Controllers\frontend\CategoryController as FrontendCategoryControll
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\CustomerController;
 use App\Http\Controllers\backend\order\OrderController;
-
+use App\Http\Controllers\Backend\setting\AddBankController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +28,20 @@ Route::prefix('categori')->name('categori.')->group(function(){
     Route::post('/table', [CategoriController::class, 'table'])->name('table');
     Route::get('/create',[CategoriController::class,'create'])->name('create');
     Route::get('/update/{id}',[CategoriController::class,'update'])->name('update');
+    Route::get('/lihat/{id}',[CategoriController::class,'lihat'])->name('lihat');
     Route::post('/updateform',[CategoriController::class,'updateform'])->name('updateform');
     Route::post('/createform',[CategoriController::class,'createform'])->name('createform');
     Route::post('/deleteform',[CategoriController::class,'deleteform'])->name('deleteform');
+});
+
+Route::prefix('add_bank')->name('add_bank.')->group(function(){
+    Route::get('/',[AddBankController::class,'bank'])->name('bank');
+    Route::post('/table', [AddBankController::class, 'table'])->name('table');
+    Route::get('/create',[AddBankController::class,'create'])->name('create');
+    Route::get('/update/{id}',[AddBankController::class,'update'])->name('update');
+    Route::post('/updateform',[AddBankController::class,'updateform'])->name('updateform');
+    Route::post('/createform',[AddBankController::class,'createform'])->name('createform');
+    Route::post('/deleteform',[AddBankController::class,'deleteform'])->name('deleteform');
 });
 
 Route::prefix('product')->name('product.')->group(function(){
