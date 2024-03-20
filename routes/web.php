@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\master\product\ProductController as BackendProd
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\ProductController as FrontendProductController;
 use App\Http\Controllers\frontend\CategoryController as FrontendCategoryController;
+use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\CustomerController;
 use App\Http\Controllers\backend\order\OrderController;
@@ -61,6 +62,14 @@ Route::prefix('order')->name('order.')->group(function(){
     Route::post('/updateform',[OrderController::class,'updateform'])->name('updateform');
     Route::post('/createform',[OrderController::class,'createform'])->name('createform');
 });
+
+Route::prefix('cart')->name('cart.')->group(function(){
+    Route::get('/',[CartController::class,'index'])->name('index');
+    Route::post('/store',[CartController::class,'store'])->name('store');
+    Route::post('/update',[CartController::class,'update'])->name('update');
+    Route::get('/delete/{id}',[CartController::class,'delete'])->name('delete');
+});
+
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/product', [FrontendProductController::class,'index'])->name('product.index');
 Route::get('/category', [FrontendCategoryController::class,'index'])->name('category.index');
