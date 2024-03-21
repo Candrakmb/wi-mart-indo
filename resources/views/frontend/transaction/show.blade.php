@@ -8,7 +8,8 @@
                     <div class="breadcrumb__links">
                         <a href="{{ url('/') }}"><i class="fa fa-home"></i> Home</a>
                         <a href="{{ route('transaction.index') }}"> Transaction</a>
-                        <span>{{ $data['order']->invoice_number }}</span>
+                        {{-- <span>{{ $data['order']->invoice_number }}</span> --}}
+                        <span>Nomor Invoice</span>
                     </div>
                 </div>
             </div>
@@ -25,23 +26,29 @@
                                 <div class="col-lg-12">
                                     <div class="invoice-title">
                                         <h2>Invoice</h2>
-                                        <div class="invoice-number">Order {{ $data['order']->invoice_number }}</div>
+                                        {{-- <div class="invoice-number">Order {{ $data['order']->invoice_number }}</div> --}}
+                                        <div class="invoice-number">Order 1</div>
                                     </div>
                                     <hr>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <address>
                                                 <strong>{{ __('text.billed_to') }}:</strong><br>
-                                                {{ $data['order']->Customer->name }}<br>
-                                                {{ $data['order']->Customer->email }}<br>
+                                                {{-- {{ $data['order']->Customer->name }}<br>
+                                                {{ $data['order']->Customer->email }}<br> --}}
+                                                Caku<br>
+                                                caku@gmail.com<br>
                                             </address>
                                         </div>
                                         <div class="col-md-6 text-md-right">
                                             <address>
                                                 <strong>{{ __('text.shipped_to') }}:</strong><br>
-                                                {{ $data['order']->recipient_name }}<br>
+                                                {{-- {{ $data['order']->recipient_name }}<br>
                                                 {{ $data['order']->address_detail }}<br>
-                                                {{ $data['order']->destination }}
+                                                {{ $data['order']->destination }} --}}
+                                                Caku<br>
+                                                Gang Aspol<br>
+                                                Bojonegoro
                                             </address>
                                         </div>
                                     </div>
@@ -50,14 +57,16 @@
                                             <address>
                                                 <strong>{{ __('text.order_status') }}:</strong>
                                                 <div class="mt-2">
-                                                    {!! $data['order']->status_name !!}
+                                                    {{-- {!! $data['order']->status_name !!} --}}
+                                                    Menunggu Pembayaran
                                                 </div>
                                             </address>
                                         </div>
                                         <div class="col-md-6 text-md-right">
                                             <address>
                                                 <strong>{{ __('text.order_date') }}:</strong><br>
-                                                {{ $data['order']->created_at }}<br><br>
+                                                {{-- {{ $data['order']->created_at }}<br><br> --}}
+                                                69 Januari 6969<br><br>
                                             </address>
                                         </div>
                                     </div>
@@ -77,9 +86,9 @@
                                                     <th class="text-center">{{ __('text.quantity') }}</th>
                                                     <th class="text-right">Total</th>
                                                 </tr>
-                                                @foreach ($data['order']->orderDetail()->get() as $detail)
+                                                {{-- @foreach ($data['order']->orderDetail()->get() as $detail) --}}
                                                     <tr>
-                                                        <td>{{ $loop->iteration }}</td>
+                                                        {{-- <td>{{ $loop->iteration }}</td>
                                                         <td><a
                                                                 href="{{ route('product.show', ['categoriSlug' => $detail->Product->category->slug, 'productSlug' => $detail->Product->slug]) }}">{{ $detail->product->name }}</a>
                                                         </td>
@@ -87,9 +96,18 @@
                                                         </td>
                                                         <td class="text-center">{{ $detail->qty }}</td>
                                                         <td class="text-right">
-                                                            {{ rupiah($detail->total_price_per_product) }}</td>
+                                                            {{ rupiah($detail->total_price_per_product) }}</td> --}}
+                                                            <td>1</td>
+                                                        <td><a
+                                                                href="{{ route('product.show') }}">Baju</a>
+                                                        </td>
+                                                        <td class="text-center">12000
+                                                        </td>
+                                                        <td class="text-center">69</td>
+                                                        <td class="text-right">
+                                                            696969</td>
                                                     </tr>
-                                                @endforeach
+                                                {{-- @endforeach --}}
                                             </tbody>
                                         </table>
                                     </div>
@@ -97,12 +115,15 @@
                                         <div class="col-lg-8">
                                             <address>
                                                 <strong>{{ __('text.shipping_method') }}:</strong>
-                                                <div class="mt-2">
+                                                {{-- <div class="mt-2">
                                                     <p class="section-lead text-uppercase">{{ $data['order']->courier }}
                                                         {{ $data['order']->shipping_method }}</p>
+                                                </div> --}}
+                                                <div class="mt-2">
+                                                    <p class="section-lead text-uppercase">Tiki</p>
                                                 </div>
                                             </address>
-                                            @if ($data['order']->receipt_number != null)
+                                            {{-- @if ($data['order']->receipt_number != null)
                                                 <address>
                                                     <strong>{{ __('text.receipt_number') }}:</strong>
                                                     <div class="mt-2">
@@ -110,24 +131,27 @@
                                                             {{ $data['order']->receipt_number }}</p>
                                                     </div>
                                                 </address>
-                                            @endif
+                                            @endif --}}
                                         </div>
                                         <div class="col-lg-4 text-right">
                                             <div class="invoice-detail-item">
                                                 <div class="invoice-detail-name">Subtotal</div>
-                                                <div class="invoice-detail-value">{{ rupiah($data['order']->subtotal) }}
+                                                {{-- <div class="invoice-detail-value">{{ rupiah($data['order']->subtotal) }} --}}
+                                                <div class="invoice-detail-value">696969
                                                 </div>
                                             </div>
                                             <div class="invoice-detail-item">
                                                 <div class="invoice-detail-name">{{ __('text.shipping_cost') }}</div>
                                                 <div class="invoice-detail-value">
-                                                    {{ rupiah($data['order']->shipping_cost) }}</div>
+                                                    {{-- {{ rupiah($data['order']->shipping_cost) }}</div> --}}
+                                                    696969</div>
                                             </div>
                                             <hr class="mt-2 mb-2">
                                             <div class="invoice-detail-item">
                                                 <div class="invoice-detail-name">Total</div>
                                                 <div class="invoice-detail-value invoice-detail-value-lg">
-                                                    {{ rupiah($data['order']->total_pay) }}</div>
+                                                    {{-- {{ rupiah($data['order']->total_pay) }}</div> --}}
+                                                    696969</div>
                                             </div>
                                         </div>
                                     </div>
@@ -137,7 +161,7 @@
                         <hr>
                         <div class="text-md-right">
                             <div class="float-lg-left mb-lg-0 mb-3">
-                                @if ($data['order']->status == 0)
+                                {{-- @if ($data['order']->status == 0)
                                     <button class="btn btn-primary btn-icon icon-left" id="pay-button"><i
                                             class="fa fa-credit-card"></i>
                                         Process Payment</button>
@@ -148,7 +172,7 @@
                                         class="btn btn-primary text-white btn-icon icon-left"><i
                                             class="fa fa-credit-card"></i>
                                         Order Received</a>
-                                @endif
+                                @endif --}}
                             </div>
                             <button class="btn btn-warning btn-icon icon-left"><i class="fa fa-print"></i> Print</button>
                         </div>
@@ -170,20 +194,20 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="activities">
-                                        @foreach ($data['order']->OrderTrack()->get() as $orderTrack)
+                                        {{-- @foreach ($data['order']->OrderTrack()->get() as $orderTrack) --}}
                                             <div class="activity">
                                                 <div class="activity-icon bg-primary text-white shadow-primary">
-                                                    <i class="{{ $orderTrack->icon }}"></i>
+                                                    {{-- <i class="{{ $orderTrack->icon }}"></i> --}}
                                                 </div>
                                                 <div class="activity-detail bg-primary text-white">
                                                     <div class="mb-2">
-                                                        <span class="text-job text-white">{{ $orderTrack->created_at->diffForHumans() }}</span>
+                                                        {{-- <span class="text-job text-white">{{ $orderTrack->created_at->diffForHumans() }}</span> --}}
                                                         <span class="bullet"></span>
                                                     </div>
-                                                    <p>{{ __($orderTrack->description) }}</p>
+                                                    {{-- <p>{{ __($orderTrack->description) }}</p> --}}
                                                 </div>
                                             </div>
-                                        @endforeach
+                                        {{-- @endforeach --}}
                                     </div>
                                 </div>
                             </div>
@@ -202,7 +226,7 @@
         payButton.addEventListener('click', function(e) {
             e.preventDefault();
 
-            snap.pay('{{ $data['order']->snap_token }}', {
+            // snap.pay('{{-- $data['order']->snap_token --}}', {
                 // Optional
                 onSuccess: function(result) {
                     /* You may add your own js here, this is just example */

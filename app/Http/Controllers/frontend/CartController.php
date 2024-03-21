@@ -21,18 +21,21 @@ class CartController extends Controller
 
     public function index()
     {
-        $data['carts'] = $this->cart->Query()->where('user_id',auth()->user()->id)->get();
-        return view('frontend.cart.index',compact('data'));
+        // $data['carts'] = $this->cart->Query()->where('user_id',auth()->user()->id)->get();
+        return view('frontend.cart.index');
     }
 
     public function store(Request $request)
     {
-        try {
-           $this->cartService->store($request);
-            return redirect()->route('cart.index')->with('success',__('message.cart_success'));
-        } catch (\Throwable $th) {
-            dd($th);
-        }
+        // try {
+        //    $this->cartService->store($request);
+        //     return redirect()->route('cart.index')->with('success',__('message.cart_success'));
+        // } catch (\Throwable $th) {
+        //     dd($th);
+        // }
+
+        $this->cartService->store($request);
+        return redirect()->route('cart.index')->with('success',__('message.cart_success'));
     }
 
     public function delete($id)

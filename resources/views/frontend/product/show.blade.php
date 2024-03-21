@@ -43,8 +43,8 @@
                             <i class="fa fa-star"></i>
                             <span>( 138 reviews )</span>
                         </div>
-                        {{-- <form action="{{ route('cart.store') }}" method="POST"> --}}
-                            <form action="" method="POST">
+                        <form action="{{ route('cart.store') }}" method="POST">
+                            {{-- <form action="" method="POST"> --}}
                         {{-- <div class="product__details__price">{{ $data['product']->price }} <span></div> --}}
                         @csrf
                         <div class="product__details__button">

@@ -3,6 +3,7 @@
 namespace App\Services\Midtrans;
 
 use App\Models\order\Order;
+use App\Models\Feature\Order;
 use App\Services\Midtrans\Midtrans;
 use Midtrans\Notification;
 
@@ -41,6 +42,7 @@ class CallbackService extends Midtrans
         } else if ($status == 'cancel') {
             $transaction->status = 4;
         }
+
         // Simpan transaksi
         $transaction->save();
     }
