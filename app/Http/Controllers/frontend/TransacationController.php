@@ -21,8 +21,9 @@ class TransacationController extends Controller
 
     public function index()
     {
-        $data['orders'] = $this->orderService->getUserOrder(auth()->user()->id);
-        return view('frontend.transaction.index',compact('data'));
+        // $data['orders'] = $this->orderService->getUserOrder(auth()->user()->id);
+        // return view('frontend.transaction.index',compact('data'));
+        return view('frontend.transaction.index');
     }
 
     public function show($invoice_number)

@@ -86,8 +86,7 @@
                         <ul>
                             <li>Total <span>120000</span></li>
                         </ul>
-                        {{-- <a href="{{ route('checkout.index') }}" class="primary-btn">Proceed to checkout</a> --}}
-                        <a href="#" class="primary-btn">Proceed to checkout</a>
+                        <a href="{{ route('checkout.index') }}" class="primary-btn">Proceed to checkout</a>
                     </div>
                 </div>
             </div>

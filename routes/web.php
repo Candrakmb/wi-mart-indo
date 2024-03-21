@@ -7,6 +7,8 @@ use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\ProductController as FrontendProductController;
 use App\Http\Controllers\frontend\CategoryController as FrontendCategoryController;
 use App\Http\Controllers\frontend\CartController;
+use App\Http\Controllers\frontend\CheckoutController;
+use App\Http\Controllers\frontend\TransacationController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\CustomerController;
 use App\Http\Controllers\backend\order\OrderController;
@@ -68,6 +70,22 @@ Route::prefix('cart')->name('cart.')->group(function(){
     Route::post('/store',[CartController::class,'store'])->name('store');
     Route::post('/update',[CartController::class,'update'])->name('update');
     Route::get('/delete/{id}',[CartController::class,'delete'])->name('delete');
+});
+
+Route::prefix('checkout')->name('checkout.')->group(function(){
+    Route::get('/',[CheckoutController::class,'index'])->name('index');
+    Route::post('/process',[CheckoutController::class,'process'])->name('process');
+});
+
+Route::prefix('transaction')->name('transaction.')->group(function(){
+    Route::get('/',[TransacationController::class,'index'])->name('index');
+    // Route::get('/{invoice_number}',[TransacationController::class,'show'])->name('show');
+    // Route::get('/{invoice_number}/received',[TransacationController::class,'received'])->name('received');
+    // Route::get('/{invoice_number}/canceled',[TransacationController::class,'canceled'])->name('canceled');
+
+    Route::get('/1',[TransacationController::class,'show'])->name('show');
+    Route::get('/1/received',[TransacationController::class,'received'])->name('received');
+    Route::get('/1/canceled',[TransacationController::class,'canceled'])->name('canceled');
 });
 
 Route::get('/',[HomeController::class,'index'])->name('home');

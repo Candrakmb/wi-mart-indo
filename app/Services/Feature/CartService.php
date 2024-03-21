@@ -46,7 +46,7 @@ class CartService{
 
     public function getUserCart()
     {
-        return $this->cart->Query()->where('user_id',auth()->user()->id)->get();
+        // return $this->cart->Query()->where('user_id',auth()->user()->id)->get();
     }
     
     public function deleteUserCart()

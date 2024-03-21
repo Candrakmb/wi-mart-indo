@@ -34,7 +34,7 @@ class CheckoutController extends Controller
     public function process(Request $request)
     {
         try{
-            $this->checkoutService->process($request->all());
+            // $this->checkoutService->process($request->all());
             return redirect()->route('transaction.index')->with('success',__('message.order_success'));
         }catch(Exception $e){
             dd($e);
