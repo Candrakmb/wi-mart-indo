@@ -28,14 +28,14 @@
                  <nav class="header__menu">
                      <ul>
                          <li class="{{ request()->is('/') ? 'active' : '' }}"><a href="{{ url('/') }}">Home</a></li>
-                         <li class="{{ request()->is('product*') ? 'active' : '' }}"><a href="{{ route('product.index') }}">Shop</a></li>
+                         <li class="{{ request()->is('product*') ? 'active' : '' }}"><a href="/product_list">Shop</a></li>
                          <li class="{{ request()->is('category*') ? 'active' : '' }}"><a href="{{ route('category.index') }}">Category</a></li>
                          <li><a href="./contact.html">Contact</a></li>
                          @auth
                           <li class="{{ request()->is('category*') ? 'active' : '' }}"><a href="#"><i class="fa fa-angle-down"></i> {{ auth()->user()->name }}</a>
                             <ul class="dropdown">
                                 <li><a href="{{ route('transaction.index') }}">Riwayat Belanja</a></li>
-                                <li><a href="{{ route('account.index') }}">Pengaturan Akun</a></li>
+                                {{-- <li><a href="{{ route('account.index') }}">Pengaturan Akun</a></li> --}}
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <li>

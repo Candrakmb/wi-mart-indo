@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Backend\master\categori\CategoriController;
-use App\Http\Controllers\Backend\master\product\ProductController as BackendProductController;
+use App\Http\Controllers\backend\master\categori\CategoriController;
+use App\Http\Controllers\backend\master\product\ProductController as BackendProductController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\ProductController as FrontendProductController;
 use App\Http\Controllers\frontend\CategoryController as FrontendCategoryController;
@@ -12,9 +12,9 @@ use App\Http\Controllers\frontend\TransacationController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\CustomerController;
 use App\Http\Controllers\backend\order\OrderController;
-use App\Http\Controllers\Backend\setting\AddBankController;
+use App\Http\Controllers\backend\setting\AddBankController;
 use App\Http\Controllers\Rajaongkir\RajaongkirController;
-use App\Http\Controllers\Backend\setting\AlamatPengirimController;
+use App\Http\Controllers\backend\setting\AlamatPengirimController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,9 +102,9 @@ Route::prefix('transaction')->name('transaction.')->group(function(){
 });
 
 Route::get('/',[HomeController::class,'index'])->name('home');
-Route::get('/product', [FrontendProductController::class,'index'])->name('product.index');
+Route::get('/product_list', [FrontendProductController::class,'index'])->name('product.index');
 Route::get('/category', [FrontendCategoryController::class,'index'])->name('category.index');
-Route::get('/dashboard',[DashboardController::class,'index'])->name('user.dashboard');
+Route::get('/dashboard',[DashboardController::class,'index'])->name('admin.dashboard');
 Route::get('/customer',[CustomerController::class,'customer'])->name('admin.customer');
 Route::post('/customer/table', [CustomerController::class, 'table'])->name('admin.customer.table');
 
