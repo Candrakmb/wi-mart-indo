@@ -59,7 +59,7 @@
                              </div>
                          </div>
                      @endif
-                     @if ($type = 'lihat')
+                     @if ($type == 'lihat')
                      <div class="row justify-content-md-center" >
                         <div class="card text-white bg-primary"  style="width: 70%; height:20%">
                             <img src="{{ asset('storage/image/kategori/'.$data->thumbnails)}}" class="right" alt="...">
