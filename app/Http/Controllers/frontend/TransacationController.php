@@ -26,18 +26,20 @@ class TransacationController extends Controller
         return view('frontend.transaction.index');
     }
 
-    public function show($invoice_number)
+    // public function show($invoice_number)
+    public function show()
     {
-        $data['order'] = $this->order->Query()->where('invoice_number',$invoice_number)->first();
-        $snapToken = $data['order']->snap_token;
-        if (empty($snapToken)) {
-            // Jika snap token masih NULL, buat token snap dan simpan ke database
-            $midtrans = new CreateSnapTokenService($data['order']);
-            $snapToken = $midtrans->getSnapToken();
-            $data['order']->snap_token = $snapToken;
-            $data['order']->save();
-        }
-        return view('frontend.transaction.show',compact('data'));
+        // $data['order'] = $this->order->Query()->where('invoice_number',$invoice_number)->first();
+        // $snapToken = $data['order']->snap_token;
+        // if (empty($snapToken)) {
+        //     // Jika snap token masih NULL, buat token snap dan simpan ke database
+        //     $midtrans = new CreateSnapTokenService($data['order']);
+        //     $snapToken = $midtrans->getSnapToken();
+        //     $data['order']->snap_token = $snapToken;
+        //     $data['order']->save();
+        // }
+        // return view('frontend.transaction.show',compact('data'));
+        return view('frontend.transaction.show');
     }
 
     public function received($invoice_number)
