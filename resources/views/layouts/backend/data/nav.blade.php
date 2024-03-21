@@ -8,7 +8,7 @@
 	<section id="sidebar">
 		<a href="#" class="brand"><i class='bx bxs-smile icon'></i> WI-MART </a>
 		<ul class="side-menu">
-			<li><a href="/admin" class="active"><i class='bx bxs-dashboard icon' ></i> Dashboard </a></li>
+			<li><a href="/dashboard" class="active"><i class='bx bxs-dashboard icon' ></i> Dashboard </a></li>
 			<li class="divider" data-text="main">Main</li>
 			<li><a href="/customer" ><i class='bx bxs-dashboard icon' ></i> Pelanggan </a></li>
 			<li>
@@ -33,7 +33,8 @@
 			<li>
 				<a href="#"><i class='bx bxs-notepad icon' ></i> Setting <i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
-					<li><a href="/penempatan">Alamat pengirim</a></li>
+					<li><a href="/add_bank">Bank</a></li>
+					<li><a href="/alamat_pengirim">Alamat pengirim</a></li>
 				</ul>
 			</li>
 		</ul>

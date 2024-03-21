@@ -13,6 +13,7 @@
              <div class="card-body">
                  <form id="form-data" method="post" autocompleted="off" enctype="multipart/form-data">
                      @csrf
+                     @if ($type == 'create' || $type == 'update')
                          <h5>Form Categori</h5>
                          <br>
                          <div class="row">
@@ -57,6 +58,29 @@
                                  <p class="help-block" style="display: none;"></p>
                              </div>
                          </div>
+                     @endif
+                     @if ($type = 'lihat')
+                     <div class="row justify-content-md-center" >
+                        <div class="card text-white bg-primary"  style="width: 70%; height:20%">
+                            <img src="{{ asset('storage/image/kategori/'.$data->thumbnails)}}" class="right" alt="...">
+                            <div class="card-img-overlay">
+                              <h5 class="card-title">Card title</h5>
+                              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                              <p class="card-text">Last updated 3 mins ago</p>
+                            </div>
+                          </div>
+                        <div class="col-md-auto">
+                            <div class="categories__item set-bg"
+                                data-setbg="">
+                                <div class="categories__text">
+                                    <h4>{{ $data->slug }}</h4>
+                                    <p>{{ $data->slug }}</p>
+                                    <a href="#">Jelajahi</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     @endif
                      @if ($type != 'lihat')
                          <div class="row">
                              <div class="col">

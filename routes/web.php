@@ -10,6 +10,8 @@ use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\CustomerController;
 use App\Http\Controllers\backend\order\OrderController;
 use App\Http\Controllers\Backend\setting\AddBankController;
+use App\Http\Controllers\Rajaongkir\RajaongkirController;
+use App\Http\Controllers\Backend\setting\AlamatPengirimController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +46,12 @@ Route::prefix('add_bank')->name('add_bank.')->group(function(){
     Route::post('/deleteform',[AddBankController::class,'deleteform'])->name('deleteform');
 });
 
+Route::prefix('alamat_pengirim')->name('alamat_pengirim.')->group(function(){
+    Route::get('/',[AlamatPengirimController::class,'alamat_pengirim'])->name('alamat_pengirim');
+    Route::post('/updateform',[AlamatPengirimController::class,'updateform'])->name('updateform');
+    Route::post('/createform',[AlamatPengirimController::class,'createform'])->name('createform');
+});
+
 Route::prefix('product')->name('product.')->group(function(){
     Route::get('/',[BackendProductController::class,'product'])->name('product');
     Route::post('/table', [BackendProductController::class, 'table'])->name('table');
@@ -52,6 +60,11 @@ Route::prefix('product')->name('product.')->group(function(){
     Route::post('/updateform',[BackendProductController::class,'updateform'])->name('updateform');
     Route::post('/createform',[BackendProductController::class,'createform'])->name('createform');
     Route::post('/deleteform',[BackendProductController::class,'deleteform'])->name('deleteform');
+});
+
+Route::prefix('rajaongkir')->name('rajaongkir.')->group(function(){
+    Route::post('/cost',[RajaongkirController::class,'cost'])->name('cost');
+    Route::get('/province/{id}',[RajaongkirController::class,'getCity'])->name('city');
 });
 
 Route::prefix('order')->name('order.')->group(function(){
