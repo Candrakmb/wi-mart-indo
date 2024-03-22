@@ -16,18 +16,18 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="row">
-                        @for ($i = 0; $i < 4; $i++)
+                        @foreach ($data['new_categories'] as $category)
                             <div class="col-lg-6 col-md-6 col-sm-6 p-0">
                                 <div class="categories__item set-bg"
-                                    data-setbg="{{ asset('img') }}/goku.png">
+                                    data-setbg="{{ asset('storage/image/kategori/' . $category->thumbnails) }}">
                                     <div class="categories__text">
-                                        <h4>KAOS</h4>
-                                        <p>10 item</p>
+                                        <h4>{{ $category->name }}</h4>
+                                        <p>{{ $category->Products()->count() }} item</p>
                                         <a href="#">Jelajahi</a>
                                     </div>
                                 </div>
                             </div>
-                        @endfor
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -44,31 +44,21 @@
                         <h4>New product</h4>
                     </div>
                 </div>
-                <div class="col-lg-8 col-md-8">
-                    <ul class="filter__controls">
-                        <li class="active" data-filter="*">All</li>
-                        {{-- @foreach ($data['new_categories'] as $new_categories) --}}
-                            {{-- <li data-filter=".{{ $new_categories->slug }}">{{ $new_categories->name }}</li> --}}
-                        {{-- @endforeach --}}
-                    </ul>
-                </div>
             </div>
             <div class="row property__gallery">
-                {{-- @foreach ($data['new_categories'] as $new_categories2) --}}
-                    {{-- @foreach ($new_categories2->Products()->limit(4)->get() as $product) --}}
-                    @for ($i = 0; $i < 4; $i++)
-                        <div class="col-lg-3 col-md-4 col-sm-6 mix {{-- $new_categories2->slug --}}">
+                @foreach ($data['new_categories'] as $new_categories2)
+                    @foreach ($new_categories2->Products()->limit(2)->get() as $product)
+                        <div class="col-lg-3 col-md-4 col-sm-6 mix {{ $new_categories2->slug }}">
                             @component('components.frontend.product-card')
-                                @slot('image', asset('img/product.jpg'))
-                                @slot('route', '#')
-                                    @slot('name', 'KAOS')
-                                    @slot('price', 120000)
-                                @endcomponent
-                            </div>
-                        {{-- @endforeach --}}
-                    {{-- @endforeach --}}
-                    @endfor
-                </div>
+                                @slot('image', asset('storage/image/product/' . $product->thumbnails))
+                                @slot('route', route('product.show', ['categoriSlug' => trim($product->categori->slug), 'productSlug' =>
+                                $product->slug]))
+                                    @slot('name', $product->name)
+                                    @slot('price', $product->price)
+                            @endcomponent
+                        </div>
+                    @endforeach
+                @endforeach
             </div>
         </section>
         <!-- Product Section End -->

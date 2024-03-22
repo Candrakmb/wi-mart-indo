@@ -106,11 +106,11 @@ Route::middleware('auth','role:user')->group(function(){
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/product_list', [FrontendProductController::class,'index'])->name('product.index');
 Route::get('/category', [FrontendCategoryController::class,'index'])->name('category.index');
+Route::get('/category/{slug}', [FrontendCategoryController::class,'show'])->name('category.show');
 Route::get('/dashboard',[DashboardController::class,'index'])->name('admin.dashboard');
 Route::get('/customer',[CustomerController::class,'customer'])->name('admin.customer');
 Route::post('/customer/table', [CustomerController::class, 'table'])->name('admin.customer.table');
 
-// Route::get('/product/{categoriSlug}/{productSlug}',[FrontendProductController::class,'show'])->name('product.show');
-Route::get('/product/baju/baju',[FrontendProductController::class,'show'])->name('product.show');
+Route::get('/product/{categoriSlug}/{productSlug}',[FrontendProductController::class,'show'])->name('product.show');
 
 require __DIR__ . '/auth.php';
