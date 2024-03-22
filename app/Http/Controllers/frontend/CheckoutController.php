@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Feature\Cart;
-use App\Models\Setting\ShippingAddress;
+use App\Models\order\Cart;
+use App\Models\Setting\Alamatpengirim;
 use App\Repositories\CrudRepositories;
 use App\Services\Feature\CartService;
 use App\Services\Feature\CheckoutService;
@@ -27,14 +27,14 @@ class CheckoutController extends Controller
     {
         $data['carts'] = $this->cartService->getUserCart();
         $data['provinces'] = $this->rajaongkirService->getProvince();
-        $data['shipping_address'] = ShippingAddress::first();
+        $data['shipping_address'] = Alamatpengirim::first();
         return view('frontend.checkout.index',compact('data'));
     }
 
     public function process(Request $request)
     {
         try{
-            // $this->checkoutService->process($request->all());
+            $this->checkoutService->process($request->all());
             return redirect()->route('transaction.index')->with('success',__('message.order_success'));
         }catch(Exception $e){
             dd($e);

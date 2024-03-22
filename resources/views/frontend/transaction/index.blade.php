@@ -27,25 +27,17 @@
                             <th>Created At</th>
                             <th>Action</th>
                           </tr>
-                          {{-- @foreach ($data['orders'] as $order) --}}
+                          @foreach ($data['orders'] as $order)
                           <tr>
-                            {{-- <td><a href="{{ route('transaction.show',$order->invoice_number) }}">{{ $order->invoice_number }}</a></td>
+                            <td><a href="{{ route('transaction.show',$order->invoice_number) }}">{{ $order->invoice_number }}</a></td>
                             <td class="font-weight-600">{{ $order->one_product }}</td>
                             <td>{!! $order->status_name !!}</td>
                             <td>{{ $order->created_at }}</td>
                             <td>
                               <a href="{{ route('transaction.show',$order->invoice_number) }}" class="btn btn-danger">Detail</a>
-                            </td> --}}
-
-                            <td><a href="{{ route('transaction.show', 1) }}"> 1 </a></td>
-                            <td class="font-weight-600"> Baju </td>
-                            <td> Menunggu Pembayaran </td>
-                            <td></td>
-                            <td>
-                              <a href="{{ route('transaction.show', 1) }}" class="btn btn-danger">Detail</a>
                             </td>
                           </tr>
-                          {{-- @endforeach --}}
+                          @endforeach
                         </tbody></table>
                       </div>
                 </div>

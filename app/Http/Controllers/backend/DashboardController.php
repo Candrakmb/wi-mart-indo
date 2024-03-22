@@ -23,11 +23,14 @@ class DashboardController extends Controller
         $data['total_completed'] = Order::where('status',3)->whereMonth('created_at', Date('m'))->whereYear('created_at',Date('Y'))->count();
         $data['total_order'] = $data['total_pending'] + $data['total_shipping'] + $data['total_completed'];
 
-        $data['best_products'] = Product::with(['OrderDetails'])
-        ->withSum('OrderDetails','qty')
-        ->orderByDesc('order_details_sum_qty')
+        $data['best_products'] = Product::select('products.*')
+        ->join('order_details', 'products.id', '=', 'order_details.product_id')
+        ->selectRaw('products.*, SUM(order_details.qty) as total_qty')
+        ->groupBy('products.id')
+        ->orderByDesc('total_qty')
         ->limit(10)
         ->get();
+
         $data['last_order'] = Order::orderBy('id','DESC')->limit(5)->get();
         $data['chart'] = $this->chartOrder->build();
         $data['chartPie'] = $this->chartOrderPie->build();

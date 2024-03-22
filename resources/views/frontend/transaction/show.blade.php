@@ -8,7 +8,7 @@
                     <div class="breadcrumb__links">
                         <a href="{{ url('/') }}"><i class="fa fa-home"></i> Home</a>
                         <a href="{{ route('transaction.index') }}"> Transaction</a>
-                        {{-- <span>{{ $data['order']->invoice_number }}</span> --}}
+                        <span>{{ $data['order']->invoice_number }}</span>
                         <span>Nomor Invoice</span>
                     </div>
                 </div>
@@ -26,29 +26,23 @@
                                 <div class="col-lg-12">
                                     <div class="invoice-title">
                                         <h2>Invoice</h2>
-                                        {{-- <div class="invoice-number">Order {{ $data['order']->invoice_number }}</div> --}}
-                                        <div class="invoice-number">Order 1</div>
+                                        <div class="invoice-number">Order {{ $data['order']->invoice_number }}</div>
                                     </div>
                                     <hr>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <address>
                                                 <strong>{{ __('text.billed_to') }}:</strong><br>
-                                                {{-- {{ $data['order']->Customer->name }}<br>
-                                                {{ $data['order']->Customer->email }}<br> --}}
-                                                Caku<br>
-                                                caku@gmail.com<br>
+                                                {{ $data['order']->user->name }}<br>
+                                                {{ $data['order']->user->email }}<br>
                                             </address>
                                         </div>
                                         <div class="col-md-6 text-md-right">
                                             <address>
                                                 <strong>{{ __('text.shipped_to') }}:</strong><br>
-                                                {{-- {{ $data['order']->recipient_name }}<br>
+                                                {{ $data['order']->recipient_name }}<br>
                                                 {{ $data['order']->address_detail }}<br>
-                                                {{ $data['order']->destination }} --}}
-                                                Caku<br>
-                                                Gang Aspol<br>
-                                                Bojonegoro
+                                                {{ $data['order']->destination }}
                                             </address>
                                         </div>
                                     </div>
@@ -57,16 +51,14 @@
                                             <address>
                                                 <strong>{{ __('text.order_status') }}:</strong>
                                                 <div class="mt-2">
-                                                    {{-- {!! $data['order']->status_name !!} --}}
-                                                    Menunggu Pembayaran
+                                                    {!! $data['order']->status_name !!}
                                                 </div>
                                             </address>
                                         </div>
                                         <div class="col-md-6 text-md-right">
                                             <address>
                                                 <strong>{{ __('text.order_date') }}:</strong><br>
-                                                {{-- {{ $data['order']->created_at }}<br><br> --}}
-                                                69 Januari 6969<br><br>
+                                                {{ $data['order']->created_at }}<br><br>
                                             </address>
                                         </div>
                                     </div>
@@ -86,28 +78,20 @@
                                                     <th class="text-center">{{ __('text.quantity') }}</th>
                                                     <th class="text-right">Total</th>
                                                 </tr>
-                                                {{-- @foreach ($data['order']->orderDetail()->get() as $detail) --}}
+                                                @foreach ($data['order']->orderDetail()->get() as $detail)
                                                     <tr>
-                                                        {{-- <td>{{ $loop->iteration }}</td>
-                                                        <td><a
-                                                                href="{{ route('product.show', ['categoriSlug' => $detail->Product->category->slug, 'productSlug' => $detail->Product->slug]) }}">{{ $detail->product->name }}</a>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td><a>
+                                                                {{-- href="{{ route('product.show', ['categoriSlug' => $detail->Product->category->slug, 'productSlug' => $detail->Product->slug]) }}">{{ $detail->product->name }} --}}
+                                                            </a>
                                                         </td>
-                                                        <td class="text-center">{{ rupiah($detail->product->price) }}
+                                                        <td class="text-center">{{ $detail->product->price }}
                                                         </td>
                                                         <td class="text-center">{{ $detail->qty }}</td>
                                                         <td class="text-right">
-                                                            {{ rupiah($detail->total_price_per_product) }}</td> --}}
-                                                            <td>1</td>
-                                                        <td><a
-                                                                href="{{ route('product.show') }}">Baju</a>
-                                                        </td>
-                                                        <td class="text-center">12000
-                                                        </td>
-                                                        <td class="text-center">69</td>
-                                                        <td class="text-right">
-                                                            696969</td>
+                                                            {{ $detail->total_price_per_product }}</td>
                                                     </tr>
-                                                {{-- @endforeach --}}
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -115,15 +99,12 @@
                                         <div class="col-lg-8">
                                             <address>
                                                 <strong>{{ __('text.shipping_method') }}:</strong>
-                                                {{-- <div class="mt-2">
+                                                <div class="mt-2">
                                                     <p class="section-lead text-uppercase">{{ $data['order']->courier }}
                                                         {{ $data['order']->shipping_method }}</p>
-                                                </div> --}}
-                                                <div class="mt-2">
-                                                    <p class="section-lead text-uppercase">Tiki</p>
                                                 </div>
                                             </address>
-                                            {{-- @if ($data['order']->receipt_number != null)
+                                            @if ($data['order']->receipt_number != null)
                                                 <address>
                                                     <strong>{{ __('text.receipt_number') }}:</strong>
                                                     <div class="mt-2">
@@ -131,27 +112,23 @@
                                                             {{ $data['order']->receipt_number }}</p>
                                                     </div>
                                                 </address>
-                                            @endif --}}
+                                            @endif
                                         </div>
                                         <div class="col-lg-4 text-right">
                                             <div class="invoice-detail-item">
                                                 <div class="invoice-detail-name">Subtotal</div>
-                                                {{-- <div class="invoice-detail-value">{{ rupiah($data['order']->subtotal) }} --}}
-                                                <div class="invoice-detail-value">696969
-                                                </div>
+                                                <div class="invoice-detail-value">{{ $data['order']->subtotal }}
                                             </div>
                                             <div class="invoice-detail-item">
                                                 <div class="invoice-detail-name">{{ __('text.shipping_cost') }}</div>
                                                 <div class="invoice-detail-value">
-                                                    {{-- {{ rupiah($data['order']->shipping_cost) }}</div> --}}
-                                                    696969</div>
+                                                    {{ $data['order']->shipping_cost }}</div>
                                             </div>
                                             <hr class="mt-2 mb-2">
                                             <div class="invoice-detail-item">
                                                 <div class="invoice-detail-name">Total</div>
                                                 <div class="invoice-detail-value invoice-detail-value-lg">
-                                                    {{-- {{ rupiah($data['order']->total_pay) }}</div> --}}
-                                                    696969</div>
+                                                    {{ $data['order']->total_pay }}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -161,8 +138,8 @@
                         <hr>
                         <div class="text-md-right">
                             <div class="float-lg-left mb-lg-0 mb-3">
-                                {{-- @if ($data['order']->status == 0)
-                                    <button class="btn btn-primary btn-icon icon-left" id="pay-button"><i
+                                @if ($data['order']->status == 0)                                 
+                                    <button class="btn btn-primary btn-icon icon-left" data-toggle="modal" data-target="#pilihMetodePay"><i
                                             class="fa fa-credit-card"></i>
                                         Process Payment</button>
                                     <a href="{{ route('transaction.canceled', $data['order']->invoice_number) }}" class="btn btn-danger btn-icon icon-left"><i class="fa fa-times"></i>
@@ -172,7 +149,7 @@
                                         class="btn btn-primary text-white btn-icon icon-left"><i
                                             class="fa fa-credit-card"></i>
                                         Order Received</a>
-                                @endif --}}
+                                @endif
                             </div>
                             <button class="btn btn-warning btn-icon icon-left"><i class="fa fa-print"></i> Print</button>
                         </div>
@@ -216,17 +193,63 @@
                 </div>
             </div>
         </div>
+        <!-- Modal pilih pembayaran -->
+<div class="modal fade" id="pilihMetodePay" tabindex="-1" aria-labelledby="pilihMetodePayLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="pilihMetodePayLabel">Metode Pembayaran</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="sidenav">
+                <button class="dropdown-btn">Transfer Bank
+                    <i class="fa fa-caret-down"></i>
+                  </button>
+                <div class="dropdown-container">
+                    
+                  <a href="#">{{$data['bank']->}}</a>
+                  <a href="#">BRI</a>
+                  <a href="#">Link 3</a>
+                </div>
+                <a href="#about">Online Transfer</a>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
     </section>
+    <!-- Modal -->
 @endsection
 @push('js')
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
     </script>
     <script>
-        const payButton = document.querySelector('#pay-button');
-        payButton.addEventListener('click', function(e) {
+        const metodeMidtrans = document.querySelector('#pay-button');
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+            } else {
+            dropdownContent.style.display = "block";
+            }
+        });
+        }
+
+        metodeMidtrans.addEventListener('click', function(e) {
             e.preventDefault();
 
-            // snap.pay('{{-- $data['order']->snap_token --}}', {
+            snap.pay('{{ $data['order']->snap_token }}', {
                 // Optional
                 onSuccess: function(result) {
                     /* You may add your own js here, this is just example */
@@ -248,4 +271,58 @@
             });
         });
     </script>
+@endpush
+@push('style')
+<style>
+/* Fixed sidenav, full height */
+.sidenav {
+  padding-top: 20px;
+}
+
+/* Style the sidenav links and the dropdown button */
+.sidenav a, .dropdown-btn {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #030303;
+  display: block;
+  border: none;
+  background: none;
+  width:100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+
+/* On mouse-over */
+.sidenav a:hover, .dropdown-btn:hover {
+  color: #f1f1f1;
+}
+
+/* Main content */
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+  font-size: 20px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+/* Add an active class to the active dropdown button */
+.active {
+  background-color: rgb(23, 10, 206);
+  color: white;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+  display: none;
+  background-color: rgb(94, 92, 89);
+  padding-left: 8px;
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+  float: right;
+  padding-right: 8px;
+}
+</style>
 @endpush

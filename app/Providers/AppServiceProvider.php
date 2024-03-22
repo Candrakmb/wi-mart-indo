@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Auth;
+use App\Models\order\Cart;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('*', function ($view) {
+            if (Auth::check()) {
+                $totalCart = Cart::where(['user_id' => Auth::user()->id])->count();
+                $view->with('totalCart', $totalCart);
+            }
+        });
     }
 }

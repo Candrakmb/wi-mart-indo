@@ -3,7 +3,6 @@
 namespace App\Services\Midtrans;
 
 use App\Models\order\Order;
-use App\Models\Feature\Order;
 use App\Services\Midtrans\Midtrans;
 use Midtrans\Notification;
 

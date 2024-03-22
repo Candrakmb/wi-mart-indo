@@ -1,7 +1,7 @@
 <?php
 namespace App\Services\Feature;
 
-use App\Models\Feature\Order;
+use App\Models\order\Order;
 use App\Repositories\CrudRepositories;
 
 class OrderService{

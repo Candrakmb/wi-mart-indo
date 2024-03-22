@@ -13,20 +13,21 @@ use App\Models\master\Product;
 
 class OrderDetail extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
-    protected $table = 'order_detail';
-    
-    protected $fillable = [
-        'qty',
-    ];
+    use HasFactory;
+    protected $guarded = [];
 
     public function custemer()
     {
         return $this->belongsTo(User::class,'user_id');
     }
-    public function product()
+    public function Product()
     {
         return $this->belongsTo(Product::class,'product_id');
+    }
+
+    public function getTotalPricePerProductAttribute()
+    {
+        $price = $this->qty * $this->Product->price;
+        return $price;
     }
 }

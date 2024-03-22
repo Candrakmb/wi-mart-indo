@@ -9,11 +9,11 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str; // Tambahkan ini
 use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
 {
-
     public function create()
     {
         return view('auth.register');
@@ -27,11 +27,13 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $user = new User();
+        $user->id = (string) Str::uuid(); // Menggunakan UUID sebagai ID
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+
+        $user->save();
 
         $user->assignRole('user');
 

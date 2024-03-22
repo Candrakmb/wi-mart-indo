@@ -1,20 +1,15 @@
 <?php
 
-namespace App\Models\Feature;
+namespace App\Models\order;
 
 use App\Models\Master\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OrderDetail extends Model
+class Cart extends Model
 {
     use HasFactory;
-    protected $guarded = [];
-
-    public function Order()
-    {
-        return $this->belongsTo(Order::class,'order_id');
-    }
+    protected $fillable = ['product_id','user_id','qty'];
 
     public function Product()
     {
@@ -26,4 +21,11 @@ class OrderDetail extends Model
         $price = $this->qty * $this->Product->price;
         return $price;
     }
+
+    public function getTotalWeightPerProductAttribute()
+    {
+        $weight = $this->qty * $this->Product->weight;
+        return $weight;
+    }
+
 }

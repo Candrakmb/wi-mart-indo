@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Feature\Cart;
+use App\Models\order\Cart;
 use App\Models\Master\Product;
 use App\Repositories\CrudRepositories;
 use App\Services\Feature\CartService;
@@ -21,21 +21,22 @@ class CartController extends Controller
 
     public function index()
     {
-        // $data['carts'] = $this->cart->Query()->where('user_id',auth()->user()->id)->get();
-        return view('frontend.cart.index');
-    }
+        $data['carts'] = $this->cart->Query()->where('user_id',auth()->user()->id)->get();
+        // dd($data['carts']);
+        return view('frontend.cart.index', compact('data'));
+    }    
 
     public function store(Request $request)
     {
-        // try {
-        //    $this->cartService->store($request);
-        //     return redirect()->route('cart.index')->with('success',__('message.cart_success'));
-        // } catch (\Throwable $th) {
-        //     dd($th);
-        // }
+        try {
+           $this->cartService->store($request);
+            return redirect()->route('cart.index')->with('success',__('message.cart_success'));
+        } catch (\Throwable $th) {
+            dd($th);
+        }
 
-        $this->cartService->store($request);
-        return redirect()->route('cart.index')->with('success',__('message.cart_success'));
+        // $this->cartService->store($request);
+        // return redirect()->route('cart.index')->with('success',__('message.cart_success'));
     }
 
     public function delete($id)

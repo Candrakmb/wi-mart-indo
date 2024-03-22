@@ -32,12 +32,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @for ($i = 0; $i < 4; $i++)
+                                @foreach ($data['carts'] as $carts)
                                     <tr>
                                         <td class="cart__product__item">
-                                            <img src="{{ asset('img/product.jpg') }}" alt="" width="90">
+                                            <img src="{{ $carts->Product->thumbnails_path}}" alt="" width="90">
                                             <div class="cart__product__item__title">
-                                                <h6> Bajuuu </h6>
+                                                <h6> {{ $carts->Product->name }} </h6>
                                                 <div class="rating">
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
@@ -47,18 +47,17 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="cart__price">120000</td>
-                                        {{-- <input type="hidden" name="cart_id[]" value="{{ $carts->id }}"> --}}
+                                        <td class="cart__price">{{ $carts->Product->price_rupiah }}</td>
+                                        <input type="hidden" name="cart_id[]" value="{{ $carts->id }}">
                                         <td class="cart__quantity">
                                             <div class="pro-qty">
-                                                <input type="text" value="1" name="cart_qty[]">
+                                                <input type="text" value="{{ $carts->qty }}" name="cart_qty[]">
                                             </div>
                                         </td>
-                                        <td class="cart__total">120000</td>
-                                        {{-- <td class="cart__close"><a href="{{ route('cart.delete',$carts->id) }}"><span class="icon_close"></span></a></td> --}}
-                                        <td class="cart__close"><a href="#"><span class="icon_close"></span></a></td>
+                                        <td class="cart__total">{{ rupiah($carts->total_price_per_product) }}</td>
+                                        <td class="cart__close"><a href="{{ route('cart.delete',$carts->id) }}"><span class="icon_close"></span></a></td>
                                     </tr>
-                                @endfor
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -84,7 +83,7 @@
                     <div class="cart__total__procced">
                         <h6>Cart total</h6>
                         <ul>
-                            <li>Total <span>120000</span></li>
+                            <li>Total <span> {{$data['carts']->sum('total_price_per_product') }}</span></li>
                         </ul>
                         <a href="{{ route('checkout.index') }}" class="primary-btn">Proceed to checkout</a>
                     </div>

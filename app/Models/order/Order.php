@@ -16,9 +16,10 @@ class Order extends Model
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $table = 'orders';
-    
+    protected $appends = ['status_name','status_name_text','one_product','array_product'];
     protected $fillable = [
         'invoice_number',
+        'user_id',
         'total_pay',
         'status',
         'metode_pembayaran',
@@ -33,7 +34,7 @@ class Order extends Model
         'shipping_method',
         'receipt_number',
         'total_weight',
-
+        'phone_number',
     ];
 
 
@@ -41,8 +42,6 @@ class Order extends Model
     {
     return $this->belongsTo(User::class, 'user_id');
     }
-
-
     public function OrderDetail()
     {
         return $this->hasMany(OrderDetail::class,'order_id','id');
@@ -50,6 +49,24 @@ class Order extends Model
     public function OrderTrack()
     {
         return $this->hasMany(OrderTrack::class,'order_id','id');
+    }
+
+    public function getStatusNameTextAttribute()
+    {
+        $status = $this->status;
+        if($status == 0){
+            return 'Pending';
+        }elseif($status == 1){
+            return 'Dikemas';
+        }elseif($status == 2){
+            return 'Dikirim';
+        }elseif($status == 3){
+            return 'Selesai';
+        }elseif($status == 4){
+            return 'Dibatalkan';
+        }else{
+            return 'Kadaluarsa';
+        }
     }
 
     public function getStatusNameAttribute()
@@ -63,6 +80,29 @@ class Order extends Model
             '5' => '<div class="badge badge-secondary">Kadaluarsa</div>',
         ];
         return $status[$this->status];
+    }
+
+    public function getOneProductAttribute()
+    {
+        $product = $this->OrderDetail[0]->product->name;
+        if($this->OrderDetail()->count() > 1){
+            $product .= ' & ' . $this->OrderDetail()->count() . 'produk lainnya';
+        }
+        return $product;
+    }
+
+    public function getArrayProductAttribute()
+    {
+        $product = [];
+        foreach($this->OrderDetail()->get() as $detail){
+            array_push($product,[
+                'id' => $detail->product->id,
+                'price' => $detail->product->price,
+                'quantity' => $detail->qty,
+                'name' => $detail->product->name,
+            ]);
+        }
+        return $product;
     }
    
 }

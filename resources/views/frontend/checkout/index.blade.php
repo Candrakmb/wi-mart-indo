@@ -26,14 +26,14 @@
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="checkout__form__input">
                                     <p>Recipient Name <span>*</span></p>
-                                    {{-- <input type="text" name="recipient_name" value="{{ auth()->user()->name }}" > --}}
-                                    <input type="text" name="recipient_name" value="" >
+                                    <input type="text" name="recipient_name" value="{{ auth()->user()->name }}" >
+                                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}" >
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="checkout__form__input">
                                     <p>Phone Number <span>*</span></p>
-                                    <input type="text" name="phone_number"  >
+                                    <input type="text" name="phone_number" >
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -90,25 +90,25 @@
                                         <span class="top__text">Product</span>
                                         <span class="top__text__right">Total</span>
                                     </li>
-                                    {{-- @foreach ($data['carts'] as $cart)
+                                    @foreach ($data['carts'] as $cart)
                                         <li>{{ $loop->iteration }}. {{ $cart->Product->name }} x
-                                            {{ $cart->qty }}<span>{{ rupiah($cart->total_price_per_product) }}</span>
+                                            {{ $cart->qty }}<span>{{ $cart->total_price_per_product }}</span>
                                         </li>
-                                    @endforeach --}}
+                                    @endforeach
                                     <li>
                                         <span class="top__text">Total Weight</span>
-                                        {{-- <span class="top__text__right">{{ $data['carts']->sum('total_weight_per_product') / 1000 }} Kg</span> --}}
-                                        {{-- <input type="hidden" name="total_weight" id="total_weight" value="{{ $data['carts']->sum('total_weight_per_product') }}"> --}}
+                                        <span class="top__text__right">{{ $data['carts']->sum('total_weight_per_product') / 1000 }} Kg</span>
+                                        <input type="hidden" name="total_weight" id="total_weight" value="{{ $data['carts']->sum('total_weight_per_product') }}">
                                     </li>
                                 </ul>
                             </div>
                             <div class="checkout__order__total">
                                 <ul>
-                                    {{-- <li>Subtotal <span>{{ rupiah($data['carts']->sum('total_price_per_product')) }}</span>
+                                    <li>Subtotal <span>{{ $data['carts']->sum('total_price_per_product') }}</span>
                                     </li>
                                     <li>Shipping Cost <span id="text-cost">Rp 0</span></li>
-                                    <li>Total <span id="total">{{ rupiah($data['carts']->sum('total_price_per_product')) }}</span></li>
-                                    <input type="hidden" name="shipping_cost" id="shipping_cost" > --}}
+                                    <li>Total <span id="total">{{ $data['carts']->sum('total_price_per_product') }}</span></li>
+                                    <input type="hidden" name="shipping_cost" id="shipping_cost" >
                                 </ul>
                             </div>
                             <button type="submit" class="site-btn">Place oder</button>
@@ -123,10 +123,10 @@
 @push('js')
     <script>
         function checkCost() {
-            // var origin = '{{-- $data["shipping_address"]->city_id --}}';
-            var origin = '{{ $data["shipping_address"] ? $data["shipping_address"]->city_id : "default_city_id" }}';
+            var origin = '{{-- $data["shipping_address"]->city_id --}}';
+            // var origin = '{{ $data["shipping_address"] ? $data["shipping_address"]->city_id : "default_city_id" }}';
             var destination = $('#city_id option:selected').data('id');
-            // var weight = "{{-- $data['carts']->sum('total_weight_per_product') --}}";
+            var weight = "{{-- $data['carts']->sum('total_weight_per_product') --}}";
             var courier = $('#courier option:selected').val();
 
             let _url = `/rajaongkir/cost`;
@@ -136,9 +136,9 @@
                 url: _url,
                 type: "POST",
                 data: {
-                    origin: origin,
+                    origin: '1',
                     destination: destination,
-                    weight: weight,
+                    weight: '60',
                     courier: courier,
                     _token: _token
                 },
@@ -207,12 +207,13 @@
 
         function countCost(ongkir)
         {
-            // var subtotal = `{{-- $data['carts']->sum('total_price_per_product') --}}`;
-            // var total = parseInt(subtotal) + ongkir;
+            var subtotal = `{{-- $data['carts']->sum('total_price_per_product') --}}`;
+            var total = parseInt(subtotal) + ongkir;
             var total = ongkir;
             $('#text-cost').text(rupiah(ongkir));
             $('#shipping_cost').val(ongkir);
             $('#total').text(rupiah(total))
         }
+
     </script>
 @endpush
