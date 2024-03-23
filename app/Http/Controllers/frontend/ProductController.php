@@ -21,18 +21,11 @@ class ProductController extends Controller
         return view('frontend.product.index', compact('data'));
     }
 
-    // public function show($categoriSlug,$productSlug)
-    // {
-    //     $data['product'] = $this->product->Query()->where('slug',$productSlug)->first();
-    //     $data['product_related'] = $this->product->Query()->whereNotIn('slug',[$productSlug])->limit(4)->get();
-    //     return view('frontend.product.show',compact('data'));
-    // }
-
-    public function show()
+    public function show($categoriSlug,$productSlug)
     {
-        // $data['product'] = $this->product->Query()->where('slug',$productSlug)->first();
-        // $data['product_related'] = $this->product->Query()->whereNotIn('slug',[$productSlug])->limit(4)->get();
-        return view('frontend.product.show');
+        $data['product'] = $this->product->Query()->where('slug',$productSlug)->first();
+        $data['product_related'] = $this->product->Query()->whereNotIn('slug',[$productSlug])->limit(4)->get();
+        return view('frontend.product.show',compact('data'));
     }
 
     public function search(Request $request)

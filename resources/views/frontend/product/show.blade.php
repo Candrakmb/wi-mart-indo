@@ -7,10 +7,8 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="{{ url('/') }}"><i class="fa fa-home"></i> Home</a>
-                        {{-- <a href="">{{ $data['product']->Category->name }}</a>
-                        <span>{{ $data['product']->name }}</span> --}}
-                        <a href="">Baju</a>
-                        <span>Baju</span>
+                        <a href="">{{ $data['product']->categori->name }}</a>
+                        <span>{{ $data['product']->name }}</span>
                     </div>
                 </div>
             </div>
@@ -26,26 +24,18 @@
                     <div class="product__details__pic">
                         <div class="product__details__slider__content">
                             <div class="product__details__pic__slider owl-carousel">
-                                <img data-hash="product-1" class="product__big__img" src="{{ asset('img/product.jpg') }}" alt="">
+                                <img data-hash="product-1" class="product__big__img" src="{{ asset('storage/image/product/' .  $data['product']->thumbnails) }}" alt="">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="product__details__text">
-                        {{-- <h3>{{ $data['product']->name }} <span>Kategori: {{ $data['product']->Category->name }}</span></h3> --}}
+                        <h3>{{ $data['product']->name }} <span>Kategori: {{ $data['product']->categori->name }}</span></h3>
                         <h3>Baju <span>Kategori: Baju</span></h3>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <span>( 138 reviews )</span>
-                        </div>
                         <form action="{{ route('cart.store') }}" method="POST">
-                            {{-- <form action="" method="POST"> --}}
-                        {{-- <div class="product__details__price">{{ $data['product']->price }} <span></div> --}}
+                            <form action="" method="POST">
+                        <div class="product__details__price">{{ $data['product']->price }} <span></div>
                         @csrf
                         <div class="product__details__button">
                             <div class="quantity">
@@ -53,7 +43,7 @@
                                 <div class="pro-qty">
                                     <input type="text" name="cart_qty" value="1">
                                 </div>
-                                {{-- <input type="hidden" name="cart_product_id" value="{{ $data['product']->id }}"> --}}
+                                <input type="hidden" name="cart_product_id" value="{{ $data['product']->id }}">
                             </div>
                             <button type="submit" class="cart-btn"><span class="icon_bag_alt"></span> Tambah Ke Keranjang</button>
                         </div>
@@ -62,8 +52,7 @@
                             <ul>
                                 <li>
                                     <span>Berat : </span>
-                                    {{-- <p>{{ $data['product']->weight }} Gram</p> --}}
-                                    <p>100 Gram</p>
+                                    <p>{{ $data['product']->weight }} Gram</p>
                                 </li>
                             </ul>
                         </div>
@@ -79,7 +68,7 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <h6>Deskripsi Produk</h6>
-                                {{-- {!! $data['product']->description !!} --}}
+                                {!! $data['product']->description !!}
                             </div>
                         </div>
                     </div>
@@ -91,18 +80,17 @@
                         <h5>Produk Lainnya</h5>
                     </div>
                 </div>
-               {{-- @foreach ($data['product_related'] as $product_related) --}}
-               @for ($i = 0; $i < 4; $i++)
+               @foreach ($data['product_related'] as $product_related)
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         @component('components.frontend.product-card')
-                        @slot('image', asset('img/product.jpg'))
-                        @slot('route', '#')
-                            @slot('name', 'KAOS')
-                            @slot('price', 120000)
-                        @endcomponent
+                                @slot('image', asset('storage/image/product/' . $product_related->thumbnails))
+                                @slot('route', route('product.show', ['categoriSlug' => trim($product_related->categori->slug), 'productSlug' =>
+                                $product_related->slug]))
+                                    @slot('name', $product_related->name)
+                                    @slot('price', $product_related->price)
+                            @endcomponent
                     </div>
-                @endfor
-               {{-- @endforeach --}}
+               @endforeach
             </div>
         </div>
     </section>

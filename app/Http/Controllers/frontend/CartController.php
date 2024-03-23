@@ -34,9 +34,6 @@ class CartController extends Controller
         } catch (\Throwable $th) {
             dd($th);
         }
-
-        // $this->cartService->store($request);
-        // return redirect()->route('cart.index')->with('success',__('message.cart_success'));
     }
 
     public function delete($id)

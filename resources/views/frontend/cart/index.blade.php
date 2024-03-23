@@ -38,13 +38,6 @@
                                             <img src="{{ $carts->Product->thumbnails_path}}" alt="" width="90">
                                             <div class="cart__product__item__title">
                                                 <h6> {{ $carts->Product->name }} </h6>
-                                                <div class="rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
                                             </div>
                                         </td>
                                         <td class="cart__price">{{ $carts->Product->price_rupiah }}</td>
@@ -54,7 +47,7 @@
                                                 <input type="text" value="{{ $carts->qty }}" name="cart_qty[]">
                                             </div>
                                         </td>
-                                        <td class="cart__total">{{ rupiah($carts->total_price_per_product) }}</td>
+                                        <td class="cart__total">{{ $carts->total_price_per_product }}</td>
                                         <td class="cart__close"><a href="{{ route('cart.delete',$carts->id) }}"><span class="icon_close"></span></a></td>
                                     </tr>
                                 @endforeach
