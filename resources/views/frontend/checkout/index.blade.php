@@ -123,12 +123,10 @@
 @push('js')
     <script>
         function checkCost() {
-            var origin = '{{-- $data["shipping_address"]->city_id --}}';
-            // var origin = '{{ $data["shipping_address"] ? $data["shipping_address"]->city_id : "default_city_id" }}';
+            var origin = '{{ $data["shipping_address"]->city_id }}';
             var destination = $('#city_id option:selected').data('id');
-            var weight = "{{-- $data['carts']->sum('total_weight_per_product') --}}";
+            var weight = "{{ $data['carts']->sum('total_weight_per_product') }}";
             var courier = $('#courier option:selected').val();
-
             let _url = `/rajaongkir/cost`;
             let _token = $('meta[name="csrf-token"]').attr('content');
 
@@ -136,9 +134,9 @@
                 url: _url,
                 type: "POST",
                 data: {
-                    origin: '1',
+                    origin: origin,
                     destination: destination,
-                    weight: '60',
+                    weight: weight,
                     courier: courier,
                     _token: _token
                 },

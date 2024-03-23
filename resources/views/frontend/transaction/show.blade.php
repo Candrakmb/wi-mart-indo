@@ -210,10 +210,10 @@
                   </button>
                 <div class="dropdown-container">
                   @foreach ($data['bank'] as $bank)
-                  <a href="#">{{strtoupper($bank->nama_bank)}}</a>
+                  <button class="down" data-toggle="modal" data-target="#pilihMetodePay">{{strtoupper($bank->nama_bank)}}</button>
                   @endforeach
                 </div>
-                <a href="#about">Online Transfer</a>
+                <button class="down" >Transfer Online</button>
               </div>
         </div>
         <div class="modal-footer">
@@ -279,7 +279,7 @@
 }
 
 /* Style the sidenav links and the dropdown button */
-.sidenav a, .dropdown-btn {
+.sidenav .down, .dropdown-btn {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 20px;
@@ -294,7 +294,7 @@
 }
 
 /* On mouse-over */
-.sidenav a:hover, .dropdown-btn:hover {
+.sidenav .down:hover, .dropdown-btn:hover {
   color: #f1f1f1;
 }
 

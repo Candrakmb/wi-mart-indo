@@ -8,15 +8,15 @@
                     </div>
                     <div class="card-stats-items">
                         <div class="card-stats-item">
-                             <div class="card-stats-item-count">{{--{{ $data['total_pending'] }} --}}</div>
+                             <div class="card-stats-item-count">{{ $data['total_pending'] }}</div>
                             <div class="card-stats-item-label">Pending</div>
                         </div>
                         <div class="card-stats-item">
-                            <div class="card-stats-item-count">{{--{{ $data['total_pending'] }} --}}</div>
+                            <div class="card-stats-item-count">{{ $data['total_shipping'] }}</div>
                             <div class="card-stats-item-label">Shipping</div>
                         </div>
                         <div class="card-stats-item">
-                            <div class="card-stats-item-count">{{--{{ $data['total_pending'] }} --}}</div>
+                            <div class="card-stats-item-count">{{ $data['total_completed'] }}</div>
                             <div class="card-stats-item-label">Completed</div>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                         <h4>Total Orders</h4>
                     </div>
                     <div class="card-body">
-                        {{-- {{ $data['total_order'] }} --}}
+                        {{ $data['total_order'] }}
                     </div>
                 </div>
             </div>
@@ -41,10 +41,10 @@
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>{{--{{ $data['total_pending'] }} --}}</h4>
+                        <h4>{{ __('menu.product') }}</h4>
                     </div>
                     <div class="card-body">
-                        {{-- {{ $data['total_product'] }} --}}
+                        {{ $data['total_product'] }}
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                         <h4>User</h4>
                     </div>
                     <div class="card-body">
-                        {{-- {{ $data['total_user'] }} --}}
+                        {{ $data['total_user'] }}
                     </div>
                 </div>
             </div>
@@ -76,7 +76,7 @@
               </div>
                 <div class="collapse show" id="mycard-collapse">
                     <div class="card-body">
-                        {{-- {!! $data['chart']->container() !!} --}}
+                        {!! $data['chart']->container() !!}
                     </div>
                 </div>
             </div>
@@ -99,20 +99,20 @@
                             <th>Created At</th>
                             <th>Action</th>
                         </tr>
-                        {{-- @foreach ($data['last_order'] as $order)
+                        @foreach ($data['last_order'] as $order)
                             <tr>
-                                <td><a
-                                        href="{{ route('feature.order.show',$order->id) }}">{{ $order->invoice_number }}</a>
-                                </td>
+                                {{-- <td><a
+                                        href="{{ route('order.show',$order->id) }}">{{ $order->invoice_number }}</a>
+                                </td> --}}
                                 <td class="font-weight-600">{{ $order->one_product }}</td>
                                 <td>{!! $order->status_name !!}</td>
                                 <td>{{ $order->created_at }}</td>
-                                <td>
+                                {{-- <td>
                                     <a href="{{ route('feature.order.show',$order->id) }}"
                                         class="btn btn-danger">Detail</a>
-                                </td>
+                                </td> --}}
                             </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -124,7 +124,7 @@
             </div>
             <div class="card-body">
                 <div class="owl-carousel owl-theme" id="products-carousel">
-                    {{-- @foreach ($data['best_products'] as $best_product)
+                    @foreach ($data['best_products'] as $best_product)
                         <div>
                             <div class="product-item pb-3">
                                 <div class="product-image">
@@ -147,7 +147,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach --}}
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -155,7 +155,7 @@
         <div class="col-lg-4">
           <div class="card">
             <div class="card-body">
-              {{-- {!! $data['chartPie']->container() !!} --}}
+              {!! $data['chartPie']->container() !!}
             </div>
           </div>
           <div class="card card-hero">
@@ -216,7 +216,7 @@
     </div>
 @endsection
 @push('js')
-    {{-- {{ $data['chart']->script() }}
+    {{ $data['chart']->script() }}
     {{ $data['chartPie']->script() }}
     <script>
         $("#products-carousel").owlCarousel({
@@ -235,6 +235,6 @@
                     items: 4
                 }
             }
-        }); --}}
+        });
     </script>
 @endpush
