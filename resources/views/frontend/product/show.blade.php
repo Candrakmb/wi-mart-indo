@@ -32,10 +32,9 @@
                 <div class="col-lg-6">
                     <div class="product__details__text">
                         <h3>{{ $data['product']->name }} <span>Kategori: {{ $data['product']->categori->name }}</span></h3>
-                        <h3>Baju <span>Kategori: Baju</span></h3>
                         <form action="{{ route('cart.store') }}" method="POST">
                             <form action="" method="POST">
-                        <div class="product__details__price">{{ $data['product']->price }} <span></div>
+                        <div class="product__details__price">Rp. {{ $data['product']->price }} <span></div>
                         @csrf
                         <div class="product__details__button">
                             <div class="quantity">

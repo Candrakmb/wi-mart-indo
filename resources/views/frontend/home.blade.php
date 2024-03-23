@@ -8,8 +8,8 @@
                     <div class="categories__item categories__large__item set-bg"
                         data-setbg="{{ asset('img') }}/hero.png">
                         <div class="categories__text">
-                            <p>Mulai Belanja Sekarang di Wii Mart</p>
-                            <a href="#">Jelajahi Sekarang</a>
+                            <p>Mulai Belanja Sekarang di Wi Mart</p>
+                            <a  href="/product_list">Jelajahi Sekarang</a>
                         </div>
                     </div>
                 </div>

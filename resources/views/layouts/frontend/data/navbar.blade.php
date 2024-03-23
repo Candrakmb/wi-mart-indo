@@ -21,7 +21,7 @@
          <div class="row">
              <div class="col-xl-3 col-lg-2">
                  <div class="">
-                     <h1 class="title-logo">Wii Mart</h1>
+                     <h1 class="title-logo">Wi Mart</h1>
                  </div>
              </div>
              <div class="col-xl-6 col-lg-7 text-center">

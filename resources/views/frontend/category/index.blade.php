@@ -22,9 +22,9 @@
                 @foreach ($data['category'] as $category)
                     <div class="col-lg-4 col-md-4 col-sm-4 p-0 ">
                         <div class="categories__item set-bg" data-setbg="{{ asset('storage/image/kategori/' . $category->thumbnails) }}">
-                            <div class="categories__text">
+                            <div class="categories__card">
                                 <h4>{{ $category->name }}</h4>
-                                <p>{{ $category->Products()->count() }} item</p>
+                                <p>{{ $category->Products()->count() }} Item</p>
                                 <a href="{{ route('category.show',$category->slug) }}">Jelajahi</a>
                             </div>
                         </div>
