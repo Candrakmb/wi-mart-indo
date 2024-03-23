@@ -4,30 +4,13 @@
     <section class="categories">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-6 p-0">
+                <div class="col-lg-12 p-0">
                     <div class="categories__item categories__large__item set-bg"
-                        data-setbg="{{ asset('img') }}/goku.png">
+                        data-setbg="{{ asset('img') }}/hero.png">
                         <div class="categories__text">
-                            <p>Beragam Merchandise Anime Mulai Dari Tshirt, Hoddie, Action Figure Semuanya Tersedia Di Anime
-                                Store.</p>
+                            <p>Mulai Belanja Sekarang di Wii Mart</p>
                             <a href="#">Jelajahi Sekarang</a>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="row">
-                        @foreach ($data['new_categories'] as $category)
-                            <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                                <div class="categories__item set-bg"
-                                    data-setbg="{{ asset('storage/image/kategori/' . $category->thumbnails) }}">
-                                    <div class="categories__text">
-                                        <h4>{{ $category->name }}</h4>
-                                        <p>{{ $category->Products()->count() }} item</p>
-                                        <a href="#">Jelajahi</a>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
                     </div>
                 </div>
             </div>

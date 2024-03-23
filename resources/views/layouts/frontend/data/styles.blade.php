@@ -1,6 +1,6 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>TOKO CAKU</title>
+<title>Wii Mart Indo</title>
   {{-- <link rel="shortcut icon" href="{{ $app_logo }}" type="image/x-icon"> --}}
 
 <!-- Google Font -->

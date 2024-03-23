@@ -21,7 +21,7 @@
          <div class="row">
              <div class="col-xl-3 col-lg-2">
                  <div class="">
-                     <h1 class="title-logo">TOKO CAKU</h1>
+                     <h1 class="title-logo">Wii Mart</h1>
                  </div>
              </div>
              <div class="col-xl-6 col-lg-7 text-center">
@@ -32,7 +32,7 @@
                          <li class="{{ request()->is('category*') ? 'active' : '' }}"><a href="{{ route('category.index') }}">Category</a></li>
                          <li><a href="./contact.html">Contact</a></li>
                          @auth
-                          <li class="{{ request()->is('category*') ? 'active' : '' }}"><a href="#"><i class="fa fa-angle-down"></i> {{ auth()->user()->name }}</a>
+                          <li><a href="#"><i class="fa fa-angle-down"></i> {{ auth()->user()->name }}</a>
                             <ul class="dropdown">
                                 <li><a href="{{ route('transaction.index') }}">Riwayat Belanja</a></li>
                                 {{-- <li><a href="{{ route('account.index') }}">Pengaturan Akun</a></li> --}}
