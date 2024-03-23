@@ -209,10 +209,9 @@
                     <i class="fa fa-caret-down"></i>
                   </button>
                 <div class="dropdown-container">
-                    
-                  <a href="#">{{$data['bank']->}}</a>
-                  <a href="#">BRI</a>
-                  <a href="#">Link 3</a>
+                  @foreach ($data['bank'] as $bank)
+                  <a href="#">{{strtoupper($bank->nama_bank)}}</a>
+                  @endforeach
                 </div>
                 <a href="#about">Online Transfer</a>
               </div>

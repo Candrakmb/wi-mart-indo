@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
+use App\Models\order\Order;
 use App\Models\master\Product;
 
 class OrderDetail extends Model
@@ -16,9 +16,9 @@ class OrderDetail extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function custemer()
+    public function order()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(Order::class,'order_id');
     }
     public function Product()
     {
