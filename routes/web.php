@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\master\categori\CategoriController;
+use App\Notifications\Notificationtele;
 use App\Http\Controllers\backend\master\product\ProductController as BackendProductController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\ProductController as FrontendProductController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\backend\order\OrderController;
 use App\Http\Controllers\backend\setting\AddBankController;
 use App\Http\Controllers\Rajaongkir\RajaongkirController;
 use App\Http\Controllers\backend\setting\AlamatPengirimController;
+use Illuminate\Support\Facades\Notification;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,7 +103,10 @@ Route::middleware('auth','role:user')->group(function(){
         Route::get('/{invoice_number}',[TransacationController::class,'show'])->name('show');
         Route::get('/{invoice_number}/received',[TransacationController::class,'received'])->name('received');
         Route::get('/{invoice_number}/canceled',[TransacationController::class,'canceled'])->name('canceled');
+        Route::get('/{invoice_number}/expired',[TransacationController::class,'expired'])->name('expired');
+        Route::get('/{invoice_number}/success',[TransacationController::class,'success'])->name('success');
         Route::post('/metodePembayaran',[TransacationController::class,'metodePembayaran'])->name('metodePembayaran');
+        Route::post('/updatePembayaranManual',[TransacationController::class,'updatePembayaranManual'])->name('updatePembayaranManual');
     });    
 });
 Route::get('/',[HomeController::class,'index'])->name('home');
@@ -113,5 +118,9 @@ Route::get('/customer',[CustomerController::class,'customer'])->name('admin.cust
 Route::post('/customer/table', [CustomerController::class, 'table'])->name('admin.customer.table');
 
 Route::get('/product/{categoriSlug}/{productSlug}',[FrontendProductController::class,'show'])->name('product.show');
+
+Route::post('/notifikasi',function(){
+    Notification::route('telegram', env('TELEGRAM_CHAT_ID'))->notify(new Notificationtele);
+});
 
 require __DIR__ . '/auth.php';

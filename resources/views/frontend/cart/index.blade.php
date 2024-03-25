@@ -47,7 +47,7 @@
                                                 <input type="text" value="{{ $carts->qty }}" name="cart_qty[]">
                                             </div>
                                         </td>
-                                        <td class="cart__total">{{ $carts->total_price_per_product }}</td>
+                                        <td class="cart__total">{{ rupiah($carts->total_price_per_product) }}</td>
                                         <td class="cart__close"><a href="{{ route('cart.delete',$carts->id) }}"><span class="icon_close"></span></a></td>
                                     </tr>
                                 @endforeach
@@ -76,7 +76,7 @@
                     <div class="cart__total__procced">
                         <h6>Cart total</h6>
                         <ul>
-                            <li>Total <span> {{$data['carts']->sum('total_price_per_product') }}</span></li>
+                            <li>Total <span> {{ rupiah($data['carts']->sum('total_price_per_product')) }}</span></li>
                         </ul>
                         <a href="{{ route('checkout.index') }}" class="primary-btn">Proceed to checkout</a>
                     </div>

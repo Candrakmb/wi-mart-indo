@@ -92,7 +92,7 @@
                                     </li>
                                     @foreach ($data['carts'] as $cart)
                                         <li>{{ $loop->iteration }}. {{ $cart->Product->name }} x
-                                            {{ $cart->qty }}<span>{{ $cart->total_price_per_product }}</span>
+                                            {{ $cart->qty }}<span>{{ rupiah($cart->total_price_per_product) }}</span>
                                         </li>
                                     @endforeach
                                     <li>
@@ -104,10 +104,10 @@
                             </div>
                             <div class="checkout__order__total">
                                 <ul>
-                                    <li>Subtotal <span>{{ $data['carts']->sum('total_price_per_product') }}</span>
+                                    <li>Subtotal <span> {{ rupiah($data['carts']->sum('total_price_per_product')) }} </span>
                                     </li>
                                     <li>Shipping Cost <span id="text-cost">Rp 0</span></li>
-                                    <li>Total <span id="total">{{ $data['carts']->sum('total_price_per_product') }}</span></li>
+                                    <li>Total <span id="total">{{ rupiah($data['carts']->sum('total_price_per_product')) }}</span></li>
                                     <input type="hidden" name="shipping_cost" id="shipping_cost" >
                                 </ul>
                             </div>
@@ -171,7 +171,7 @@
             $.ajax({
                 url: '/rajaongkir/province/' + provinceId,
                 type: "GET",
-                dataType: "json
+                dataType: "json",
                 success: function(data) {
                     if (data) {
                         $('#city_id').empty();
