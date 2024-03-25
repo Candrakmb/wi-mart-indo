@@ -10,9 +10,9 @@
                                      class="required">*</span>
                                 <input type="hidden" name="id" class="form-control" value="{{($type == 'create' ? '' : $alamat_pengirim->id)}}" >
                                 <select name="province_id" id="province_id" class="form-select" required>
-                                    <option value="" {{$type == 'create' ? 'selected' : ''}} disabled>-- Select Province --</option>
+                                    <option value="" selected disabled>-- Select Province --</option>
                                     @foreach ($provinces as $province)
-                                        <option value="{{ $province['province_id'] }}" data-id="{{ $province['province_id'] }} {{$type == 'update' && $alamat_pengirim->province_id == $province['province_id'] ? 'selected' : ''}}">{{ $province['province'] }}
+                                        <option value="{{ $province['province_id'] }}" data-id="{{ $province['province_id'] }}">{{ $province['province'] }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -22,7 +22,7 @@
                                 <label for="city_id" class="label1">Kota/Kabupaten</label><span
                                     class="required">*</span>
                                 <select name="city_id" id="city_id" class="form-select" disabled required>
-                                    <option value="" {{$type == 'create' ? 'selected' : ''}} disabled>-- Select City --</option>
+                                    <option value="" selected disabled>-- Select City --</option>
                                </select>
                                 <p class="help-block" style="display: none;"></p>
                             </div>

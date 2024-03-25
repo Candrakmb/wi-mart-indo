@@ -81,9 +81,10 @@
                                                 @foreach ($data['order']->orderDetail()->get() as $detail)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        <td><a>
-                                                                {{-- href="{{ route('product.show', ['categoriSlug' => $detail->Product->category->slug, 'productSlug' => $detail->Product->slug]) }}">{{ $detail->product->name }} --}}
-                                                            </a>
+                                                        <td>{{ $detail->product->name }}
+                                                            {{-- <a>
+                                                                href="{{ route('product.show', ['categoriSlug' => $detail->Product->category->slug, 'productSlug' => $detail->Product->slug]) }}">{{ $detail->product->name }}
+                                                            </a> --}}
                                                         </td>
                                                         <td class="text-center">{{ $detail->product->price }}
                                                         </td>
@@ -210,11 +211,31 @@
                   </button>
                 <div class="dropdown-container">
                   @foreach ($data['bank'] as $bank)
-                  <a href="#">{{strtoupper($bank->nama_bank)}}</a>
+                    <button class="down payManual" data-id="{{$bank->id}}" data-nama="{{$bank->nama_bank}}" data-atasNama="{{$bank->atas_nama}}" data-rek="{{$bank->no_rekening}}" data-total="{{$data['order']->total_pay}}" >{{strtoupper($bank->nama_bank)}}</button>
                   @endforeach
                 </div>
-                <a href="#about">Online Transfer</a>
+                <button class="down" id="pay-button">Transfer Online</button>
               </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Modal proses pembayran offline -->
+<div class="modal fade" id="prosesPembayaran" tabindex="-1" aria-labelledby="prosesPembayaran" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="prosesPembayaran">Pembayaran</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="contenModel">
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -229,6 +250,7 @@
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
     </script>
     <script>
+        
         const metodeMidtrans = document.querySelector('#pay-button');
         var dropdown = document.getElementsByClassName("dropdown-btn");
         var i;
@@ -244,6 +266,168 @@
             }
         });
         }
+        function handleClick(event, route) {
+            event.preventDefault(); 
+
+           
+        
+        }
+
+        document.querySelectorAll('.payManual').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var dataId = this.getAttribute('data-id');
+                var nama = this.getAttribute('data-nama');
+                var atasNama = this.getAttribute('data-atasNama');
+                var noRek = this.getAttribute('data-rek');
+                var total = parseInt(this.getAttribute('data-total'));
+                var nRandom = Math.floor(Math.random() * 81) + 20;
+                total = total + nRandom;
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                console.log(dataId, nama, atasNama, noRek, total);
+
+                // Lakukan permintaan AJAX ke route dengan invoice_number dan method
+                $.ajax({
+                    type: "POST",
+                    url: "/transaction/metodePembayaran",
+                    data: {
+                        invoice: '{{ $data["order"]->invoice_number }}',
+                        nRandom: nRandom,
+                        total: total,
+                        idBank: dataId,
+                        method: '0',
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                        success: function(response) {
+                        console.log(response);
+                        // Lakukan tindakan tambahan jika diperlukan setelah permintaan berhasil
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+
+                // Menutup modal jika diperlukan
+                $('#pilihMetodePay').modal('hide');
+
+                // Membuat modal detail jika diperlukan
+                createModalDetail(dataId, nama, atasNama, noRek, total);
+            });
+        });
+
+
+        
+        function createModalDetail(dataId,nama,atasNama,noRek,total){
+            var modalBody = document.querySelector('#prosesPembayaran .modal-body');
+            modalBody.innerHTML = '';
+            var html = "";
+            var totalRupiah = formatRupiah(total);
+            var upBank = nama.toUpperCase();
+            html += `
+            <div class="row justify-content-md-center">
+            <div class="col-md-auto" style="width: 80%;">
+            <div class="card" style="width: auto;">
+                <div class="card-body">
+                    <div id="alertMessage" class="alert alert-success" style="display: none;">Copied!</div>
+                    <div class="row col-md-12">
+                        <div class="col-md-3 mb-3">
+                            <div class="text-center">
+                           <img src="{{asset('/img/bill.gif')}}">
+                        </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h5> Bank ${upBank} </h5>
+                            <h5> ${atasNama}</h5>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="myInput" value="${noRek}" aria-describedby="button-addon2" readonly>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="button" id="button-addon2"  onclick="copyText('myInput')">Salin</button>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <p>Jumlah Transfer</p>
+                            <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="myInputTotal" value="${totalRupiah}" aria-describedby="button-addon2" readonly>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="button" id="button-addon2"  onclick="copyText('myInputTotal')">Salin</button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+            <button class="btn btn-primary" style="width: 100%" id="konfirmasi" data-id="${dataId}" data-nama="${nama}" data-atasNama="${atasNama}" data-rek="${noRek}" data-total="${total}" >saya sudah transfer</button>
+            </div>
+            </div>
+            </div>
+            `;
+            $('#contenModel').append(html);
+            $('#prosesPembayaran').modal('show');
+
+            document.querySelectorAll('#konfirmasi').forEach(function(buttonKonfirmasi) {
+            buttonKonfirmasi.addEventListener('click', function() {
+                var dataId = this.getAttribute('data-id');
+                var nama = this.getAttribute('data-nama');
+                var atasNama = this.getAttribute('data-atasNama');
+                var noRek = this.getAttribute('data-rek');
+                var total = parseInt(this.getAttribute('data-total'));
+                console.log(dataId,nama,atasNama,noRek,total);
+                $('#pilihMetodePay').modal('hide');
+                createKonfirmasi();
+                });
+            });
+        }
+       
+        function createKonfirmasi(){
+            var modalBody = document.querySelector('#prosesPembayaran .modal-body');
+            modalBody.innerHTML = '';
+            var html = "";
+            html += `
+            <div class="row justify-content-md-center">
+                <div class="col-md-auto" style="width: 80%;">
+                    <div class="card" style="width: auto;">
+                         <div class="card-body">
+                            <div class="text-center">
+                            <p class="card-text">Wi-Mart sedang memvalidasi pembayaranmu. Mohon tunggu hingga proses validasi selesai</p>
+                            <img class="img-fluid"  src="{{asset('/img/bill.gif')}}">
+                            </div>
+                        </div>
+                     </div>
+                </div>
+             </div>
+            `;
+            $('#contenModel').append(html);
+            $('#prosesPembayaran').modal('show');
+        }
+
+        function copyText(inputId) {
+            // Get the text field based on inputId parameter
+            var copyText = document.getElementById(inputId);
+            if (inputId === 'myInputTotal') {
+            // Remove "Rp" and dots (.) from total value
+            var totalValue = copyText.value.replace(/Rp|\./g, '');
+            copyText.value = totalValue;
+    }
+            // Select the text in the field
+            copyText.select();
+            copyText.setSelectionRange(0, copyText.value.length); // Select all text in the field
+
+            // Copy the text to clipboard
+            document.execCommand("copy");
+            var alertMessage = document.getElementById("alertMessage");
+            alertMessage.style.display = "block";
+
+            // Hide the alert message after 2 seconds
+            setTimeout(function() {
+                alertMessage.style.display = "none";
+            }, 1500);
+        }
+
 
         metodeMidtrans.addEventListener('click', function(e) {
             e.preventDefault();
@@ -269,6 +453,23 @@
                 }
             });
         });
+
+        function formatRupiah(angka) {
+            var number_string = angka.toString(),
+                split = number_string.split(','),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+                
+            // tambahkan titik jika yang diinput sudah menjadi angka ribuan
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+            return 'Rp ' + rupiah;
+        }
     </script>
 @endpush
 @push('style')
@@ -279,7 +480,7 @@
 }
 
 /* Style the sidenav links and the dropdown button */
-.sidenav a, .dropdown-btn {
+.sidenav .down, .dropdown-btn {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 20px;
@@ -294,7 +495,7 @@
 }
 
 /* On mouse-over */
-.sidenav a:hover, .dropdown-btn:hover {
+.sidenav .down:hover, .dropdown-btn:hover {
   color: #f1f1f1;
 }
 

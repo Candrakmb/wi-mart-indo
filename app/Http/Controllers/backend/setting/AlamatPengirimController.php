@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 use App\Models\master\Categori;
-use App\Models\setting\Alamatpengirim;
+use App\Models\Setting\Alamatpengirim;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;

@@ -9,11 +9,19 @@ use Illuminate\Http\Request;
 use App\Models\master\Product;
 use App\Models\User;
 use App\Models\order\Order;
+use App\Charts\OrderCart;
+use App\Charts\OrderChartPie;
 
 
 class DashboardController extends Controller
 {
+    protected $chartOrder,$chartOrderPie;
 
+    public function __construct(OrderCart $chartOrder,OrderChartPie $chartOrderPie)
+    {
+        $this->chartOrder = $chartOrder;
+        $this->chartOrderPie = $chartOrderPie;
+    }
     public function index()
     {
         $data['total_product'] = Product::count();
@@ -23,17 +31,15 @@ class DashboardController extends Controller
         $data['total_completed'] = Order::where('status',3)->whereMonth('created_at', Date('m'))->whereYear('created_at',Date('Y'))->count();
         $data['total_order'] = $data['total_pending'] + $data['total_shipping'] + $data['total_completed'];
 
-        $data['best_products'] = Product::select('products.*')
-        ->join('order_details', 'products.id', '=', 'order_details.product_id')
-        ->selectRaw('products.*, SUM(order_details.qty) as total_qty')
-        ->groupBy('products.id')
-        ->orderByDesc('total_qty')
+        $data['best_products'] = Product::with(['OrderDetails'])
+        ->withSum('OrderDetails','qty')
+        ->orderByDesc('order_details_sum_qty')
         ->limit(10)
         ->get();
 
         $data['last_order'] = Order::orderBy('id','DESC')->limit(5)->get();
         $data['chart'] = $this->chartOrder->build();
         $data['chartPie'] = $this->chartOrderPie->build();
-        return view('backend.dashboard');
+        return view('backend.dashboard', compact('data'));
     }
 }

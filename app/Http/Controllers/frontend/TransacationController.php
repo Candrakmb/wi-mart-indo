@@ -7,6 +7,7 @@ use App\Models\order\Order;
 use App\Models\setting\Bank;
 use App\Repositories\CrudRepositories;
 use App\Services\Feature\OrderService;
+use Illuminate\Support\Facades\DB;
 use App\Services\Midtrans\CreateSnapTokenService;
 use Illuminate\Http\Request;
 
@@ -40,6 +41,40 @@ class TransacationController extends Controller
         }
         return view('frontend.transaction.show',compact('data'));
     }
+
+    public function metodePembayaran(Request $request)
+    {
+        DB::beginTransaction();
+        
+        try {
+            $invoice = $request->input('invoice');
+            $nRandom = $request->input('nRandom');
+            $total = $request->input('total');
+            $idBank = $request->input('idBank');
+            $method = $request->input('method');
+    
+            $order = Order::where('invoice_number', $invoice)->first();
+            
+            if(!$order) {
+                throw new \Exception('Order not found.');
+            }
+    
+            if($method == '0'){
+                $order->metode_pembayaran = $method;
+                $order->total_pay = $total;
+            } else {
+                $order->metode_pembayaran ='1';
+            }
+            $order->save();
+            DB::commit();
+    
+            return response()->json(['message' => 'Metode pembayaran berhasil diupdate.']);
+        } catch (\Exception $e) {
+            DB::rollBack();
+    
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }    
 
     public function received($invoice_number)
     {

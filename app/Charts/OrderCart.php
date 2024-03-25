@@ -22,7 +22,7 @@ class OrderCart
             DB::raw("(count(id)) as total"),
             DB::raw("(DATE_FORMAT(created_at, '%D %M')) as month_name"))
             ->whereYear('created_at',date('Y'))
-            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%m %Y')"))
+            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%D %M')"))
             ->get();
         $month_name = json_decode(json_encode($order->pluck('month_name')), true);
         $total = json_decode(json_encode($order->pluck('total')), true);
