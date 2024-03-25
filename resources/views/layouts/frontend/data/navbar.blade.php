@@ -21,7 +21,7 @@
          <div class="row">
              <div class="col-xl-3 col-lg-2">
                  <div class="">
-                    <a class="logo" href="{{ url('/') }}"><img src="{{ asset('img') }}/logo.png" alt="" style="width: 75px; margin-left: 50px;">Wimartindo</a>
+                    <a class="logo" href="{{ url('/') }}"><img src="{{ asset('img') }}/logo.png" alt="">Wimartindo</a>
                  </div>
              </div>
              <div class="col-xl-6 col-lg-7 text-center">
