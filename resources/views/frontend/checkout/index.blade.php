@@ -171,7 +171,7 @@
             $.ajax({
                 url: '/rajaongkir/province/' + provinceId,
                 type: "GET",
-                dataType: "json",
+                dataType: "json
                 success: function(data) {
                     if (data) {
                         $('#city_id').empty();

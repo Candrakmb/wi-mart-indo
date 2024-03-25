@@ -101,6 +101,7 @@ Route::middleware('auth','role:user')->group(function(){
         Route::get('/{invoice_number}',[TransacationController::class,'show'])->name('show');
         Route::get('/{invoice_number}/received',[TransacationController::class,'received'])->name('received');
         Route::get('/{invoice_number}/canceled',[TransacationController::class,'canceled'])->name('canceled');
+        Route::post('/metodePembayaran',[TransacationController::class,'metodePembayaran'])->name('metodePembayaran');
     });    
 });
 Route::get('/',[HomeController::class,'index'])->name('home');
