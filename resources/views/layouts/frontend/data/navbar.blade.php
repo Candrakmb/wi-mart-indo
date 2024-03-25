@@ -8,8 +8,8 @@
              <div class="tip">2</div>
          </a></li>
      </ul>
-     <div class="offcanvas__logo">
-         <a href="{{ url('/') }}"><img src="{{ asset('ashion') }}/img/logo.png" alt=""></a>
+     <div class="offcanvas__logo" style="text-align: center;">
+         <a href="{{ url('/') }}"><img src="{{ asset('img') }}/logo.png" alt="" style="width: 150px; display: inline-block;"></a>
      </div>
      <div id="mobile-menu-wrap"></div>
  </div>
@@ -21,7 +21,7 @@
          <div class="row">
              <div class="col-xl-3 col-lg-2">
                  <div class="">
-                     <h1 class="title-logo">Wi Mart</h1>
+                    <a class="logo" href="{{ url('/') }}"><img src="{{ asset('img') }}/logo.png" alt="" style="width: 75px; margin-left: 50px;">Wimartindo</a>
                  </div>
              </div>
              <div class="col-xl-6 col-lg-7 text-center">
