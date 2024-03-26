@@ -4,12 +4,14 @@
      <div class="offcanvas__close">+</div>
      <ul class="offcanvas__widget">
          <li><span class="icon_search search-switch"></span></li>
-         <li><a href="#"><span class="icon_bag_alt"></span>
-             <div class="tip">2</div>
+         <li><a href="{{ route('cart.index') }}"><span class="icon_bag_alt"></span>
+            <div class="tip">
+                {{ $totalCart ?? 0 }}
+            </div>
          </a></li>
      </ul>
      <div class="offcanvas__logo" style="text-align: center;">
-         <a href="{{ url('/') }}"><img src="{{ asset('img') }}/logo.png" alt="" style="width: 150px; display: inline-block;"></a>
+         <a href="{{ url('/') }}"><img src="{{ asset('img') }}/logo.png" alt="" style="width: 200px; display: inline-block;"></a>
      </div>
      <div id="mobile-menu-wrap"></div>
  </div>

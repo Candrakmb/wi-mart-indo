@@ -1303,7 +1303,7 @@ ol {
 
 .product__hover a {
 	color: #f3f3f3;
-	font-family: 'Luckiest Guy', cursive;
+	font-family: "Figtree", sans-serif;
 	font-size: 12px;
 	width: 125px;
 	border: 0px solid white;
@@ -2842,7 +2842,7 @@ ol {
 }
 
 .blog__details__item__title .tip {
-	font-size: 12px;
+	font-size: 20px;
 	color: #ffffff;
 	background: #237B9F;
 	text-transform: uppercase;
@@ -3321,9 +3321,10 @@ ol {
 		right: 15px;
 		top: 24px;
 		margin-right: 50px;
+		margin-top: 10px;
 	}
 	.canvas__open i{
-		margin-top: 20px;
+		margin-top: 25px;
 	}
 	.offcanvas-menu-overlay {
 		z-index: -999;
@@ -3365,13 +3366,13 @@ ol {
 	}
 	.offcanvas__close {
 		position: absolute;
-		width: 40px;
-		height: 40px;
+		width: 80px;
+		height: 80px;
 		right: 30px;
 		top: 25px;
 		border: 1px solid #ddd;
 		border-radius: 50%;
-		font-size: 26px;
+		font-size: 50px;
 		text-align: center;
 		-webkit-transform: rotate(45deg);
 		-ms-transform: rotate(45deg);
@@ -3391,6 +3392,15 @@ ol {
 	}
 	.slicknav_nav ul {
 		margin: 0;
+		font-size: 40px;
+		margin-bottom: 20px;
+	}
+	.slicknav_nav ul li{
+		margin-bottom: 30px;
+	}
+	.slicknav_nav ul li .dropdown {
+		margin-top: 25px;
+		margin-left: 40px;
 	}
 	.slicknav_nav .slicknav_row,
 	.slicknav_nav a {
@@ -3422,7 +3432,7 @@ ol {
 	.offcanvas__widget li {
 		list-style: none;
 		display: inline-block;
-		font-size: 18px;
+		font-size: 40px;
 		color: #111111;
 		margin-right: 20px;
 		cursor: pointer;
@@ -3431,7 +3441,7 @@ ol {
 		margin-right: 0;
 	}
 	.offcanvas__widget li a {
-		font-size: 18px;
+		font-size: 40px;
 		color: #111111;
 		position: relative;
 	}
@@ -3439,13 +3449,13 @@ ol {
 		position: absolute;
 		right: -12px;
 		top: -11px;
-		height: 18px;
-		width: 18px;
+		height: 30px;
+		width: 30px;
 		background: #111111;
-		font-size: 10px;
+		font-size: 15px;
 		font-weight: 500;
 		color: #ffffff;
-		line-height: 18px;
+		line-height: 30px;
 		text-align: center;
 		border-radius: 50%;
 	}
@@ -3477,11 +3487,11 @@ ol {
 	}
 
 	.header .container-fluid .row .logo img {
-		width: 120px;
+		width: 150px;
 	}
 
 	.header .container-fluid .row .logo{
-		font-size: 35px;
+		font-size: 40px;
 	}
 
 	.product__item__pic {
@@ -3503,6 +3513,10 @@ ol {
     .product__hover {
         margin-bottom: 10px;
     }
+
+	.breadcrumb__links a, .breadcrumb__links span{
+		font-size: 25px;
+	}
 }
 
 /* Wide Mobile = 480px */
@@ -3562,8 +3576,8 @@ ol {
 	}
 	.offcanvas__close {
 		position: absolute;
-		width: 40px;
-		height: 40px;
+		width: 80px;
+		height: 80px;
 		right: 30px;
 		top: 25px;
 		border: 1px solid #ddd;
@@ -3636,10 +3650,10 @@ ol {
 		position: absolute;
 		right: -12px;
 		top: -11px;
-		height: 18px;
-		width: 18px;
+		height: 30px;
+		width: 30px;
 		background: #111111;
-		font-size: 10px;
+		font-size: 20px;
 		font-weight: 500;
 		color: #ffffff;
 		line-height: 18px;
