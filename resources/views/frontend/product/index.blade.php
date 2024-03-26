@@ -22,13 +22,13 @@
                 <div class="col-lg-12 col-md-12">
                     <div class="row">
                         @foreach ($data['product'] as $product)
-                        <div class="col-lg-3 col-md-4">
+                        <div class="col-lg-2 col-md-3">
                             @component('components.frontend.product-card')
                                 @slot('image', asset('storage/image/product/' . $product->thumbnails))
                                 @slot('route', route('product.show', ['categoriSlug' => trim($product->categori->slug), 'productSlug' =>
                                 $product->slug]))
                                     @slot('name', $product->name)
-                                    @slot('price', $product->price)
+                                    @slot('price', rupiah($product->price))
                             @endcomponent
                         </div>
                         @endforeach
