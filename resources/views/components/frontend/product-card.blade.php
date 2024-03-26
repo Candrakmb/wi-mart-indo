@@ -3,7 +3,8 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 100%; /* Mengisi tinggi kontainer */
+        flex-wrap: wrap;
+        height: 95%; /* Mengisi tinggi kontainer */
     }
 
     .product__item__text {
@@ -15,7 +16,7 @@
     }
 
     .product__item__text h6 a {
-        font-size: 14px;
+        font-size: 13px;
         font-weight: lighter;
         font-family: "Figtree", sans-serif;
         color: #111111;
@@ -29,14 +30,35 @@
     .product__price {
         margin-top: 5px; /* Memberi sedikit jarak dengan judul */
         position: absolute; /* Mengatur posisi elemen */
-        bottom: 60px
+        bottom: 65px
     }
 
     .product__hover {
         margin-top: 10px; /* Memberi sedikit jarak dari harga */
-        bottom: 10px
+        bottom: 25px
+    }
+
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .product__item__text h6 a {
+            font-size: 25px;
+            margin-bottom: 55px;
+        }
+        
+        .product__item__text .product__price {
+            margin-bottom: 50px;
+            font-size: 30px;
+        }
+
+        .product__hover a {
+            width: 290px;
+            height: 50px;
+            font-size: 20px;
+            padding-top: 10px;
+            margin-bottom: 15px;
+        }
     }
 </style>
+
 
 <div class="product__item">
     <div class="product__item__pic set-bg image-popup"

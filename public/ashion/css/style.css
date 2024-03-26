@@ -502,6 +502,8 @@ ol {
 
 .offcanvas-menu-wrapper {
 	display: none;
+	z-index: -999;
+	visibility: hidden;
 }
 
 .canvas__open {
@@ -1258,8 +1260,6 @@ ol {
 	position: relative;
 	overflow: hidden;
 	border-radius: 10px;
-	/* border: 2px solid #237B9F; */
-	/* box-shadow: 0px 0px 5px #888888; */
 	background-size:     contain;
 	background-repeat:   no-repeat;
     background-position: center center;  
@@ -1317,22 +1317,6 @@ ol {
 	margin-left: 10px;
 }
 
-.product__item__text h6 a {
-	font-size: 14px;
-	font-weight: lighter;
-	font-family: "Figtree", sans-serif;
-	color: #111111;
-
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
-	-webkit-line-clamp: 2;
-}
-
-.product__item__text h6 a::after {
-	content: '\A'; /* Menambahkan line break */
-	white-space: pre; /* Mengatur agar line break berfungsi */
-}
 
 .product__item__text .rating i:last-child {
 	margin-right: 0;
@@ -1342,8 +1326,8 @@ ol {
 	font-family: "Crimson Pro", serif;
 	color: #237B9F;
 	font-weight: 600;
-	font-size: 20px;
-	margin-top: 5px;
+	font-size: 17px;
+	margin-top: 0px;
 }
 
 .product__item__text .product__price span {
@@ -3343,6 +3327,7 @@ ol {
 		margin-top: 20px;
 	}
 	.offcanvas-menu-overlay {
+		z-index: -999;
 		position: fixed;
 		left: 0;
 		top: 0;
@@ -3498,6 +3483,26 @@ ol {
 	.header .container-fluid .row .logo{
 		font-size: 35px;
 	}
+
+	.product__item__pic {
+		height: 300px;
+		position: relative;
+		overflow: hidden;
+		border-radius: 10px;
+		background-size:     contain;
+		background-repeat:   no-repeat;
+		background-position: center center;  
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+
+	.product__item__text {
+		margin-bottom: 20px;
+	}
+
+    .product__hover {
+        margin-bottom: 10px;
+    }
 }
 
 /* Wide Mobile = 480px */
@@ -3519,6 +3524,7 @@ ol {
 		top: 24px;
 	}
 	.offcanvas-menu-overlay {
+		z-index: -999;
 		position: fixed;
 		left: 0;
 		top: 0;
