@@ -15,6 +15,7 @@ use App\Http\Controllers\backend\CustomerController;
 use App\Http\Controllers\backend\order\OrderController;
 use App\Http\Controllers\backend\setting\AddBankController;
 use App\Http\Controllers\Rajaongkir\RajaongkirController;
+use App\Http\Controllers\Midtrans\MidtransController;
 use App\Http\Controllers\backend\setting\AlamatPengirimController;
 use Illuminate\Support\Facades\Notification;
 
@@ -28,6 +29,11 @@ use Illuminate\Support\Facades\Notification;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::post('payments/midtrans-notification', [MidtransController::class, 'receive']);
+Route::post('payments/midtrans-success', [MidtransController::class, 'success']);
+
+
+
 Route::middleware(['auth'])->group(function () {
     Route::prefix('categori')->name('categori.')->group(function(){
         Route::get('/',[CategoriController::class,'categori'])->name('categori');
