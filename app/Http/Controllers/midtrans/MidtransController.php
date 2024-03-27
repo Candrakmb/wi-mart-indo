@@ -16,31 +16,27 @@ class MidtransController extends Controller
         $serverKey = config('midtrans.server_key');
         $hashed = hash("sha512",$request->order_id.$request->status_code.$request->gross_amount.$serverKey);
         if($hashed == $request->signature_key){
+            $order = Order::where('invoice_number', $request->order_id)->first();
             // if($request->transaction_status == 'capture'){
                 if($request->transaction_status == 'settlement'){
-                    $order =Order::where('invoice_number', $request->order_id);
                     $order->update(['status' => '1']);
                 }
                 else if($request->transaction_status == 'pending'){
-                    $order =Order::where('invoice_number', $request->order_id);
                     $order->update(['status' => '0']);
                 }
                 else if($request->transaction_status == 'deny'){
-                    $order =Order::where('invoice_number', $request->order_id);
                     $order->update(['status' => '4']);
                 }
                 else if($request->transaction_status == 'expire'){
-                    $order =Order::where('invoice_number', $request->order_id);
                     $order->update(['status' => '5']);
                 }
                 else if($request->transaction_status == 'cancel'){
-                    $order =Order::where('invoice_number', $request->order_id);
                     $order->update(['status' => '4']);
                 }
                 return response()
                 ->json([
                     'success' => true,
-                    'message' => $order->order_id,
+                    'message' => $order->invoice_number,
                 ]);
             }
             
