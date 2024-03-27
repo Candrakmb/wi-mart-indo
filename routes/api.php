@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Midtrans\MidtransController;
+use App\Http\Controllers\midtrans\MidtransController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
