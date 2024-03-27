@@ -18,7 +18,7 @@ class OrderController extends Controller
     public $data = [
         'title' => 'Pesanan',
         'modul' => 'order',
-        'sektor' => 'Backend'
+        'sektor' => 'backend'
     ];
 
     function order($status){
