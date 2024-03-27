@@ -14,7 +14,7 @@ class MidtransController extends Controller
     public function receive( Request $request)
     {
         $serverKey = config('midtrans.server_key');
-        $hashed = hash("sha512",$request->order_id.$request->status_code.$request->gross_amont.$serverKey);
+        $hashed = hash("sha512",$request->order_id.$request->status_code.$request->gross_amount.$serverKey);
         if($hashed == $request->signature_key){
             // if($request->transaction_status == 'capture'){
                 if($request->transaction_status == 'settlement'){
@@ -43,6 +43,7 @@ class MidtransController extends Controller
                     'message' => $order->order_id,
                 ]);
             }
+            
         // }
         
             // $callback = new CallbackService;
