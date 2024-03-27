@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Midtrans;
+namespace App\Http\Controllers\midtrans;
 
 use App\Http\Controllers\Controller;
 use App\Services\Midtrans\CallbackService;
