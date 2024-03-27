@@ -16,15 +16,15 @@
         </div>
     </div>
 
-    <section class="shop-cart spad">
+    <section class="shop-cart spad " >
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
+            <div class="row" >
+                <div class="col-lg-12" >
                     <div class="invoice" style="border-top: 2px solid #6777ef;">
-                        <div class="invoice-print">
+                        <div class="invoice-print" >
                             <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="invoice-title">
+                                <div class="col-lg-12" >
+                                    <div class="invoice-title" >
                                         <h2>Invoice</h2>
                                         <div class="invoice-number">Order {{ $data['order']->invoice_number }}</div>
                                     </div>
@@ -115,20 +115,52 @@
                                                 </address>
                                             @endif
                                         </div>
-                                        <div class="col-lg-4 text-right">
-                                            <div class="invoice-detail-item">
-                                                <div class="invoice-detail-name">Subtotal</div>
-                                                <div class="invoice-detail-value">{{ rupiah($data['order']->subtotal) }}
+                                        <div class="col-lg-4">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="invoice-detail-name">Subtotal</div>
                                                 </div>
-                                                <div class="invoice-detail-item">
-                                                    <div class="invoice-detail-name">{{ __('text.shipping_cost') }}</div>
-                                                    <div class="invoice-detail-value">
+                                                <div class="col-md-1">
+                                                    <span class="text-right">:</span>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="invoice-detail-value text-right">
+                                                        {{ rupiah($data['order']->subtotal) }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="invoice-detail-name">shipping cost</div>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <span class="text-right">:</span>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="invoice-detail-value text-right">
                                                         {{ rupiah($data['order']->shipping_cost) }}</div>
                                                 </div>
-                                                <hr class="mt-2 mb-2">
-                                                <div class="invoice-detail-item">
+                                                @if ($data['order']->kode_unik != null)
+                                                    <div class="col-md-6">
+                                                        <div class="invoice-detail-name">Kode unik</div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <span class="text-right">:</span>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div class="invoice-detail-value text-right">
+                                                            {{ rupiah($data['order']->kode_unik) }}</div>
+                                                    </div>
+                                                @endif
+                                                <div class="col-md-12">
+                                                    <hr class="mt-2 mb-2">
+                                                </div>
+                                                <div class="col-md-6">
                                                     <div class="invoice-detail-name">Total</div>
-                                                    <div class="invoice-detail-value invoice-detail-value-lg">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <span class="text-right">:</span>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="invoice-detail-value invoice-detail-value-lg text-right">
                                                         {{ rupiah($data['order']->total_pay) }}</div>
                                                 </div>
                                             </div>
@@ -137,33 +169,40 @@
                                 </div>
                             </div>
                             <hr>
-                            <div class="text-md-right">
-                                <div class="float-lg-left mb-lg-0 mb-3">
-                                    @if ($data['order']->status == 0)
-                                            <button class="btn btn-primary btn-icon icon-left" data-toggle="modal"
-                                                data-target="#pilihMetodePay" id="payment"><i class="fa fa-credit-card"></i>
-                                            Process Payment</button>
-                                        <a href="{{ route('transaction.canceled', $data['order']->invoice_number) }}"
-                                            class="btn btn-danger btn-icon icon-left"><i class="fa fa-times"></i>
-                                            Cancel Order</a>
-                                    @elseif ($data['order']->status == 2)
-                                        <a href="{{ route('transaction.received', $data['order']->invoice_number) }}"
-                                            class="btn btn-primary text-white btn-icon icon-left"><i
-                                                class="fa fa-credit-card"></i>
-                                            Order Received</a>
-                                    @endif
-                                </div>
-                                <button class="btn btn-warning btn-icon icon-left"><i class="fa fa-print"></i>
-                                    Print</button>
-                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-md-right">
+                        <div class="float-lg-left mb-lg-0 mb-3">
+                            @if ($data['order']->status == 0)
+                                <button class="btn btn-primary btn-icon icon-left" data-toggle="modal"
+                                    data-target="#pilihMetodePay" id="payment"><i class="fa fa-credit-card"></i>
+                                    Process Payment</button>
+                                <a href="{{ route('transaction.canceled', $data['order']->invoice_number) }}"
+                                    class="btn btn-danger btn-icon icon-left"><i class="fa fa-times"></i>
+                                    Cancel Order</a>
+                            @elseif ($data['order']->status == 2)
+                                <a href="{{ route('transaction.received', $data['order']->invoice_number) }}"
+                                    class="btn btn-primary text-white btn-icon icon-left"><i class="fa fa-credit-card"></i>
+                                    Order Received</a>
+                            @endif
+                        </div>
+                        <button class="btn btn-warning btn-icon icon-left" id="btnPrint"><i class="fa fa-print"></i>
+                            Print</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section>
-        <div class="container">
+        <div class="container" id="content-print">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-primary">
@@ -197,7 +236,8 @@
             </div>
         </div>
         <!-- Modal pilih pembayaran -->
-        <div class="modal fade" id="pilihMetodePay" tabindex="-1" aria-labelledby="pilihMetodePayLabel" aria-hidden="true">
+        <div class="modal fade" id="pilihMetodePay" tabindex="-1" aria-labelledby="pilihMetodePayLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -250,38 +290,42 @@
             </div>
         </div>
     </section>
+    <iframe id="pdfViewer" style="width: 100%; height: 500px;"></iframe>
+
     <!-- Modal -->
 @endsection
 @push('js')
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
     <script>
         const metodeMidtrans = document.querySelector('#pay-button');
-        const payment = document.querySelector('#payment');
+
         var dropdown = document.getElementsByClassName("dropdown-btn");
         var i;
-        
+
         document.addEventListener('DOMContentLoaded', function() {
             let pembayaran = JSON.parse(localStorage.getItem('pembayaran'));
-
             // Jika nilai tidak ada di Local Storage, inisialisasi dengan nilai default
             if (!pembayaran) {
                 pembayaran = {
                     statusMetodePembayaran: '0',
-                    idBank:'',
-                    namaBank:'',
-                    noRek:'',
-                    total:'',
-                    nRandom:'',
+                    idBank: '',
+                    namaBank: '',
+                    noRek: '',
+                    total: '',
+                    nRandom: '',
                     atasNama: '',
                     startTime: '',
-                    sudahBayar:false
+                    sudahBayar: false
                 };
                 localStorage.setItem('pembayaran', JSON.stringify(pembayaran));
             }
-            if ('{{ $data['order']->status }}' == 1) {
+            if ('{{ $data['order']->status }}' != 0) {
                 // Mengecek status pembayaran
-                
+
                 // Memastikan pembayaran ada dalam local storage sebelum dihapus
                 if (pembayaran) {
                     localStorage.removeItem('pembayaran');
@@ -302,44 +346,50 @@
             });
         };
 
-        payment.addEventListener('click', function(e) {
+        document.addEventListener('DOMContentLoaded', function() {
+            const payment = document.querySelector('#payment');
+            if (payment) {
+                payment.addEventListener('click', function(e) {
 
-            const pembayaran = JSON.parse(localStorage.getItem('pembayaran'));
-            const statusMetodePembayaran = pembayaran.statusMetodePembayaran;
-
-            const payButton = document.getElementById('pay-button');
-            const listBank = document.getElementById('listBank');
-            const manualPayButton = document.getElementById('manualPay');
-            if (statusMetodePembayaran === '1') {
-                manualPayButton.style.display = 'block';
-                listBank.innerHTML = '';
-                payButton.style.display = 'none';
-                manualPayButton.addEventListener('click', function(e) {
                     const pembayaran = JSON.parse(localStorage.getItem('pembayaran'));
                     const statusMetodePembayaran = pembayaran.statusMetodePembayaran;
-                    const idBank = pembayaran.idBank;
-                    const nRandom = pembayaran.nRandom;
-                    const nama_bank = pembayaran.namaBank;
-                    const no_rekening = pembayaran.noRek;
-                    const atas_nama = pembayaran.atasNama;
-                    const total = pembayaran.total;
-                    pembayaran.startTime = '{{ $data['order']->updated_at }}';
-                    localStorage.setItem('pembayaran', JSON.stringify(pembayaran));
-                    $('#pilihMetodePay').modal('hide');
-                    createModalDetail(idBank, nama_bank, atas_nama, no_rekening, total, nRandom);
-                })
-            } else if (statusMetodePembayaran === '2') {
-                payButton.style.display = 'block';
-                manualPayButton.style.display = 'none';
-                listBank.style.display = 'none';
-               
-            } else {
-                // Jika statusMetodePembayaran kosong atau tidak sesuai, sesuaikan dengan logika Anda
-                // Contoh: Tampilkan keduanya atau sembunyikan keduanya
-                payButton.style.display = 'block';
-                manualPayButton.style.display = 'block';
+
+                    const payButton = document.getElementById('pay-button');
+                    const listBank = document.getElementById('listBank');
+                    const manualPayButton = document.getElementById('manualPay');
+                    if (statusMetodePembayaran === '1') {
+                        manualPayButton.style.display = 'block';
+                        listBank.innerHTML = '';
+                        payButton.style.display = 'none';
+                        manualPayButton.addEventListener('click', function(e) {
+                            const pembayaran = JSON.parse(localStorage.getItem('pembayaran'));
+                            const statusMetodePembayaran = pembayaran.statusMetodePembayaran;
+                            const idBank = pembayaran.idBank;
+                            const nRandom = pembayaran.nRandom;
+                            const nama_bank = pembayaran.namaBank;
+                            const no_rekening = pembayaran.noRek;
+                            const atas_nama = pembayaran.atasNama;
+                            const total = pembayaran.total;
+                            pembayaran.startTime = '{{ $data['order']->updated_at }}';
+                            localStorage.setItem('pembayaran', JSON.stringify(pembayaran));
+                            $('#pilihMetodePay').modal('hide');
+                            createModalDetail(idBank, nama_bank, atas_nama, no_rekening, total,
+                                nRandom);
+                        })
+                    } else if (statusMetodePembayaran === '2') {
+                        payButton.style.display = 'block';
+                        manualPayButton.style.display = 'none';
+                        listBank.style.display = 'none';
+
+                    } else {
+                        payButton.style.display = 'block';
+                        manualPayButton.style.display = 'block';
+                    }
+                });
             }
         });
+
+
 
         document.querySelectorAll('.payManual').forEach(function(button) {
             button.addEventListener('click', function() {
@@ -348,7 +398,7 @@
                 var atasNama = this.getAttribute('data-atasNama');
                 var noRek = this.getAttribute('data-rek');
                 var total = parseInt(this.getAttribute('data-total'));
-                var nRandom = Math.floor(Math.random() * 81) + 20; 
+                var nRandom = Math.floor(Math.random() * 81) + 20;
                 total = total + nRandom;
                 var csrfToken = $('meta[name="csrf-token"]').attr('content');
                 var startTime = new Date();
@@ -384,7 +434,7 @@
                         console.error(xhr.responseText);
                     }
                 });
-                 
+
                 // Menutup modal jika diperlukan
                 $('#pilihMetodePay').modal('hide');
                 // Membuat modal detail jika diperlukan
@@ -392,7 +442,7 @@
             });
         });
 
-        function createModalDetail(dataId, nama, atasNama, noRek, total,nRandom) {
+        function createModalDetail(dataId, nama, atasNama, noRek, total, nRandom) {
             var modalBody = document.querySelector('#prosesPembayaran .modal-body');
             modalBody.innerHTML = '';
             const pembayaran = JSON.parse(localStorage.getItem('pembayaran'));
@@ -400,7 +450,7 @@
             // Menambahkan 5 menit ke waktu awal untuk mendapatkan waktu akhir
             var endTime = new Date(startTime.getTime() + 5 * 60000);
             var endTimeFormatted = endTime.toLocaleString();
-             // 5 menit dalam milidetik
+            // 5 menit dalam milidetik
             console.log(startTime);
             var html = "";
             var totalRupiah = formatRupiah(total);
@@ -458,7 +508,7 @@
             $('#contenModel').append(html);
             startCountdown(endTime);
             $('#prosesPembayaran').modal('show');
-           
+
             document.querySelectorAll('#konfirmasi').forEach(function(buttonKonfirmasi) {
                 buttonKonfirmasi.addEventListener('click', function() {
                     var csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -466,24 +516,24 @@
                     $('#pilihMetodePay').modal('hide');
 
                     $.ajax({
-                    type: "POST",
-                    url: "/transaction/updatePembayaranManual",
-                    data: {
-                        invoice: '{{ $data['order']->invoice_number }}',
-                        nRandom: nRandom,
-                        total: total,
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken
-                    },
-                    success: function(response) {
-                        console.log(response);
-                        // Lakukan tindakan tambahan jika diperlukan setelah permintaan berhasil
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
+                        type: "POST",
+                        url: "/transaction/updatePembayaranManual",
+                        data: {
+                            invoice: '{{ $data['order']->invoice_number }}',
+                            nRandom: nRandom,
+                            total: total,
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            // Lakukan tindakan tambahan jika diperlukan setelah permintaan berhasil
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
 
                     $.ajax({
                         type: "POST",
@@ -559,10 +609,10 @@
         metodeMidtrans.addEventListener('click', function(e) {
             e.preventDefault();
             let pembayaran = JSON.parse(localStorage.getItem('pembayaran'));
-                // Mengubah nilai statusMetodePembayaran menjadi '1'
+            // Mengubah nilai statusMetodePembayaran menjadi '1'
             pembayaran.statusMetodePembayaran = '2';
 
-                // Menyimpan objek pembayaran yang sudah diubah kembali ke local storage
+            // Menyimpan objek pembayaran yang sudah diubah kembali ke local storage
             localStorage.setItem('pembayaran', JSON.stringify(pembayaran));
             $('#pilihMetodePay').modal('hide');
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -588,14 +638,13 @@
             snap.pay('{{ $data['order']->snap_token }}', {
                 // Optional
                 onSuccess: function(result) {
-                    window.location.href ='{{ route('transaction.success', $data['order']->invoice_number) }}'
+                    console.log(result)
+                    // window.location.href ='{{ route('transaction.success', $data['order']->invoice_number) }}'
+
+                    // window.location.href = '/payments/midtrans-notification';
                     $.ajax({
                         type: "POST",
-                        url: "/notifikasi",
-                        data: {
-                            invoice: '{{ $data['order']->invoice_number }}',
-                            tipe: '1',
-                        },
+                        url: "/payments/midtrans-notification",
                         headers: {
                             'X-CSRF-TOKEN': csrfToken
                         },
@@ -607,7 +656,25 @@
                             console.error(xhr.responseText);
                         }
                     });
-                    localStorage.removeItem('pembayaran');
+                    //     $.ajax({
+                    //         type: "POST",
+                    //         url: "/notifikasi",
+                    //         data: {
+                    //             invoice: '{{ $data['order']->invoice_number }}',
+                    //             tipe: '1',
+                    //         },
+                    //         headers: {
+                    //             'X-CSRF-TOKEN': csrfToken
+                    //         },
+                    //         success: function(response) {
+                    //             console.log(response);
+                    //             // Lakukan tindakan tambahan jika diperlukan setelah permintaan berhasil
+                    //         },
+                    //         error: function(xhr, status, error) {
+                    //             console.error(xhr.responseText);
+                    //         }
+                    //     });
+                    //     localStorage.removeItem('pembayaran');
                 },
                 // Optional
                 onPending: function(result) {
@@ -655,7 +722,7 @@
                     const tombolKonfirmasi = document.getElementById('konfirmasi');
                     tombolKonfirmasi.disabled = true;
                     localStorage.removeItem('pembayaran');
-                    window.location.href ='{{ route('transaction.expired', $data['order']->invoice_number) }}'
+                    window.location.href = '{{ route('transaction.expired', $data['order']->invoice_number) }}'
                     countdownElement.textContent = 'Waktu pembayaran habis';
                     // Tindakan tambahan jika diperlukan saat waktu habis
                 }
@@ -678,6 +745,47 @@
             rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
             return 'Rp ' + rupiah;
         }
+
+        $(document).on('click', '#btnPrint', function() {
+            var data = $('#content-print').html();
+            var opt = {
+                filename: 'Laporan Bulan.pdf',
+                margin: [5, 5, 10, 5],
+                image: {
+                    type: 'jpeg',
+                    quality: 1
+                },
+                html2canvas: {
+            dpi: 150, // Mengurangi resolusi untuk menghindari masalah pemotongan
+            scale: 2, // Menyesuaikan skala untuk memastikan konten sesuai dengan halaman
+            letterRendering: true,
+            useCORS: true
+        },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
+
+            };
+            html2pdf().set(opt).from(data).toPdf().get('pdf').then((pdf) => {
+                var totalPages = pdf.internal.getNumberOfPages();
+
+if (totalPages > 1) {
+    // Jika terdapat lebih dari satu halaman, hapus halaman yang tidak diperlukan
+    for (let i = totalPages; i > 1; i--) {
+        pdf.deletePage(i);
+    }
+}
+
+// Set footer pada halaman
+pdf.setPage(1);
+pdf.setFontSize(10);
+pdf.setTextColor(150);
+pdf.output('dataurlnewwindow', {filename: "Laporan Bulan.pdf"});
+
+        // Menetapkan hasil PDF ke iframe
+        var pdfDataUri = pdf.output('datauristring');
+        $('#pdfViewer').attr('src', pdfDataUri);
+
+            });
+        })
     </script>
 @endpush
 @push('style')

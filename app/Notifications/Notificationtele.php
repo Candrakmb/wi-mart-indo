@@ -33,7 +33,6 @@ class Notificationtele extends Notification
             $bank = Bank::where('id', $idBank)->first();
             $tipe = $request['tipe'];
             
-           
 
             if ($tipe == '0') {
                 $totalRupiah = "Rp " . number_format($total, 0, ',', '.');
@@ -46,25 +45,23 @@ class Notificationtele extends Notification
                 $content .= "Atas nama: " . $bank->atas_nama."\n";
                 $content .= "Konfirmasi pada web admin";
     
-                return TelegramMessage::create()
-                    ->to(1104082522)
-                    ->content($content);
             } else {
-                $orderCreate= Carbon::parse($$order->created_at)->format('d F Y H:i:s');;
+                $orderCreate= Carbon::parse($order->created_at)->format('d F Y H:i:s');;
                 $totalRupiah = "Rp " . number_format($order->total_pay, 0, ',', '.');
                 $content = "Ada order baru masuk $orderCreate:\n";
                 $content .= "Invoice: #" . $invoice . "\n";
-                $content .= "Nama Pemesan: " . $$order->recipient_name. "\n";
+                $content .= "Nama Pemesan: " . $order->recipient_name. "\n";
                 $content .= "Total Pembayaran: " . $totalRupiah . "\n";
                 $content .= "Metode Pembayaran: Midtrans \n";
                 $content .= "kurir : ". $order->courier. "\n";
                 $content .= "Pengiriman : ". $order->shipping_method. "\n";
                 $content .= "segera proses untuk kirim ";
     
-                return TelegramMessage::create()
-                    ->to(1104082522)
-                    ->content($content);
             }
+
+            return TelegramMessage::create()
+                    ->to(1533092542)
+                    ->content($content);
         } catch (\Exception $ex) {
             \Log::error($ex);
         }

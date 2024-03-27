@@ -6,20 +6,22 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="#" class="brand"><i class='bx bxs-smile icon'></i> WI-MART </a>
+		<a href="#" class="brand"><img style="width: 20%" src="{{ asset('/img/logo.png')}}" alt=""> WIMARTINDO </a>
 		<ul class="side-menu">
 			<li><a href="/dashboard" class="active"><i class='bx bxs-dashboard icon' ></i> Dashboard </a></li>
 			<li class="divider" data-text="main">Main</li>
-			<li><a href="/customer" ><i class='bx bxs-dashboard icon' ></i> Pelanggan </a></li>
+			<li><a href="/customer" ><i class='bx bxs-user-account icon' ></i> Pelanggan </a></li>
 			<li>
-				<a href="#"><i class='bx bxs-inbox icon' ></i> Master Data <i class='bx bx-chevron-right icon-right' ></i></a>
+				<a href="#"><i class='fa fa-list icon' ></i> Master Data <i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
 					<li><a href="/categori">kategori</a></li>
 					<li><a href="/product">produk</a></li>
+					<li><a href="/add_bank">Bank</a></li>
+					<li><a href="/alamat_pengirim">Alamat pengirim</a></li>
 				</ul>
 			</li>
 			<li>
-				<a href="#"><i class='bx bx-table icon' ></i> pesanan <i class='bx bx-chevron-right icon-right' ></i></a>
+				<a href="#"><i class='fa fa-cart-plus icon' ></i> pesanan <i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
 					<li><a href="/order/all">semua pesanan</a></li>
 					<li><a href="/order/0">pesanan pending</a></li>
@@ -30,13 +32,12 @@
 					
 				</ul>
 			</li>
-			<li>
-				<a href="#"><i class='bx bxs-notepad icon' ></i> Setting <i class='bx bx-chevron-right icon-right' ></i></a>
+			{{-- <li>
+				<a href="#"><i class='fa fa-cog icon' ></i> Setting <i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
-					<li><a href="/add_bank">Bank</a></li>
-					<li><a href="/alamat_pengirim">Alamat pengirim</a></li>
+					
 				</ul>
-			</li>
+			</li> --}}
 		</ul>
 		
 	</section>
@@ -55,7 +56,7 @@
 			</form>
 			<span class="divider"></span>
 			<div class="profile">
-				<img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cGVvcGxlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="">
+				<img src="{{ asset('/img/logo.png')}}" alt="">
 				<ul class="profile-link">
 					<li><a href="/admin/user"><i class='bx bxs-user-circle icon' ></i> Profile</a></li>
 					<li><a href="#"><i class='bx bxs-cog' ></i> Settings</a></li>

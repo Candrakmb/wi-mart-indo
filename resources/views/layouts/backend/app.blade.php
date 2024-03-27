@@ -16,14 +16,25 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         @include('layouts.backend.data.style')
-
+        <link rel="stylesheet" href="{{ asset('ashion') }}/css/bootstrap.min.css" type="text/css">
+        <script src="https://kit.fontawesome.com/f076b04045.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{{ asset('ashion') }}/css/elegant-icons.css" type="text/css">
+        <link rel="stylesheet" href="{{ asset('ashion') }}/css/jquery-ui.min.css" type="text/css">
+        <link rel="stylesheet" href="{{ asset('ashion') }}/css/magnific-popup.css" type="text/css">
+        <link rel="stylesheet" href="{{ asset('ashion') }}/css/owl.carousel.min.css" type="text/css">
+        <link rel="stylesheet" href="{{ asset('ashion') }}/css/slicknav.min.css" type="text/css">
+        <link rel="stylesheet" href="{{ asset('ashion') }}/css/style.css" type="text/css">
+        <link rel="stylesheet" href="{{ asset('stisla') }}/css/style2.css">
+        <link rel="stylesheet" href="{{ asset('stisla') }}/css/components.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     </head>
     <body>
         @include('layouts.backend.data.nav')
         <main>
-            {{-- <h1 class="title">{{$title}}</h1> --}}
+            <h1 class="title">{{$title}}</h1>
 			<ul class="breadcrumbs">
-				{{-- <li><a href="#">{{$parent}}</a></li> --}}
+				<li><a href="#">{{isset($parent)}}</a></li>
 				<li class="divider">/</li>
 				<li><a href="#" class="active">Dashboard</a></li>
 			</ul>
@@ -31,6 +42,18 @@
         </main>
         </section>
         @include('layouts.backend.data.script')
+        <script src="{{ asset('ashion') }}/js/jquery-3.3.1.min.js"></script>
+        <script src="{{ asset('ashion') }}/js/bootstrap.min.js"></script>
+        <script src="{{ asset('ashion') }}/js/jquery.magnific-popup.min.js"></script>
+        <script src="{{ asset('ashion') }}/js/jquery-ui.min.js"></script>
+        <script src="{{ asset('ashion') }}/js/mixitup.min.js"></script>
+        <script src="{{ asset('ashion') }}/js/jquery.countdown.min.js"></script>
+        <script src="{{ asset('ashion') }}/js/jquery.slicknav.js"></script>
+        <script src="{{ asset('ashion') }}/js/owl.carousel.min.js"></script>
+        <script src="{{ asset('ashion') }}/js/jquery.nicescroll.min.js"></script>
+        <script src="{{ asset('ashion') }}/js/main.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
@@ -50,6 +73,7 @@
         <script src="{{ asset('assets/vendors/datatables/vfs_fonts.js') }}"></script>
         <script src="{{ asset('assets/vendors/datatables/vfs_fonts.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
         @stack('after-scripts')
     </body>
 </html>

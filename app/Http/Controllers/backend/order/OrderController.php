@@ -10,6 +10,7 @@ use App\Models\order\Order;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrderController extends Controller
 {
@@ -27,34 +28,33 @@ class OrderController extends Controller
     	return view($this->data['sektor'].'.'.$this->data['modul'].'.index', $this->data);
     }
 
-    function lihat(){
+    function lihat($id){
         $this->data['type'] = "lihat";
         $this->data['data'] = null;
+        $this->data['orders'] = Order::where('id',$id)->first();
     	return view($this->data['sektor'].'.'.$this->data['modul'].'.index', $this->data);
     }
 
     function table($status){
         if ($status == 'all') {
             $query = Order::join('users', 'orders.user_id', '=', 'users.id')
-                            ->orderBy('orders.id', 'desc')
-                            ->get(['orders.*', 'users.name as user_name']);
+                ->orderBy('orders.id', 'desc')
+                ->selectRaw('orders.*, users.name as user_name, DATE_FORMAT(orders.created_at, "%Y-%m-%d %H:%i:%s") as formatted_created_at')
+                ->get();
         } else {
             $query = Order::join('users', 'orders.user_id', '=', 'users.id')
-                            ->where('orders.status', '=', $status)
-                            ->orderBy('orders.id', 'desc')
-                            ->get(['orders.*', 'users.name as user_name']);
-        }        
+                ->where('orders.status', '=', $status)
+                ->orderBy('orders.id', 'desc')
+                ->selectRaw('orders.*, users.name as user_name, DATE_FORMAT(orders.created_at, "%Y-%m-%d %H:%i:%s") as formatted_created_at')
+                ->get();
+        }  
         return DataTables::of($query)
             ->addIndexColumn()
             ->addColumn('action', function($row){
                 $btn = ''; 
                 $btn .= '<div class="text-center">';
-                $btn .= '<div class="btn-group btn-group-solid mx-5">';
-                $btn .= '<a class="btn btn-warning ml-1" href="/order_all/detail/'.$row->id.'"><i class="icon-edit"></i></a> &nbsp';
-                if ($row->status == 0 && $row->metode_pembayaran == 0) {
-                    // Hanya menampilkan tombol 'Update' jika status = 0 dan metode_pembayaran = 0
-                    $btn .= '<button class="btn btn-danger btn-raised btn-xs" id="btn-konfirmasi" title="Hapus"><i class="icon-ceklist"></i></button>';
-                }
+                $btn .= '<div class="btn-group btn-group-solid mx-3">';
+                $btn .= '<a class="btn btn-warning ml-1" href="/order/lihat/'.$row->id.'"><i class="fa fa-info"></i></a> &nbsp';
                 $btn .= '</div>';    
                 $btn .= '</div>';
                 return $btn;
@@ -62,7 +62,7 @@ class OrderController extends Controller
             ->addColumn('status_name', function($row){
                 $status = ''; 
                 $status .= '<div class="text-center">';
-                $status .= '<div class="btn-group btn-group-solid mx-5">';
+                $status .= '<div class="btn-group btn-group-solid mx-3">';
                 if ($row->status == 0) {
                     $status .= '<div class="badge rounded-pill bg-warning">Menunggu Pembayaran</div>';
                 }
@@ -88,7 +88,7 @@ class OrderController extends Controller
             ->addColumn('metode_pembayaran_name', function($row){
                 $metode = ''; 
                 $metode .= '<div class="text-center">';
-                $metode .= '<div class="btn-group btn-group-solid mx-5">';
+                $metode .= '<div class="btn-group btn-group-solid mx-3">';
                 if ($row->metode_pembayaran == 0) {
                     $metode .= '<div class="badge rounded-pill bg-primary">Transfer Bank Manual</div>';
                 }
@@ -99,6 +99,7 @@ class OrderController extends Controller
                 $metode .= '</div>';
                 return $metode;
             })
+
             ->rawColumns(['metode_pembayaran_name','status_name','action'])
             ->make(true);
     }
@@ -106,11 +107,35 @@ class OrderController extends Controller
     function konfirmasiform(Request $request){
         DB::beginTransaction();
         try{
-                Order::where('id', $request->id)
+                $id = $request->input('id');
+                Order::where('id', $id)
                 ->update(
                     [
                         'status' => '1',
                         'paid_at' => Carbon::now(),            
+                    ]
+                );
+
+                DB::commit();
+                return response()->json(['title'=>'Success!','icon'=>'success','text'=>'Data Berhasil Diubah!', 'ButtonColor'=>'#66BB6A', 'type'=>'success']); 
+        }catch(\Illuminate\Validation\ValidationException $em){
+            DB::rollback();
+            return response()->json(['title'=>'Error','icon'=>'error','text'=>'Email tidak valid!', 'ButtonColor'=>'#EF5350', 'type'=>'error']); 
+        }catch(\Exception $e){
+            DB::rollback();
+            return response()->json(['title'=>'Error','icon'=>'error','text'=>$e->getMessage(), 'ButtonColor'=>'#EF5350', 'type'=>'error']); 
+        } 
+
+    }
+
+    function resiform(Request $request){
+        DB::beginTransaction();
+        try{
+                Order::where('id', $request->id)
+                ->update(
+                    [
+                        'status' => '2',
+                        'receipt_number' => $request->resi,            
                     ]
                 );
 

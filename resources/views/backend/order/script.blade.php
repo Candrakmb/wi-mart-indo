@@ -1,3 +1,6 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 <script>
     var data = function() {
         let valid = true,
@@ -8,7 +11,6 @@
         var dt = new Date();
         var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
         let scannedContents = [];
-
         var table = function() {
             swal.fire({
                 html: '<h5>Loading...</h5>',
@@ -39,7 +41,7 @@
                     }
                 }, ],
                 'ajax': {
-                    "url": "/order/table/{{$status}}",
+                    "url": "/order/table/{{ isset($status) ? $status : 'default' }}",
                     "method": "POST",
                     "complete": function() {
                         $('.buttons-excel').hide();
@@ -88,8 +90,8 @@
                         class: 'text-left'
                     },
                     {
-                        data: 'created_at',
-                        name: 'created_at',
+                        data: 'formatted_created_at',
+                        name: 'formatted_created_at',
                         class: 'text-left'
                     },
                 ],
@@ -159,12 +161,12 @@
             });
         }
 
-        var create = function() {
-            $('#simpan').click(function(e) {
+        var konfirmasi = function() {
+            $('#btn-konfirmasi').click(function(e) {
                 e.preventDefault();
                 swal.fire({
                         title: 'Apakah Anda Yakin?',
-                        text: 'Menyimpan Data Ini',
+                        text: 'konfirmasi pembayaran ini',
                         type: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#2196F3',
@@ -173,59 +175,68 @@
                     })
                     .then((result) => {
                         if (result.value) {
-                            var formdata = $(this).serialize();
-                            valid = true
-                            var err = 0;
-                            $('.help-block').hide();
-                            $('.form-error').removeClass('form-error');
-                            $('#form-data').find('input, select').each(function() {
-                                if ($(this).prop('required')) {
-                                    if (err == 0) {
-                                        if ($(this).val() == "") {
-                                            valid = false;
-                                            real = this.name;
-                                            title = $('label[for="' + this.name + '"]')
-                                                .html();
-                                            type = '';
-                                            if ($(this).is("input")) {
-                                                type = 'diisi';
-                                            } else {
-                                                type = 'dipilih';
-                                            }
-                                            err++;
+                                $.ajax({
+                                    url: "/order/konfirmasiform",
+                                    type: "POST",
+                                    data: {
+                                        id: "{{ isset($orders) ? $orders->id : 'default' }}",
+                                    },
+                                    beforeSend: function() {
+                                        swal.fire({
+                                            html: '<h5>Loading...</h5>',
+                                            showConfirmButton: false
+                                        });
+                                    },
+                                    success: function(result) {
+                                        if (result.type == 'success') {
+                                            swal.fire({
+                                                title: result.title,
+                                                text: result.text,
+                                                confirmButtonColor: result
+                                                    .ButtonColor,
+                                                type: result.type,
+                                            }).then((result) => {
+                                                location.href = "/order/all";
+                                            });
+                                        } else {
+                                            swal.fire({
+                                                title: result.title,
+                                                text: result.text,
+                                                confirmButtonColor: result
+                                                    .ButtonColor,
+                                                type: result.type,
+                                            });
                                         }
                                     }
-                                }
-                            })
-                            if (!valid) {
-                                if (type == 'diisi') {
-                                    $("input[name=" + real + "]").addClass('form-error');
-                                    $($("input[name=" + real + "]").closest('div').find(
-                                        '.help-block')).html(title + 'belum ' + type);
-                                    $($("input[name=" + real + "]").closest('div').find(
-                                        '.help-block')).show();
-                                } else {
-                                    $("select[name=" + real + "]").closest('div').find(
-                                        '.select2-selection--single').addClass('form-error');
-                                    $($("select[name=" + real + "]").closest('div').find(
-                                        '.help-block')).html(title + 'belum ' + type);
-                                    $($("select[name=" + real + "]").closest('div').find(
-                                        '.help-block')).show();
-                                }
-
-                                swal.fire({
-                                    text: title + 'belum ' + type,
-                                    type: "error",
-                                    confirmButtonColor: "#EF5350",
                                 });
-                            } else {
+                        } else {
+                            swal.fire({
+                                text: 'Aksi Dibatalkan!',
+                                type: "info",
+                                confirmButtonColor: "#EF5350",
+                            });
+                        }
+                    });
+            });
+        }
+
+        var resi = function() {
+            $('#btn-resi').click(function(e) {
+                e.preventDefault();
+                swal.fire({
+                        title: 'Apakah Anda Yakin?',
+                        text: 'konfirmasi pembayaran ini',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#2196F3',
+                        confirmButtonText: 'Ya',
+                        cancelButtonText: 'Tidak'
+                    })
+                    .then((result) => {
+                        if (result.value) {
                                 var formData = new FormData($('#form-data')[0]);
                                 $.ajax({
-                                    @if ($type == 'create')
-                                        url: "/categori/createform",
-                                    @else
-                                        url: "/categori/updateform",
-                                    @endif
+                                    url: "/order/resiform",
                                     type: "POST",
                                     data: formData,
                                     processData: false,
@@ -245,7 +256,7 @@
                                                     .ButtonColor,
                                                 type: result.type,
                                             }).then((result) => {
-                                                location.href = "/categori";
+                                                window.location.reload();
                                             });
                                         } else {
                                             swal.fire({
@@ -258,7 +269,6 @@
                                         }
                                     }
                                 });
-                            }
                         } else {
                             swal.fire({
                                 text: 'Aksi Dibatalkan!',
@@ -270,77 +280,6 @@
             });
         }
 
-        var hapus = function(){
-            $('#table').on('click', '#btn-hapus', function () {
-                var baris = $(this).parents('tr')[0];
-                var table = $('#table').DataTable();
-                var data = table.row(baris).data();
-
-                swal.fire({
-                    title: 'Apakah Anda Yakin?',
-                    text: 'Menghapus Data Ini',
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#2196F3',
-                    confirmButtonText: 'Ya',
-                    cancelButtonText: 'Tidak'
-                })
-                .then((result) => {
-                    if (result.value) {
-                        var fd = new FormData();
-                        fd.append('_token','{{ csrf_token() }}');
-                        fd.append('id', data.id);
-
-                        $.ajax({
-                            url : "/categori/deleteform",
-                            type : "POST",
-                            data : fd,
-                            dataType: "json",
-                            contentType: false,
-                            processData: false,
-                            beforeSend: function(){
-                                swal.fire({
-                                    html: '<h5>Loading...</h5>',
-                                    showConfirmButton: false
-                                });
-                            },
-                            success: function(result){
-                                swal.fire({
-                                    title: result.title,
-                                    text : result.text,
-                                    confirmButtonColor: result.ButtonColor,
-                                    type : result.type,
-                                });
-
-                                if(result.type == 'success'){
-                                    swal.fire({
-                                        title: result.title,
-                                        text : result.text,
-                                        confirmButtonColor: result.ButtonColor,
-                                        type : result.type,
-                                    }).then((result) => {
-                                        $('#table').DataTable().ajax.reload();
-                                    });
-                                }else{
-                                    swal.fire({
-                                        title: result.title,
-                                        text : result.text,
-                                        confirmButtonColor: result.ButtonColor,
-                                        type : result.type,
-                                    });
-                                }
-                            }
-                        });
-                    } else {
-                        swal.fire({
-                            text : 'Aksi Dibatalkan!',
-                            type : "info",
-                            confirmButtonColor: "#EF5350",
-                        });
-                    }
-                });
-            });
-        }
 
         return {
             init: function() {
@@ -349,8 +288,8 @@
                     muatUlang();
                 @endif
                 setData();
-                create();
-                hapus();
+                konfirmasi();
+                resi();
             }
         }
     }();
@@ -362,5 +301,34 @@
         });
         $.fn.dataTable.ext.errMode = 'none';
         data.init();
+        
     });
+
+    $(document).on('click', '#btnPrint', function(){
+        var data = $('#id-content').html();
+        var opt = { filename: 'Laporan Bulan.pdf',
+                    margin: [5, 5, 5, 10],
+                    image: { type: 'jpeg', quality: 1 },
+                    html2canvas:  { dpi: 500,
+                                    scale:4,
+                                    letterRendering: true,
+                                    useCORS: true},
+                    pagebreak: {
+                        mode: ['avoid-all', 'css', 'legacy']
+                    },
+        };
+        html2pdf().set(opt).from(data).toPdf().get('pdf').then((pdf) => {
+            var totalPages = pdf.internal.getNumberOfPages();
+
+            for (let i = 1; i <= totalPages; i++) {
+                // set footer to every page
+                pdf.setPage(i);
+                // set footer font
+                pdf.setFontSize(10);
+                pdf.setTextColor(150);
+                // this example gets internal pageSize just as an example to locate your text near the borders in case 
+            }
+        
+        }).save();
+    })
 </script>
