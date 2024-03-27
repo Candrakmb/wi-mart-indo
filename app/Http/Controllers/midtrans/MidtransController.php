@@ -37,8 +37,14 @@ class MidtransController extends Controller
                     $order =Order::where('invoice_number', $request->order_id);
                     $order->update(['status' => '4']);
                 }
+                return response()
+                ->json([
+                    'success' => true,
+                    'message' => $order->order_id,
+                ]);
             }
         }
+        
             // $callback = new CallbackService;
             
             // if ($callback->isSignatureKeyVerified()) {
