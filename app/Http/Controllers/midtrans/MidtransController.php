@@ -16,7 +16,7 @@ class MidtransController extends Controller
         $serverKey = config('midtrans.server_key');
         $hashed = hash("sha512",$request->order_id.$request->status_code.$request->gross_amont.$serverKey);
         if($hashed == $request->signature_key){
-            if($request->transaction_status == 'capture'){
+            // if($request->transaction_status == 'capture'){
                 if($request->transaction_status == 'settlement'){
                     $order =Order::where('invoice_number', $request->order_id);
                     $order->update(['status' => '1']);
@@ -43,7 +43,7 @@ class MidtransController extends Controller
                     'message' => $order->order_id,
                 ]);
             }
-        }
+        // }
         
             // $callback = new CallbackService;
             
