@@ -19,7 +19,7 @@ class MidtransController extends Controller
             $order = Order::where('invoice_number', $request->order_id)->first();
             // if($request->transaction_status == 'capture'){
                 if($request->transaction_status == 'settlement'){
-                    $order->update(['status' => '1']);
+                    $order->update(['status' => '1', 'paid_at' => Carbon::now()]);
                 }
                 else if($request->transaction_status == 'pending'){
                     $order->update(['status' => '0']);
