@@ -642,20 +642,20 @@
                     // window.location.href ='{{ route('transaction.success', $data['order']->invoice_number) }}'
 
                     // window.location.href = '/payments/midtrans-notification';
-                    $.ajax({
-                        type: "POST",
-                        url: "/payments/midtrans-notification",
-                        headers: {
-                            'X-CSRF-TOKEN': csrfToken
-                        },
-                        success: function(response) {
-                            console.log(response);
-                            // Lakukan tindakan tambahan jika diperlukan setelah permintaan berhasil
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(xhr.responseText);
-                        }
-                    });
+                    // $.ajax({
+                    //     type: "POST",
+                    //     url: "/payments/midtrans-notification",
+                    //     headers: {
+                    //         'X-CSRF-TOKEN': csrfToken
+                    //     },
+                    //     success: function(response) {
+                    //         console.log(response);
+                    //         // Lakukan tindakan tambahan jika diperlukan setelah permintaan berhasil
+                    //     },
+                    //     error: function(xhr, status, error) {
+                    //         console.error(xhr.responseText);
+                    //     }
+                    // });
                     //     $.ajax({
                     //         type: "POST",
                     //         url: "/notifikasi",
