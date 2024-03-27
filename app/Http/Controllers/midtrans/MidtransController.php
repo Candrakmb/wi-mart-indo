@@ -21,19 +21,19 @@ class MidtransController extends Controller
                     $order =Order::where('invoice_number', $request->order_id);
                     $order->update(['status' => '1']);
                 }
-                elseif($request->transaction_status == 'pending'){
+                else if($request->transaction_status == 'pending'){
                     $order =Order::where('invoice_number', $request->order_id);
                     $order->update(['status' => '0']);
                 }
-                elseif($request->transaction_status == 'deny'){
+                else if($request->transaction_status == 'deny'){
                     $order =Order::where('invoice_number', $request->order_id);
                     $order->update(['status' => '4']);
                 }
-                elseif($request->transaction_status == 'expire'){
+                else if($request->transaction_status == 'expire'){
                     $order =Order::where('invoice_number', $request->order_id);
                     $order->update(['status' => '5']);
                 }
-                elseif($request->transaction_status == 'cancel'){
+                else if($request->transaction_status == 'cancel'){
                     $order =Order::where('invoice_number', $request->order_id);
                     $order->update(['status' => '4']);
                 }
