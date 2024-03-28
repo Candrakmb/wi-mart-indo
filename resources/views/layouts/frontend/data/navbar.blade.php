@@ -11,7 +11,7 @@
          </a></li>
      </ul>
      <div class="offcanvas__logo" style="text-align: center;">
-         <a href="{{ url('/') }}"><img src="{{ asset('img') }}/logo.png" alt="" style="width: 200px; display: inline-block;"></a>
+         <a href="{{ url('/') }}"><img src="{{ asset('img') }}/logo.png" alt="" style="width: 200px; display: inline-block;">Wimartindo</a>
      </div>
      <div id="mobile-menu-wrap"></div>
  </div>

@@ -40,21 +40,31 @@
 
     @media only screen and (min-width: 768px) and (max-width: 991px) {
         .product__item__text h6 a {
-            font-size: 25px;
+            font-size: 26px;
             margin-bottom: 55px;
         }
         
         .product__item__text .product__price {
-            margin-bottom: 50px;
-            font-size: 30px;
+            margin-bottom: 65px;
+            font-size: 40px;
         }
 
-        .product__hover a {
-            width: 290px;
-            height: 50px;
-            font-size: 20px;
-            padding-top: 10px;
+        .produk:nth-child(odd) .product__item .product__hover a {
+            width: 380px;
+            height: 60px;
+            font-size: 35px;
+            padding-top: 15px;
             margin-bottom: 15px;
+            margin-left: 35px
+        }
+
+        .produk:nth-child(even) .product__item .product__hover a {
+            width: 380px;
+            height: 60px;
+            font-size: 35px;
+            padding-top: 15px;
+            margin-bottom: 15px;
+            margin-left: 156px
         }
     }
 </style>
@@ -70,7 +80,7 @@
         <div class="product__price">{{ $price }}</div>
 
         <ul class="product__hover">
-            <a href="{{ $route }}" class="btn btn-primary" style="background-color: #237B9F">+ Keranjang</a>
+            <a href="{{ $route }}" class="btn btn-primary" style="background-color: #237B9F">+ Beli</a>
         </ul>
     </div>
 </div>

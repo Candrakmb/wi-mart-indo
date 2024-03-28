@@ -3310,8 +3310,8 @@ ol {
 		display: block;
 		font-size: 22px;
 		color: #222;
-		height: 70px;
-		width: 70px;
+		height: 100px;
+		width: 100px;
 		line-height: 35px;
 		text-align: center;
 		border: 1px solid #323232;
@@ -3325,6 +3325,7 @@ ol {
 	}
 	.canvas__open i{
 		margin-top: 25px;
+		font-size: 50px;
 	}
 	.offcanvas-menu-overlay {
 		z-index: -999;
@@ -3392,15 +3393,15 @@ ol {
 	}
 	.slicknav_nav ul {
 		margin: 0;
-		font-size: 40px;
-		margin-bottom: 20px;
+		font-size: 60px;
+		margin-top: 100px;
+		text-align: center;
 	}
 	.slicknav_nav ul li{
-		margin-bottom: 30px;
+		margin-bottom: 80px;
 	}
 	.slicknav_nav ul li .dropdown {
-		margin-top: 25px;
-		margin-left: 40px;
+		margin-top: 50px;
 	}
 	.slicknav_nav .slicknav_row,
 	.slicknav_nav a {
@@ -3422,8 +3423,13 @@ ol {
 	.slicknav_nav {
 		display: block !important;
 	}
-	.offcanvas__logo {
+	.offcanvas__logo a{
 		margin-bottom: 25px;
+		font-size: 50px;
+		font-family: "Figtree", sans-serif;
+		font-weight: bold;
+		color: #237B9F;
+		text-decoration: none;
 	}
 	.offcanvas__widget {
 		text-align: center;
@@ -3487,15 +3493,24 @@ ol {
 	}
 
 	.header .container-fluid .row .logo img {
-		width: 150px;
+		width: 200px;
 	}
 
 	.header .container-fluid .row .logo{
-		font-size: 40px;
+		font-size: 50px;
+	}
+
+	.produk:nth-child(odd) .product__item {
+		width:420px;
+	}
+
+	.produk:nth-child(even) .product__item {
+		width:420px;
+		margin-left: 120px;
 	}
 
 	.product__item__pic {
-		height: 300px;
+		height: 350px;
 		position: relative;
 		overflow: hidden;
 		border-radius: 10px;
@@ -3507,7 +3522,7 @@ ol {
 	}
 
 	.product__item__text {
-		margin-bottom: 20px;
+		margin-bottom: 50px;
 	}
 
     .product__hover {
@@ -3516,6 +3531,11 @@ ol {
 
 	.breadcrumb__links a, .breadcrumb__links span{
 		font-size: 25px;
+	}
+
+	.container {
+		margin-left: 20px;
+		margin-right: 20px;
 	}
 }
 
@@ -3526,8 +3546,8 @@ ol {
 		display: block;
 		font-size: 22px;
 		color: #222;
-		height: 35px;
-		width: 35px;
+		height: 50px;
+		width: 50px;
 		line-height: 35px;
 		text-align: center;
 		border: 1px solid #323232;
@@ -3820,7 +3840,4 @@ ol {
 	margin-left: 50px;
 }
 
-.container {
-	margin-left: 20px;
-	margin-right: 20px;
-}
+
