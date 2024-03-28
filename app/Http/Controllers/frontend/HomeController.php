@@ -10,15 +10,15 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    protected $category;
-    public function __construct(Categori $category)
+    protected $product;
+    public function __construct(Product $product)
     {
-        $this->category = new CrudRepositories($category);
+        $this->product = new CrudRepositories(new Product());
     }
 
     public function index()
     {
-        $data['new_categories'] = $this->category->Query()->limit(4)->get();
+        $data['product'] = $this->product->Query()->orderBy('id', 'desc')->limit(6)->get();
         return view('frontend.home', compact('data'));
     }
 }

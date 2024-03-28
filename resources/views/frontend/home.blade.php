@@ -9,7 +9,7 @@
                         data-setbg="{{ asset('img') }}/hero.png">
                         <div class="categories__text">
                             <p>Belanja Hemat Hanya Di WIMART</p>
-                            <p class="lorem">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt odit quae quidem sequi eveniet iure totam optio officiis ea voluptas expedita officia aspernatur illum sint, alias asperiores, quasi ratione accusantium! Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, sequi deleniti. Enim soluta quasi culpa ea, voluptatem, eius magnam perspiciatis, consectetur nisi id assumenda vitae earum recusandae porro quia placeat?</p>
+                            <p class="lorem">Temukan produk berkualitas dengan harga terbaik hanya di WIMART, Jadilah bagian dari komunitas kami yang penuh semangat, Raih kepuasan belanja yang tak terlupakan,Kami tidak hanya menjual produk, tapi juga solusi untuk kebutuhan Anda.Bersama WIMART kita membangun pengalaman belanja yang luar biasa.</p>
                             <a class="btn btn-light" href="/product_list">Jelajahi Sekarang</a>
                         </div>
                     </div>
@@ -30,22 +30,16 @@
                 </div>
             </div>
             <div class="row property__gallery">
-                @foreach ($data['new_categories'] as $new_categories2)
-                    @foreach ($new_categories2->Products()->limit(2)->get() as $product)
-                        <div class="col-lg-3 col-md-4 col-sm-6 mix {{ $new_categories2->slug }}">
-                        @php
-                            // Potong nama produk menjadi 10 kata
-                            $productName = implode(' ', array_slice(explode(' ', $product->name), 0, 5));
-                        @endphp
-                            @component('components.frontend.product-card')
-                                @slot('image', asset('storage/image/product/' . $product->thumbnails))
-                                @slot('route', route('product.show', ['categoriSlug' => trim($product->categori->slug), 'productSlug' =>
-                                $product->slug]))
-                                    @slot('name', $productName . (str_word_count($product->name) > 10 ? '...' : ''))
-                                    @slot('price', rupiah($product->price))
-                            @endcomponent
-                        </div>
-                    @endforeach
+                @foreach ($data['product'] as $product)
+                    <div class="col-lg-2 col-md-6 produk">
+                        @component('components.frontend.product-card')
+                            @slot('image', asset('storage/image/product/' . $product->thumbnails))
+                            @slot('route', route('product.show', ['categoriSlug' => trim($product->categori->slug), 'productSlug' =>
+                            $product->slug]))
+                                @slot('name', $product->name)
+                                @slot('price', rupiah($product->price))
+                        @endcomponent
+                    </div>
                 @endforeach
             </div>
         </section>

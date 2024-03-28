@@ -1618,6 +1618,7 @@ ol {
 	-o-transition: all, 0.3s;
 	transition: all, 0.3s;
 	margin-right: 6px;
+	margin-top: 50px;
 }
 
 .pagination__option a:last-child {
@@ -3536,6 +3537,47 @@ ol {
 	.container {
 		margin-left: 20px;
 		margin-right: 20px;
+	}
+
+	.pagination__option {
+		margin-left: 220px;
+	}
+
+	.pagination__option a {
+		height: 50px;
+		width: 50px;
+		font-size: 30px;
+	}
+
+	.categories__item.categories__large__item {
+		padding-left: 0px;
+	}
+
+	.categories__item.categories__large__item .categories__text p {
+		font-size: 40px;
+	}
+
+	.categories__item.categories__large__item .categories__text .lorem {
+		font-size: 15px;
+		width: 430px;
+	}
+
+	.section-title {
+		width: 300px;
+	}
+
+	.section-title h4 {
+		font-size: 40px;
+	}
+
+	.section-title h4:after {
+		position: absolute;
+		left: 0;
+		bottom: -10px;
+		height: 2px;
+		width: 130px;
+		background: #237B9F;
+		content: "";
 	}
 }
 
