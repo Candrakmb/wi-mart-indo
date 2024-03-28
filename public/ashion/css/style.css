@@ -3675,10 +3675,18 @@ ol {
 	.login_container h3 {
 		font-size: 80px;
 		margin-left: 150px;
+		margin-bottom: 50px;
+	}
+
+	.login_container .register {
+		width: 700px;
+		margin-left: -80px;
+		margin-bottom: 50px;
 	}
 
 	.login_container .form-group label {
-		font-size: 45px;
+		font-size: 40px;
+		width: 700px;
 	}
 
 	.login_container .col-md-5 .form-group .form-control {
@@ -3703,6 +3711,59 @@ ol {
 	.login_container .text-center p {
 		font-size: 20px;
 		width: 600px;
+	}
+
+	.shop-cart .container .container_cart .shop__cart__table table {
+		width: 900px;
+	}
+
+	.shop-cart .container .container_cart .shop__cart__table th {
+		font-size: 25px;
+	}
+
+	.shop-cart .container .container_cart .shop__cart__table table img{
+		width: 150px;
+	}
+
+	.shop-cart .container .container_cart .shop__cart__table table h6{
+		font-size: 20px;
+		padding-right: 20px;
+	}
+
+	.shop-cart .container .container_cart .shop__cart__table table .cart__price, 
+	.shop-cart .container .container_cart .shop__cart__table table .cart__quantity,
+	.shop-cart .container .container_cart .shop__cart__table table .cart__total {
+		font-size: 20px;
+	}
+
+	.shop-cart .container .cart_bottom{
+		width: 900px;
+	}
+
+	.shop-cart .container .cart_bottom a {
+		font-size: 25px;
+	}
+
+	.shop-cart .container .cart_bottom button {
+		width: 300px;
+		height: 80px;
+		font-size: 20px;
+	}
+
+	.shop-cart .container .cart_total {
+		width: 900px;
+	}
+
+	.shop-cart .container .cart_total .cart__total__procced h6,
+	.shop-cart .container .cart_total .cart__total__procced ul li {
+		font-size: 25px;
+		margin-bottom: 20px;
+	}
+
+	.shop-cart .container .cart_total .cart__total__procced a{
+		font-size: 20px;
+		padding-top: 20px;
+		height: 70px;
 	}
 }
 

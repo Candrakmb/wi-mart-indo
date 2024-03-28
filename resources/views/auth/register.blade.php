@@ -1,9 +1,9 @@
 @extends('layouts.frontend.app')
 @section('content')
     <div class="container mt-5">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center login_container">
             <div class="col-md-5">
-                <div class="mb-2">
+                <div class="mb-2 register">
                     <h3>Buat Akun</h3>
                 </div>
                 <form method="POST" action="{{ route('register') }}">
