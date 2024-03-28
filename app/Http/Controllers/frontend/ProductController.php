@@ -24,7 +24,7 @@ class ProductController extends Controller
     public function show($categoriSlug,$productSlug)
     {
         $data['product'] = $this->product->Query()->where('slug',$productSlug)->first();
-        $data['product_related'] = $this->product->Query()->whereNotIn('slug',[$productSlug])->limit(4)->get();
+        $data['product_related'] = $this->product->Query()->whereNotIn('slug',[$productSlug])->limit(6)->get();
         return view('frontend.product.show',compact('data'));
     }
 

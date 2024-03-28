@@ -66,6 +66,22 @@
             margin-bottom: 15px;
             margin-left: 156px
         }
+
+        .produk_show:nth-child(even) .product__item  {
+            margin-left: 0;
+        }
+
+        .produk_show:nth-child(even) .product__item .product__hover a  {
+            margin-left: 35px;
+        }
+
+        .produk_show:nth-child(odd) .product__item  {
+            margin-left: 110px;
+        }
+
+        .produk_show:nth-child(odd) .product__item .product__hover a  {
+            margin-left: 145px;
+        }
     }
 </style>
 

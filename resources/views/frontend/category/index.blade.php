@@ -16,11 +16,11 @@
     <!-- Breadcrumb End -->
 
     <!-- Categories Section Begin -->
-    <section class="categories">
+    <section class="categories kategori_container">
         <div class="container">
             <div class="row">
                 @foreach ($data['category'] as $category)
-                    <div class="col-lg-4 col-md-4 col-sm-4 p-0 ">
+                    <div class="col-lg-4 col-md-6 kategori">
                         <div class="categories__item set-bg" data-setbg="{{ asset('storage/image/kategori/' . $category->thumbnails) }}">
                             <div class="categories__card">
                                 <h4>{{ $category->name }}</h4>

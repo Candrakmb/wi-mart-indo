@@ -1040,6 +1040,10 @@ ol {
 	margin-top: 10px;
 }
 
+.kategori_container {
+	margin-top: 50px;
+}
+
 .categories .container-fluid {
 	padding-right: 5px;
 }
@@ -1061,7 +1065,7 @@ ol {
 }
 
 .categories__item.categories__large__item {
-	height: 638px;
+	height: 1000px;
 	padding-left: 70px;
 }
 
@@ -1735,22 +1739,6 @@ ol {
 	text-transform: none;
 	font-weight: 400;
 	margin-top: 5px;
-}
-
-.product__details__text .rating {
-	margin-bottom: 16px;
-}
-
-.product__details__text .rating i {
-	font-size: 12px;
-	color: #e3c01c;
-	margin-right: -4px;
-}
-
-.product__details__text .rating span {
-	font-size: 12px;
-	color: #666666;
-	margin-left: 5px;
 }
 
 .product__details__text p {
@@ -3578,6 +3566,100 @@ ol {
 		width: 130px;
 		background: #237B9F;
 		content: "";
+	}
+
+	.categories .container .kategori:nth-child(odd) .categories__item {
+		width: 440px;
+		height: 400px;
+	}
+
+	.categories .container .kategori:nth-child(even) .categories__item {
+		width: 440px;
+		height: 400px;
+		margin-left: 110px
+	}
+
+	.categories__card h4 {
+		font-size: 35px;
+	}
+
+	.categories__card p {
+		font-size: 45px;
+		margin: 10px 0;
+	}
+
+	.categories__card a {
+		font-size: 25px;
+	}
+
+	.related__title h5 {
+		font-size: 40px;
+		color: #111111;
+		font-weight: 600;
+		text-transform: uppercase;
+		margin-bottom: 60px;
+		margin-left: 200px;
+	}
+
+	.product__details__pic  {
+		margin-left: 200px;
+	}
+
+	.product__details__text h3 {
+		font-size: 40px;
+	}
+	
+	.product__details__text h3 span {
+		font-size: 25px;
+		margin: 20px 0;
+	}
+	
+	.product__details__price {
+		font-size: 50px;
+	}
+
+	.product__details__button .quantity span {
+		font-size: 30px;
+		margin-top: 0;
+	}
+
+	.product__details__button .quantity input {
+		font-size: 20px;
+	}
+
+	.product__details__button .quantity .pro-qty {
+		width: 160px;
+		height: 50px;
+	}
+
+	.product__details__button button{
+		width: 350px;
+		height: 60px;
+	}
+
+	.product__details__button button span{
+		font-size: 20px;
+	}
+
+	.product__details__button button .text{
+		font-size: 18px;
+	}
+
+	.product__details__widget {
+		border-top: 1px solid #ebebeb;
+		width: 900px;
+	}
+
+	.product__details__widget ul li span, .product__details__widget ul li p {
+		font-size: 20px;
+	}
+
+	.product__details__tab {
+		width: 900px;
+	}
+
+	.product__details__tab .tab-content .tab-pane, .product__details__tab .tab-content .tab-pane h6 {
+		font-size: 20px;
 	}
 }
 

@@ -44,7 +44,7 @@
                                 </div>
                                 <input type="hidden" name="cart_product_id" value="{{ $data['product']->id }}">
                             </div>
-                            <button type="submit" class="cart-btn"><span class="icon_bag_alt"></span> Tambah Ke Keranjang</button>
+                            <button type="submit" class="cart-btn"><span class="icon_bag_alt"></span><span class="text"> Tambah Ke Keranjang</span></button>
                         </div>
                         <div class="product__details__widget">
                         </form>
@@ -80,14 +80,14 @@
                     </div>
                 </div>
                @foreach ($data['product_related'] as $product_related)
-                    <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="col-lg-2 col-md-6 produk produk_show">
                         @component('components.frontend.product-card')
-                                @slot('image', asset('storage/image/product/' . $product_related->thumbnails))
-                                @slot('route', route('product.show', ['categoriSlug' => trim($product_related->categori->slug), 'productSlug' =>
-                                $product_related->slug]))
-                                    @slot('name', $product_related->name)
-                                    @slot('price', $product_related->price)
-                            @endcomponent
+                            @slot('image', asset('storage/image/product/' . $product_related->thumbnails))
+                            @slot('route', route('product.show', ['categoriSlug' => trim($product_related->categori->slug), 'productSlug' =>
+                            $product_related->slug]))
+                                @slot('name', $product_related->name)
+                                @slot('price', rupiah($product_related->price))
+                        @endcomponent
                     </div>
                @endforeach
             </div>
