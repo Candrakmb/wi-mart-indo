@@ -16,7 +16,7 @@
     <!-- Breadcrumb End -->
 
     <!-- Categories Section Begin -->
-    <section class="categories kategori_container">
+    <section class="categories">
         <div class="container">
             <div class="row">
                 @foreach ($data['category'] as $category)

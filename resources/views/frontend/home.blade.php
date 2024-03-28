@@ -25,23 +25,24 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4">
                     <div class="section-title">
-                        <h4>New product</h4>
+                        <h4>New Categories</h4>
                     </div>
                 </div>
             </div>
-            <div class="row property__gallery">
-                @foreach ($data['product'] as $product)
-                    <div class="col-lg-2 col-md-6 produk">
-                        @component('components.frontend.product-card')
-                            @slot('image', asset('storage/image/product/' . $product->thumbnails))
-                            @slot('route', route('product.show', ['categoriSlug' => trim($product->categori->slug), 'productSlug' =>
-                            $product->slug]))
-                                @slot('name', $product->name)
-                                @slot('price', rupiah($product->price))
-                        @endcomponent
+
+            <div class="row">
+                @foreach ($data['category'] as $category)
+                    <div class="col-lg-4 col-md-6 kategori">
+                        <div class="categories__item set-bg" data-setbg="{{ asset('storage/image/kategori/' . $category->thumbnails) }}">
+                            <div class="categories__card">
+                                <h4>{{ $category->name }}</h4>
+                                <p>{{ $category->Products()->count() }} Item</p>
+                                <a href="{{ route('category.show',$category->slug) }}">Jelajahi</a>
+                            </div>
+                        </div>
                     </div>
                 @endforeach
             </div>
-        </section>
+
         <!-- Product Section End -->
     @endsection

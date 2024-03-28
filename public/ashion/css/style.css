@@ -1040,10 +1040,6 @@ ol {
 	margin-top: 10px;
 }
 
-.kategori_container {
-	margin-top: 50px;
-}
-
 .categories .container-fluid {
 	padding-right: 5px;
 }
@@ -3551,7 +3547,7 @@ ol {
 	}
 
 	.section-title {
-		width: 300px;
+		width: 400px;
 	}
 
 	.section-title h4 {
@@ -3563,7 +3559,7 @@ ol {
 		left: 0;
 		bottom: -10px;
 		height: 2px;
-		width: 130px;
+		width: 150px;
 		background: #237B9F;
 		content: "";
 	}
@@ -3660,6 +3656,53 @@ ol {
 
 	.product__details__tab .tab-content .tab-pane, .product__details__tab .tab-content .tab-pane h6 {
 		font-size: 20px;
+	}
+
+	.product .container .kategori:nth-child(odd) .categories__item {
+		width: 430px;
+	}
+
+	.product .container .kategori:nth-child(even) .categories__item {
+		width: 430px;
+		margin-left: 110px;
+	}
+
+	.login_container {
+		width: 900px;
+		margin-left: -120px;
+	}
+
+	.login_container h3 {
+		font-size: 80px;
+		margin-left: 150px;
+	}
+
+	.login_container .form-group label {
+		font-size: 45px;
+	}
+
+	.login_container .col-md-5 .form-group .form-control {
+		width: 600px;
+		height: 70px;
+		font-size: 20px;
+
+	}
+
+	.login_container .lupa_password {
+		font-size: 25px;
+		width: 600px;
+	}
+
+	.login_container button {
+		font-size: 25px;
+		padding-right: 350px;
+		padding-left: 250px;
+		height: 60px;
+	}
+
+	.login_container .text-center p {
+		font-size: 20px;
+		width: 600px;
 	}
 }
 
