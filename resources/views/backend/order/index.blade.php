@@ -7,7 +7,7 @@
     @if($type == "index")
         @include('backend.order.table')
     @else
-        @include('backend.order.form')
+        @include('backend.order.show')
     @endif
 @stop
 

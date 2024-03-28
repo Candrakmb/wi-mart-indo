@@ -2,7 +2,19 @@
     <div class="card-body">
         <div class="row">
             <div class="col-6">
-                <h3 class="card-title">Data Pesanan</h3>
+                @if($status == 'all')
+                <h3 class="card-title">Data Semua Order</h3>
+                @elseif($status == '0')
+                <h3 class="card-title">Data Order pending</h3>
+                @elseif($status == '1')
+                <h3 class="card-title">Data order dikemas</h3>
+                @elseif($status == '2')
+                <h3 class="card-title">Data order dikirim</h3>
+                @elseif($status == '3')
+                <h3 class="card-title">Data order selesai</h3>
+                @elseif($status == '4')
+                <h3 class="card-title">Data order batal</h3>
+                @endif
             </div>
             <div class="col-6 text-right">
             <button type="button" class="btn btn-data-sec" id="btn-muat-ulang" style="margin: 1em 0 0 0;">

@@ -29,8 +29,8 @@ use Illuminate\Support\Facades\Notification;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::post('payments/midtrans-notification', [MidtransController::class, 'receive']);
-Route::post('payments/midtrans-success', [MidtransController::class, 'success']);
+
+Route::post('/payments/midtrans-success', [MidtransController::class, 'success']);
 
 
 
@@ -75,9 +75,9 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('order')->name('order.')->group(function(){
         Route::get('/{status}',[OrderController::class,'order'])->name('order');
         Route::post('/table/{status}', [OrderController::class, 'table'])->name('table');
-        Route::get('/update/{id}',[OrderController::class,'update'])->name('update');
-        Route::post('/updateform',[OrderController::class,'updateform'])->name('updateform');
-        Route::post('/createform',[OrderController::class,'createform'])->name('createform');
+        Route::get('/lihat/{id}',[OrderController::class,'lihat'])->name('lihat');
+        Route::post('/konfirmasiform',[OrderController::class,'konfirmasiform'])->name('konfirmasiform');
+        Route::post('/resiform',[OrderController::class,'resiform'])->name('resiform');
     });
 });
 

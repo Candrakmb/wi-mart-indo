@@ -16,30 +16,35 @@ use App\Charts\OrderChartPie;
 class DashboardController extends Controller
 {
     protected $chartOrder,$chartOrderPie;
-
+     
     public function __construct(OrderCart $chartOrder,OrderChartPie $chartOrderPie)
     {
         $this->chartOrder = $chartOrder;
         $this->chartOrderPie = $chartOrderPie;
     }
+
+    public $data = [
+        'title' => ' Dashboard',
+    ];
+
     public function index()
     {
-        $data['total_product'] = Product::count();
-        $data['total_user'] = User::count();
-        $data['total_pending'] = Order::where('status',0)->whereMonth('created_at', Date('m'))->whereYear('created_at',Date('Y'))->count();
-        $data['total_shipping'] = Order::where('status',2)->whereMonth('created_at', Date('m'))->whereYear('created_at',Date('Y'))->count();
-        $data['total_completed'] = Order::where('status',3)->whereMonth('created_at', Date('m'))->whereYear('created_at',Date('Y'))->count();
-        $data['total_order'] = $data['total_pending'] + $data['total_shipping'] + $data['total_completed'];
+         $this->data['total_product'] = Product::count();
+         $this->data['total_user'] = User::count();
+         $this->data['total_pending'] = Order::where('status',0)->whereMonth('created_at', Date('m'))->whereYear('created_at',Date('Y'))->count();
+         $this->data['total_shipping'] = Order::where('status',2)->whereMonth('created_at', Date('m'))->whereYear('created_at',Date('Y'))->count();
+         $this->data['total_completed'] = Order::where('status',3)->whereMonth('created_at', Date('m'))->whereYear('created_at',Date('Y'))->count();
+         $this->data['total_order'] =  $this->data['total_pending'] +  $this->data['total_shipping'] +  $this->data['total_completed'];
 
-        $data['best_products'] = Product::with(['OrderDetails'])
+         $this->data['best_products'] = Product::with(['OrderDetails'])
         ->withSum('OrderDetails','qty')
         ->orderByDesc('order_details_sum_qty')
         ->limit(10)
         ->get();
 
-        $data['last_order'] = Order::orderBy('id','DESC')->limit(5)->get();
-        $data['chart'] = $this->chartOrder->build();
-        $data['chartPie'] = $this->chartOrderPie->build();
-        return view('backend.dashboard', compact('data'));
+        $this->data['last_order'] = Order::orderBy('id','DESC')->limit(5)->get();
+        $this->data['chart'] = $this->chartOrder->build();
+        $this->data['chartPie'] = $this->chartOrderPie->build();
+        return view('backend.dashboard', $this->data);
     }
 }
