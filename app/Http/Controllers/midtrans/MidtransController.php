@@ -17,7 +17,6 @@ class MidtransController extends Controller
         $hashed = hash("sha512",$request->order_id.$request->status_code.$request->gross_amount.$serverKey);
         if($hashed == $request->signature_key){
             $order = Order::where('invoice_number', $request->order_id)->first();
-            // if($request->transaction_status == 'capture'){
                 if($request->transaction_status == 'settlement'){
                     $order->update(['status' => '1', 'paid_at' => Carbon::now()]);
                 }
@@ -39,48 +38,5 @@ class MidtransController extends Controller
                     'message' => $order->invoice_number,
                 ]);
             }
-            
-        // }
-        
-            // $callback = new CallbackService;
-            
-            // if ($callback->isSignatureKeyVerified()) {
-            //     $notification = $callback->getNotification();
-            //     $order = $callback->getOrder();
-
-            //     // $orderNumber = $order->order_id;
-            //     // $id_order = explode("_",$orderNumber)[1];
-    
-            //     if ($callback->isSuccess()) {
-            //         Order::where('invoice_number', $order->order_id)->update([
-            //             'status' => 1,
-            //             'paid_at'=> Carbon::now(),  
-            //         ]);
-            //     }
-    
-            //     if ($callback->isExpire()) {
-            //         Order::where('invoice_number', $order->order_id)->update([
-            //             'status' => 5,
-            //         ]);
-            //     }
-    
-            //     if ($callback->isCancelled()) {
-            //         Order::where('invoice_number', $order->order_id)->update([
-            //             'status' => 4,
-            //         ]);
-            //     }
-    
-            //     return response()
-            //         ->json([
-            //             'success' => true,
-            //             'message' => $order->order_id,
-            //         ]);
-            // } else {
-            //     return response()
-            //         ->json([
-            //             'error' => true,
-            //             'message' => 'Signature key torder_idak terverifikasi',
-            //         ], 403);
-            // }
     }
 }

@@ -66,9 +66,9 @@
                                 <div class="checkout__form__input">
                                     <p>Courier <span>*</span></p>
                                     <select name="courier" id="courier">
-                                        <option value="jne" selected>JNE</option>
+                                        {{-- <option value="jne" selected>JNE</option>
                                         <option value="tiki">TIKI</option>
-                                        <option value="pos">POS INDONESIA</option>
+                                        <option value="pos">POS INDONESIA</option> --}}
                                     </select>
                                 </div>
                             </div>
@@ -91,8 +91,9 @@
                                         <span class="top__text__right">Total</span>
                                     </li>
                                     @foreach ($data['carts'] as $cart)
-                                        <li class="product_order">{{ $loop->iteration }}. {{ $cart->Product->name }} x
-                                            {{ $cart->qty }}<span class="product_order_right">{{ rupiah($cart->total_price_per_product) }}</span>
+                                        <li>{{ $loop->iteration }}. {{ $cart->Product->name}} x
+                                            {{-- $cart->Product->categori()->first()->name --}}
+                                            {{ $cart->qty }}<span>{{ rupiah($cart->total_price_per_product) }}</span>
                                         </li>
                                     @endforeach
                                     <li>
@@ -164,6 +165,35 @@
             });
         }
 
+        function kurirWimart() {
+            var idKategori = '{{ $data["kategori"]->id }}';
+            var minFreeOngkir = 50000;
+            var totalHarga = 0;
+            
+            @foreach ($data['carts'] as $cart)
+        // Periksa apakah produk memiliki kategori dengan ID yang sesuai
+                @if ($cart->Product->categories_id == $data['kategori']->id)
+                    totalHarga += {{ $cart->total_price_per_product }};
+                @endif
+            @endforeach
+            if( totalHarga >= minFreeOngkir){
+                $('#shipping_method').empty();
+                $('#shipping_method').append(
+                            'option value="" selected disabled>-- Select Shipment Service --</option>');
+                $('select[name="shipping_method"]').append('<option value="Free Ongkir Rp0 estimasi 2-4" data-ongkir="0"> Free Ongkir Rp 0 estimasi 2-4</option>')
+                var ongkir = parseInt($('#shipping_method option:selected').data('ongkir'));
+                countCost(ongkir);
+            }else{
+                $('#shipping_method').empty();
+                $('#shipping_method').append(
+                            'option value="" selected disabled>-- Select Shipment Service --</option>');
+                $('select[name="shipping_method"]').append('<option value="REG Rp10.000 estimasi 2-4" data-ongkir="10000" > REG Rp10.000 estimasi 2-4</option>')
+                var ongkir = parseInt($('#shipping_method option:selected').data('ongkir'));
+                countCost(ongkir);
+            }
+            // console.log('Total harga produk dengan kategori ID 1: ' + totalHarga);
+        }
+
         $('#province_id').on('change', function() {
             var provinceId = $('#province_id option:selected').data('id');
             $('#city_id').empty();
@@ -177,13 +207,13 @@
                         $('#city_id').empty();
                         $('#city_id').removeAttr('disabled');
                         $('select[name="city_id"]').append(
-                            'option value="" selected>-- Select City --</option>');
+                            '<option value="" selected>-- Select City --</option>');
                         $.each(data, function(key, city) {
                             $('select[name="city_id"]').append('<option value="' + city
                                 .city_name + '" data-id="'+city.city_id+'">' + city.type + ' ' + city.city_name +
                                 '</option>');
                         });
-                        checkCost();
+                        // checkCost();
                     } else {
                         $('#city_id').empty();
                     }
@@ -192,22 +222,41 @@
         });
 
         $('#city_id').on('change', function() {
-            checkCost();
+            var alamatPengirim = '{{ $data["shipping_address"]->city_id }}';
+            var cityId = $('#city_id option:selected').data('id');
+            if(alamatPengirim == cityId){
+                $('#courier').empty();
+                $('#courier').append(
+                '<option value="wimart" selected>WIMART</option>');
+                kurirWimart()
+            }else{
+                $('#courier').empty();
+                $('#courier').append(
+                '<option value="" selected disabled>-- Select Kurir --</option><option value="jne" selected>JNE</option><option value="tiki">TIKI</option><option value="pos">POS INDONESIA</option>');
+                checkCost();
+            }
         });
         $('#courier').on('change', function() {
-            checkCost();
+            var alamatPengirim = '{{ $data["shipping_address"]->city_id }}';
+            var cityId = $('#city_id option:selected').data('id');
+            if(alamatPengirim == cityId){
+                kurirWimart()
+            }else{
+                checkCost();
+            }
+           
         });
 
         $('#shipping_method').on('change',function(){
-            var ongkir = parseInt($('#shipping_method option:selected').data('ongkir'));
-            countCost(ongkir);
+                var ongkir = parseInt($('#shipping_method option:selected').data('ongkir'));
+                countCost(ongkir);
         })
 
         function countCost(ongkir)
         {
-            var subtotal = `{{-- $data['carts']->sum('total_price_per_product') --}}`;
+            var subtotal = `{{$data['carts']->sum('total_price_per_product')}}`;
             var total = parseInt(subtotal) + ongkir;
-            var total = ongkir;
+            console.log(ongkir)
             $('#text-cost').text(rupiah(ongkir));
             $('#shipping_cost').val(ongkir);
             $('#total').text(rupiah(total))

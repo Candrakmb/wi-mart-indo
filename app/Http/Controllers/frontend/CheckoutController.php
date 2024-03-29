@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\order\Cart;
-use App\Models\Setting\Alamatpengirim;
+use App\Models\setting\Alamatpengirim;
+use App\Models\master\Categori;
 use App\Repositories\CrudRepositories;
 use App\Services\Feature\CartService;
 use App\Services\Feature\CheckoutService;
@@ -28,6 +29,7 @@ class CheckoutController extends Controller
         $data['carts'] = $this->cartService->getUserCart();
         $data['provinces'] = $this->rajaongkirService->getProvince();
         $data['shipping_address'] = Alamatpengirim::first();
+        $data['kategori'] = Categori::where('name', 'Kebutuhan Rumah')->first();
         return view('frontend.checkout.index',compact('data'));
     }
 

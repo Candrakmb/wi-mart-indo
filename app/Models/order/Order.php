@@ -11,9 +11,17 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\order\OrderDetail;
 use App\Models\order\OrderTrack;
+use App\Observers\OrderObserver;
+
 class Order extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    protected static function boot()
+    {             
+        parent::boot();
+        static::observe(OrderObserver::class);
+    }
 
     protected $table = 'orders';
     protected $appends = ['status_name','status_name_text','one_product','array_product'];
@@ -50,6 +58,8 @@ class Order extends Model
     {
         return $this->hasMany(OrderTrack::class,'order_id','id');
     }
+
+
 
     public function getStatusNameTextAttribute()
     {

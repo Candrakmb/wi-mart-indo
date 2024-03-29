@@ -15,187 +15,180 @@
             </div>
         </div>
     </div>
-
-    <section class="shop-cart spad " >
-        <div class="container">
-            <div class="row" >
-                <div class="col-lg-12" >
-                    <div class="invoice" style="border-top: 2px solid #6777ef;">
-                        <div class="invoice-print" >
-                            <div class="row">
-                                <div class="col-lg-12" >
-                                    <div class="invoice-title" >
-                                        <h2>Invoice</h2>
-                                        <div class="invoice-number">Order {{ $data['order']->invoice_number }}</div>
-                                    </div>
-                                    <hr>
+    <section class="shop-cart spad">
+        <div class="card p-3">
+            <div class="card-body" id="id-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="invoice" style="border-top: 2px solid #6777ef;">
+                                <div class="invoice-print">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <address>
-                                                <strong>{{ __('text.billed_to') }}:</strong><br>
-                                                {{ $data['order']->user->name }}<br>
-                                                {{ $data['order']->user->email }}<br>
-                                            </address>
-                                        </div>
-                                        <div class="col-md-6 text-md-right">
-                                            <address>
-                                                <strong>{{ __('text.shipped_to') }}:</strong><br>
-                                                {{ $data['order']->recipient_name }}<br>
-                                                {{ $data['order']->address_detail }}<br>
-                                                {{ $data['order']->destination }}
-                                            </address>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <address>
-                                                <strong>{{ __('text.order_status') }}:</strong>
-                                                <div class="mt-2">
-                                                    {!! $data['order']->status_name !!}
+                                        <div class="col-lg-12">
+                                            <div class="invoice-title">
+                                                <h2>Invoice</h2>
+                                                <div class="invoice-number">No Order : {{ $data['order']->invoice_number }}
                                                 </div>
-                                            </address>
-                                        </div>
-                                        <div class="col-md-6 text-md-right">
-                                            <address>
-                                                <strong>{{ __('text.order_date') }}:</strong><br>
-                                                {{ $data['order']->created_at }}<br><br>
-                                            </address>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mt-4">
-                                <div class="col-md-12">
-                                    <div class="section-title font-weight-bold">{{ __('text.order_summary') }}</div>
-                                    <div class="table-responsive">
-                                        <table class="table table-striped table-hover table-md">
-                                            <tbody>
-                                                <tr>
-                                                    <th data-width="40" style="width: 40px;">#</th>
-                                                    <th>{{ __('field.product_name') }}</th>
-                                                    <th class="text-center">{{ __('field.price') }}</th>
-                                                    <th class="text-center">{{ __('text.quantity') }}</th>
-                                                    <th class="text-right">Total</th>
-                                                </tr>
-                                                @foreach ($data['order']->orderDetail()->get() as $detail)
-                                                    <tr>
-                                                        <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $detail->product->name }}
-                                                            {{-- <a>
-                                                                href="{{ route('product.show', ['categoriSlug' => $detail->Product->category->slug, 'productSlug' => $detail->Product->slug]) }}">{{ $detail->product->name }}
-                                                            </a> --}}
-                                                        </td>
-                                                        <td class="text-center">{{ rupiah($detail->product->price) }}
-                                                        </td>
-                                                        <td class="text-center">{{ $detail->qty }}</td>
-                                                        <td class="text-right">
-                                                            {{ rupiah($detail->total_price_per_product) }}</td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="row mt-4">
-                                        <div class="col-lg-8">
-                                            <address>
-                                                <strong>{{ __('text.shipping_method') }}:</strong>
-                                                <div class="mt-2">
-                                                    <p class="section-lead text-uppercase">{{ $data['order']->courier }}
-                                                        {{ $data['order']->shipping_method }}</p>
-                                                </div>
-                                            </address>
-                                            @if ($data['order']->receipt_number != null)
-                                                <address>
-                                                    <strong>{{ __('text.receipt_number') }}:</strong>
-                                                    <div class="mt-2">
-                                                        <p class="section-lead text-uppercase">
-                                                            {{ $data['order']->receipt_number }}</p>
-                                                    </div>
-                                                </address>
-                                            @endif
-                                        </div>
-                                        <div class="col-lg-4">
+                                            </div>
+                                            <hr>
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <div class="invoice-detail-name">Subtotal</div>
+                                                    <address>
+                                                        <strong>{{ __('text.billed_to') }}:</strong><br>
+                                                        {{ $data['order']->user->name }}<br>
+                                                        {{ $data['order']->user->email }}<br>
+                                                    </address>
                                                 </div>
-                                                <div class="col-md-1">
-                                                    <span class="text-right">:</span>
+                                                <div class="col-md-6 text-md-right">
+                                                    <address>
+                                                        <strong>{{ __('text.shipped_to') }} :</strong><br>
+                                                        {{ $data['order']->recipient_name }}<br>
+                                                        {{ $data['order']->address_detail }}<br>
+                                                        {{ $data['order']->destination }}
+                                                    </address>
                                                 </div>
-                                                <div class="col-md-5">
-                                                    <div class="invoice-detail-value text-right">
-                                                        {{ rupiah($data['order']->subtotal) }}
-                                                    </div>
-                                                </div>
+                                            </div>
+                                            <div class="row">
                                                 <div class="col-md-6">
-                                                    <div class="invoice-detail-name">shipping cost</div>
+                                                    <address>
+                                                        <strong>{{ __('text.order_status') }} :</strong>
+                                                        <div class="mt-2 ">
+                                                            {!! $data['order']->status_name !!}
+                                                        </div>
+                                                    </address>
                                                 </div>
-                                                <div class="col-md-1">
-                                                    <span class="text-right">:</span>
+                                                <div class="col-md-6 text-md-right">
+                                                    <address>
+                                                        <strong> {{ __('text.order_date') }}:</strong><br>
+                                                        {{ $data['order']->created_at }}<br><br>
+                                                    </address>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-4">
+                                        <div class="col-md-12">
+                                            <div class="section-title font-weight-bold">{{ __('text.order_summary') }}
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-hover table-md">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th data-width="40" style="width: 40px;">#</th>
+                                                            <th>{{ __('field.product_name') }}</th>
+                                                            <th class="text-center">{{ __('field.price') }}</th>
+                                                            <th class="text-center">{{ __('text.quantity') }}</th>
+                                                            <th class="text-right">Total</th>
+                                                        </tr>
+                                                        @foreach ($data['order']->orderDetail()->get() as $detail)
+                                                            <tr>
+                                                                <td>{{ $loop->iteration }}</td>
+                                                                <td>{{ $detail->product->name }}
+                                                                    {{-- <a>
+                                                                    href="{{ route('product.show', ['categoriSlug' => $detail->Product->category->slug, 'productSlug' => $detail->Product->slug]) }}">{{ $detail->product->name }}
+                                                                </a> --}}
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    {{ rupiah($detail->product->price) }}
+                                                                </td>
+                                                                <td class="text-center">{{ $detail->qty }}</td>
+                                                                <td class="text-right">
+                                                                    {{ rupiah($detail->total_price_per_product) }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="row mt-4">
+                                                <div class="col-md-7">
+                                                    <address>
+                                                        <strong>{{ __('text.shipping_method') }}</strong>
+                                                        <div class="mt-2">
+                                                            <p class="section-lead text-uppercase">
+                                                                {{ $data['order']->courier }}
+                                                                {{ $data['order']->shipping_method }}</p>
+                                                        </div>
+                                                    </address>
+                                                    @if ($data['order']->receipt_number != null)
+                                                        <address>
+                                                            <strong>{{ __('text.receipt_number') }}:</strong>
+                                                            <div class="mt-2">
+                                                                <p class="section-lead text-uppercase">
+                                                                    {{ $data['order']->receipt_number }}</p>
+                                                            </div>
+                                                        </address>
+                                                    @endif
                                                 </div>
                                                 <div class="col-md-5">
-                                                    <div class="invoice-detail-value text-right">
-                                                        {{ rupiah($data['order']->shipping_cost) }}</div>
-                                                </div>
-                                                @if ($data['order']->kode_unik != null)
-                                                    <div class="col-md-6">
-                                                        <div class="invoice-detail-name">Kode unik</div>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-borderless">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="text-left">Subtotal</td>
+                                                                    <td>:</td>
+                                                                    <td class="text-right">
+                                                                        {{ rupiah($data['order']->subtotal) }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>shipping cost</td>
+                                                                    <td>:</td>
+                                                                    <td class="text-right">
+                                                                        {{ rupiah($data['order']->shipping_cost) }}</td>
+                                                                </tr>
+                                                                @if ($data['order']->kode_unik != null)
+                                                                    <tr>
+                                                                        <td>Kode unik</td>
+                                                                        <td>:</td>
+                                                                        <td class="text-right">
+                                                                            {{ rupiah($data['order']->kode_unik) }}</td>
+                                                                    </tr>
+                                                                @endif
+                                                                <tr class="border-top">
+                                                                    <td>Total</td>
+                                                                    <td>:</td>
+                                                                    <td class="text-right">
+                                                                        {{ rupiah($data['order']->total_pay) }}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
                                                     </div>
-                                                    <div class="col-md-1">
-                                                        <span class="text-right">:</span>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <div class="invoice-detail-value text-right">
-                                                            {{ rupiah($data['order']->kode_unik) }}</div>
-                                                    </div>
-                                                @endif
-                                                <div class="col-md-12">
-                                                    <hr class="mt-2 mb-2">
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="invoice-detail-name">Total</div>
-                                                </div>
-                                                <div class="col-md-1">
-                                                    <span class="text-right">:</span>
-                                                </div>
-                                                <div class="col-md-5">
-                                                    <div class="invoice-detail-value invoice-detail-value-lg text-right">
-                                                        {{ rupiah($data['order']->total_pay) }}</div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="text-md-right">
+                                            <div class="float-lg-left mb-lg-0 mb-3">
+                                                @if ($data['order']->status == 0)
+                                                    <button class="btn btn-primary btn-icon icon-left" data-toggle="modal"
+                                                        data-target="#pilihMetodePay" id="payment"><i
+                                                            class="fa fa-credit-card"></i>
+                                                        Process Payment</button>
+                                                    <a href="{{ route('transaction.canceled', $data['order']->invoice_number) }}"
+                                                        class="btn btn-danger btn-icon icon-left"><i
+                                                            class="fa fa-times"></i>
+                                                        Cancel Order</a>
+                                                @elseif ($data['order']->status == 2)
+                                                    <a href="{{ route('transaction.received', $data['order']->invoice_number) }}"
+                                                        class="btn btn-primary text-white btn-icon icon-left"><i
+                                                            class="fa fa-credit-card"></i>
+                                                        Order Received</a>
+                                                @endif
+                                            </div>
+                                            <button class="btn btn-warning btn-icon icon-left" id="btnPrint"><i
+                                                    class="fa fa-print"></i>
+                                                Print</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <hr>
                         </div>
+                    </div>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="text-md-right">
-                        <div class="float-lg-left mb-lg-0 mb-3">
-                            @if ($data['order']->status == 0)
-                                <button class="btn btn-primary btn-icon icon-left" data-toggle="modal"
-                                    data-target="#pilihMetodePay" id="payment"><i class="fa fa-credit-card"></i>
-                                    Process Payment</button>
-                                <a href="{{ route('transaction.canceled', $data['order']->invoice_number) }}"
-                                    class="btn btn-danger btn-icon icon-left"><i class="fa fa-times"></i>
-                                    Cancel Order</a>
-                            @elseif ($data['order']->status == 2)
-                                <a href="{{ route('transaction.received', $data['order']->invoice_number) }}"
-                                    class="btn btn-primary text-white btn-icon icon-left"><i class="fa fa-credit-card"></i>
-                                    Order Received</a>
-                            @endif
-                        </div>
-                        <button class="btn btn-warning btn-icon icon-left" id="btnPrint"><i class="fa fa-print"></i>
-                            Print</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -213,20 +206,21 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="activities">
-                                        {{-- @foreach ($data['order']->OrderTrack()->get() as $orderTrack) --}}
-                                        <div class="activity">
-                                            <div class="activity-icon bg-primary text-white shadow-primary">
-                                                {{-- <i class="{{ $orderTrack->icon }}"></i> --}}
-                                            </div>
-                                            <div class="activity-detail bg-primary text-white">
-                                                <div class="mb-2">
-                                                    {{-- <span class="text-job text-white">{{ $orderTrack->created_at->diffForHumans() }}</span> --}}
-                                                    <span class="bullet"></span>
+                                        @foreach ($data['order']->OrderTrack()->get() as $orderTrack)
+                                            <div class="activity">
+                                                <div class="activity-icon bg-primary text-white shadow-primary">
+                                                    <i class="{{ $orderTrack->icon }}"></i>
                                                 </div>
-                                                {{-- <p>{{ __($orderTrack->description) }}</p> --}}
+                                                <div class="activity-detail bg-primary text-white">
+                                                    <div class="mb-2">
+                                                        <span
+                                                            class="text-job text-white">{{ $orderTrack->created_at->diffForHumans() }}</span>
+                                                        <span class="bullet"></span>
+                                                    </div>
+                                                    <p>{{ __($orderTrack->description) }}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                        {{-- @endforeach --}}
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -236,8 +230,7 @@
             </div>
         </div>
         <!-- Modal pilih pembayaran -->
-        <div class="modal fade" id="pilihMetodePay" tabindex="-1" aria-labelledby="pilihMetodePayLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="pilihMetodePay" tabindex="-1" aria-labelledby="pilihMetodePayLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -290,18 +283,19 @@
             </div>
         </div>
     </section>
-    <iframe id="pdfViewer" style="width: 100%; height: 500px;"></iframe>
-
     <!-- Modal -->
 @endsection
 @push('js')
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
     <script>
-        const metodeMidtrans = document.querySelector('#pay-button');
+        const payButton = document.querySelector('#pay-button');
+        
 
         var dropdown = document.getElementsByClassName("dropdown-btn");
         var i;
@@ -361,20 +355,26 @@
                         manualPayButton.style.display = 'block';
                         listBank.innerHTML = '';
                         payButton.style.display = 'none';
+                        const pembayaran = JSON.parse(localStorage.getItem('pembayaran'));
+                        const statusMetodePembayaran = pembayaran.statusMetodePembayaran;
+                        const idBank = pembayaran.idBank;
+                        const nRandom = pembayaran.nRandom;
+                        const nama_bank = pembayaran.namaBank;
+                        const no_rekening = pembayaran.noRek;
+                        const atas_nama = pembayaran.atasNama;
+                        const total = pembayaran.total;
+                        const sudahBayar = pembayaran.sudahBayar;
+                        pembayaran.startTime = '{{ $data['order']->updated_at }}';
+                        localStorage.setItem('pembayaran', JSON.stringify(pembayaran));
                         manualPayButton.addEventListener('click', function(e) {
-                            const pembayaran = JSON.parse(localStorage.getItem('pembayaran'));
-                            const statusMetodePembayaran = pembayaran.statusMetodePembayaran;
-                            const idBank = pembayaran.idBank;
-                            const nRandom = pembayaran.nRandom;
-                            const nama_bank = pembayaran.namaBank;
-                            const no_rekening = pembayaran.noRek;
-                            const atas_nama = pembayaran.atasNama;
-                            const total = pembayaran.total;
-                            pembayaran.startTime = '{{ $data['order']->updated_at }}';
-                            localStorage.setItem('pembayaran', JSON.stringify(pembayaran));
                             $('#pilihMetodePay').modal('hide');
-                            createModalDetail(idBank, nama_bank, atas_nama, no_rekening, total,
-                                nRandom);
+                            if (!sudahBayar) {
+                                createModalDetail(idBank, nama_bank, atas_nama, no_rekening, total,
+                                    nRandom);
+                            } else {
+                                createKonfirmasi();
+                            }
+
                         })
                     } else if (statusMetodePembayaran === '2') {
                         payButton.style.display = 'block';
@@ -514,7 +514,9 @@
                     var csrfToken = $('meta[name="csrf-token"]').attr('content');
                     console.log(dataId, nama, atasNama, noRek, total, nRandom);
                     $('#pilihMetodePay').modal('hide');
-
+                    let pembayaran = JSON.parse(localStorage.getItem('pembayaran'));
+                    pembayaran.sudahBayar = true;
+                    localStorage.setItem('pembayaran', JSON.stringify(pembayaran));
                     $.ajax({
                         type: "POST",
                         url: "/transaction/updatePembayaranManual",
@@ -605,91 +607,121 @@
             }, 1500);
         }
 
-
-        metodeMidtrans.addEventListener('click', function(e) {
-            e.preventDefault();
-            let pembayaran = JSON.parse(localStorage.getItem('pembayaran'));
-            // Mengubah nilai statusMetodePembayaran menjadi '1'
-            pembayaran.statusMetodePembayaran = '2';
-
-            // Menyimpan objek pembayaran yang sudah diubah kembali ke local storage
-            localStorage.setItem('pembayaran', JSON.stringify(pembayaran));
+        payButton.addEventListener('click', function(e) {
             $('#pilihMetodePay').modal('hide');
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
-            $.ajax({
-                type: "POST",
-                url: "/transaction/metodePembayaran",
-                data: {
-                    invoice: '{{ $data['order']->invoice_number }}',
-                    method: '1',
-                },
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                success: function(response) {
-                    console.log(response);
-                    // Lakukan tindakan tambahan jika diperlukan setelah permintaan berhasil
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
-
-            snap.pay('{{ $data['order']->snap_token }}', {
-                // Optional
-                onSuccess: function(result) {
-                    console.log(result)
-                    // window.location.href ='{{ route('transaction.success', $data['order']->invoice_number) }}'
-
-                    // window.location.href = '/payments/midtrans-notification';
-                    // $.ajax({
-                    //     type: "POST",
-                    //     url: "/payments/midtrans-notification",
-                    //     headers: {
-                    //         'X-CSRF-TOKEN': csrfToken
-                    //     },
-                    //     success: function(response) {
-                    //         console.log(response);
-                    //         // Lakukan tindakan tambahan jika diperlukan setelah permintaan berhasil
-                    //     },
-                    //     error: function(xhr, status, error) {
-                    //         console.error(xhr.responseText);
-                    //     }
-                    // });
-                    //     $.ajax({
-                    //         type: "POST",
-                    //         url: "/notifikasi",
-                    //         data: {
-                    //             invoice: '{{ $data['order']->invoice_number }}',
-                    //             tipe: '1',
-                    //         },
-                    //         headers: {
-                    //             'X-CSRF-TOKEN': csrfToken
-                    //         },
-                    //         success: function(response) {
-                    //             console.log(response);
-                    //             // Lakukan tindakan tambahan jika diperlukan setelah permintaan berhasil
-                    //         },
-                    //         error: function(xhr, status, error) {
-                    //             console.error(xhr.responseText);
-                    //         }
-                    //     });
-                    //     localStorage.removeItem('pembayaran');
-                },
-                // Optional
-                onPending: function(result) {
-                    /* You may add your own js here, this is just example */
-                    // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                    console.log(result)
-                },
-                // Optional
-                onError: function(result) {
-                    /* You may add your own js here, this is just example */
-                    // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                    console.log(result)
-                }
-            });
+            adminMidtrans();
         });
+
+        function adminMidtrans() {
+            var totalPay = parseInt('{{$data['order']->total_pay}}');
+            var adminBank = 5000;
+            var totalMidtrans = rupiah(totalPay + adminBank);
+            var modalBody = document.querySelector('#prosesPembayaran .modal-body');
+            modalBody.innerHTML = '';
+            var html = "";
+            html += `
+            <div class="row justify-content-md-center">
+                <div class="col-md-auto" style="width: auto;">
+                    <div class="card" style="width: auto;">
+                         <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-borderless">
+                                    <tbody>
+                                        <tr>
+                                        <td class="text-left">Total</td>
+                                        <td>:</td>
+                                        <td class="text-right">{{ rupiah($data['order']->total_pay) }}</td>
+                                        </tr>
+                                        <tr>
+                                        <td class="text-left">Admin Bank</td>
+                                        <td>:</td>
+                                        <td class="text-right">Rp5.000</td>
+                                        </tr>
+                                        <tr class="border-top">
+                                        <td class="text-left">Total Bayar</td>
+                                        <td>:</td>
+                                        <td class="text-right">${totalMidtrans}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button class="btn btn-primary" style="width: 100%" id="midtrans-pay">Bayar</button>
+                        </div>
+                     </div>
+                </div>
+             </div>
+            `;
+            $('#contenModel').append(html);
+            $('#prosesPembayaran').modal('show');
+            const midtransPay = document.querySelector('#midtrans-pay');
+            midtransPay.addEventListener('click', function(e) {
+                e.preventDefault();
+                let pembayaran = JSON.parse(localStorage.getItem('pembayaran'));
+                // Mengubah nilai statusMetodePembayaran menjadi '1'
+                pembayaran.statusMetodePembayaran = '2';
+
+                // Menyimpan objek pembayaran yang sudah diubah kembali ke local storage
+                localStorage.setItem('pembayaran', JSON.stringify(pembayaran));
+                $('#prosesPembayaran').modal('hide');
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                $.ajax({
+                    type: "POST",
+                    url: "/transaction/metodePembayaran",
+                    data: {
+                        invoice: '{{ $data['order']->invoice_number }}',
+                        method: '1',
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        // Lakukan tindakan tambahan jika diperlukan setelah permintaan berhasil
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+
+                snap.pay('{{ $data['order']->snap_token }}', {
+                    // Optional
+                    onSuccess: function(result) {
+                        console.log(result.order_id);
+                        $.ajax({
+                            type: "POST",
+                            url: "/notifikasi",
+                            data: {
+                                invoice: result.order_id,
+                                tipe: '1',
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': csrfToken
+                            },
+                            success: function(response) {
+                                console.log(response);
+                                // Lakukan tindakan tambahan jika diperlukan setelah permintaan berhasil
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr.responseText);
+                            }
+                        });
+                        localStorage.removeItem('pembayaran');
+                    },
+                    // Optional
+                    onPending: function(result) {
+                        /* You may add your own js here, this is just example */
+                        // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                        console.log(result)
+                    },
+                    // Optional
+                    onError: function(result) {
+                        /* You may add your own js here, this is just example */
+                        // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                        console.log(result)
+                    }
+                });
+            });
+        }
 
         function startCountdown(endTime) {
             // Mendapatkan elemen tempat timer akan ditampilkan
@@ -747,44 +779,37 @@
         }
 
         $(document).on('click', '#btnPrint', function() {
-            var data = $('#content-print').html();
+            var data = $('#id-content').html();
             var opt = {
                 filename: 'Laporan Bulan.pdf',
-                margin: [5, 5, 10, 5],
+                margin: [5, 5, 5, 10],
                 image: {
                     type: 'jpeg',
                     quality: 1
                 },
                 html2canvas: {
-            dpi: 150, // Mengurangi resolusi untuk menghindari masalah pemotongan
-            scale: 2, // Menyesuaikan skala untuk memastikan konten sesuai dengan halaman
-            letterRendering: true,
-            useCORS: true
-        },
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
-
+                    dpi: 500,
+                    scale: 4,
+                    letterRendering: true,
+                    useCORS: true
+                },
+                pagebreak: {
+                    mode: ['avoid-all', 'css', 'legacy']
+                },
             };
             html2pdf().set(opt).from(data).toPdf().get('pdf').then((pdf) => {
                 var totalPages = pdf.internal.getNumberOfPages();
 
-if (totalPages > 1) {
-    // Jika terdapat lebih dari satu halaman, hapus halaman yang tidak diperlukan
-    for (let i = totalPages; i > 1; i--) {
-        pdf.deletePage(i);
-    }
-}
+                for (let i = 1; i <= totalPages; i++) {
+                    // set footer to every page
+                    pdf.setPage(i);
+                    // set footer font
+                    pdf.setFontSize(10);
+                    pdf.setTextColor(150);
+                    // this example gets internal pageSize just as an example to locate your text near the borders in case 
+                }
 
-// Set footer pada halaman
-pdf.setPage(1);
-pdf.setFontSize(10);
-pdf.setTextColor(150);
-pdf.output('dataurlnewwindow', {filename: "Laporan Bulan.pdf"});
-
-        // Menetapkan hasil PDF ke iframe
-        var pdfDataUri = pdf.output('datauristring');
-        $('#pdfViewer').attr('src', pdfDataUri);
-
-            });
+            }).save();
         })
     </script>
 @endpush
