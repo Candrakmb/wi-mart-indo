@@ -29,7 +29,7 @@ class CheckoutController extends Controller
         $data['carts'] = $this->cartService->getUserCart();
         $data['provinces'] = $this->rajaongkirService->getProvince();
         $data['shipping_address'] = Alamatpengirim::first();
-        $data['kategori'] = Categori::where('name', 'Kebutuhan Rumah Tangga')->first();
+        $data['kategori'] = Categori::where('name', 'Kebutuhan Rumah')->first();
         return view('frontend.checkout.index',compact('data'));
     }
 
