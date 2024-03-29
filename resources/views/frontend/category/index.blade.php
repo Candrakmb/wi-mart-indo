@@ -22,14 +22,11 @@
                 @foreach ($data['category'] as $category)
                     <div class="col-lg-4 col-md-6 kategori">
                         <div class="categories__item set-bg" data-setbg="{{ asset('storage/image/kategori/' . $category->thumbnails) }}">
-                            <div class="categories__card">
-                                <h4>{{ $category->name }}</h4>
-                                <p>{{ $category->Products()->count() }} Item</p>
-                                <a href="{{ route('category.show',$category->slug) }}">Jelajahi</a>
-                            </div>
+                            <a href="{{ route('category.show',$category->slug) }}">{{ $category->name }}</a>
                         </div>
                     </div>
                 @endforeach
             </div>
         </div>
-    @endsection
+    </section>
+@endsection
