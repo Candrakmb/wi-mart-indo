@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="{{ url('/') }}"><i class="fa fa-home"></i> Home</a>
+                        <a href="{{ url('/') }}"><i class="fa fa-home"></i> Home&nbsp;</a>
                         <span>Cart</span>
                     </div>
                 </div>
@@ -17,7 +17,7 @@
     <section class="shop-cart spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12 container_cart">
                     <form action="{{ route('cart.update') }}" method="post">
                         @csrf
                     <div class="shop__cart__table">
@@ -56,7 +56,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row cart_bottom">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="cart__btn">
                         <a href="{{ route('product.index') }}">Continue Shopping</a>
@@ -69,7 +69,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row cart_total">
                 <div class="col-lg-6">
                 </div>
                 <div class="col-lg-4 offset-lg-2">

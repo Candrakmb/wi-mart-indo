@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Setting\ShippingAddress;
+use App\Models\Setting\Alamatpengirim;
 use Illuminate\Database\Seeder;
 
 class ShippingSeeder extends Seeder
@@ -14,9 +14,10 @@ class ShippingSeeder extends Seeder
      */
     public function run()
     {
-        ShippingAddress::create([
+        Alamatpengirim::create([
             'city_id' => 103,
-            'province_id' => 9
+            'province_id' => 9,
+            'detail_alamat' => '-'
         ]);
     }
 }
