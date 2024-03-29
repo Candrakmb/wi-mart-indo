@@ -20,7 +20,7 @@
             <form action="{{ route('checkout.process') }}" class="checkout__form" method="POST">
                 @csrf
                 <div class="row">
-                    <div class="col-lg-8 mb-4">
+                    <div class="col-lg-8 mb-4 checkout_container">
                         <h5>Billing detail</h5>
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
+                                <div class="checkout__form__input drop1">
                                     <p>Province <span>*</span></p>
                                     <select name="province_id" id="province_id" class="select-2" >
                                         <option value="" selected disabled>-- Select Province --</option>
@@ -49,8 +49,8 @@
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                    <p>City <span>*</span></p>
+                                <div class="checkout__form__input drop2">
+                                    <p class="city_name">City <span>*</span></p>
                                     <select name="city_id" id="city_id" class="select-2" disabled >
                                         <option value="" selected disabled>-- Select City --</option>
                                     </select>
@@ -81,7 +81,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 container_order">
                         <div class="checkout__order">
                             <h5>Your order</h5>
                             <div class="checkout__order__product">
@@ -91,8 +91,8 @@
                                         <span class="top__text__right">Total</span>
                                     </li>
                                     @foreach ($data['carts'] as $cart)
-                                        <li>{{ $loop->iteration }}. {{ $cart->Product->name }} x
-                                            {{ $cart->qty }}<span>{{ rupiah($cart->total_price_per_product) }}</span>
+                                        <li class="product_order">{{ $loop->iteration }}. {{ $cart->Product->name }} x
+                                            {{ $cart->qty }}<span class="product_order_right">{{ rupiah($cart->total_price_per_product) }}</span>
                                         </li>
                                     @endforeach
                                     <li>

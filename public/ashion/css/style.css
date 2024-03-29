@@ -3765,6 +3765,89 @@ ol {
 		padding-top: 20px;
 		height: 70px;
 	}
+
+	.checkout .container .checkout__form .checkout_container h5 {
+		font-size: 50px;
+	}
+
+	.checkout .container .checkout__form .checkout_container .checkout__form__input p {
+		font-size: 35px;
+		margin-top: 30px;
+		margin-bottom: 20px;
+	}
+
+	.checkout .container .checkout__form .checkout_container .checkout__form__input input {
+		width: 900px;
+		height: 70px;
+		font-size: 27px;
+	}
+
+	.checkout .container .checkout__form .checkout_container .checkout__form__input select {
+		width: 900px;
+		height: 70px;
+		font-size: 27px;
+	}
+
+	.checkout .container .checkout__form .checkout_container .drop1 .select2 .selection .select2-selection {
+		width: 440px;
+		height: 70px;
+	}
+
+	.checkout .container .checkout__form .checkout_container .drop1 .select2 .selection .select2-selection .select2-selection__rendered {
+		font-size: 27px;
+		padding-top: 10px;
+	}
+
+	.checkout .container .checkout__form .checkout_container .drop2 .select2 .selection .select2-selection {
+		width: 440px;
+		height: 70px;
+		margin-left: 100px;
+	}
+
+	.checkout .container .checkout__form .checkout_container .drop2 .select2 .selection .select2-selection .select2-selection__rendered {
+		font-size: 27px;
+		padding-top: 10px;
+	}
+
+	.checkout .container .checkout__form .checkout_container .drop2 .city_name {
+		margin-left: 100px;
+	}
+
+	.checkout .container .checkout__form .container_order .checkout__order {
+		width: 900px;
+	}
+
+	.checkout .container .checkout__form .container_order .checkout__order h5 {
+		font-size: 35px;
+	}
+
+	.checkout .container .checkout__form .container_order .checkout__order .checkout__order__product .top__text {
+		font-size: 27px;
+		margin-top: 15px;
+	}
+
+	.checkout .container .checkout__form .container_order .checkout__order .checkout__order__product .product_order {
+		font-size: 20px;
+	}
+
+	.checkout .container .checkout__form .container_order .checkout__order .checkout__order__product .top__text__right {
+		font-size: 27px;
+		margin-top: 15px;
+	}
+
+	.checkout .container .checkout__form .container_order .checkout__order .checkout__order__product .product_order_right {
+		font-size: 20px;
+	}
+
+	.checkout .container .checkout__form .container_order .checkout__order .checkout__order__total li {
+		font-size: 27px;
+		margin-top: 15px;
+	}
+
+	.checkout .container .checkout__form .container_order .checkout__order button {
+		font-size: 27px;
+		padding: 30px 0;
+	}
 }
 
 /* Wide Mobile = 480px */
