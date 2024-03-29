@@ -34,7 +34,8 @@
                             <td>{!! $order->status_name !!}</td>
                             <td>{{ $order->created_at }}</td>
                             <td>
-                              <a href="{{ route('transaction.show',$order->invoice_number) }}" class="btn btn-danger">Detail</a>
+                              <a href="{{ route('transaction.show',$order->invoice_number) }}" class="{{$order->status == '0' ? 'btn btn-danger' : 'btn btn-success'}}">{{$order->status == '0' ? 'Bayar' : 'Detail'}}
+                                </a>
                             </td>
                           </tr>
                           @endforeach

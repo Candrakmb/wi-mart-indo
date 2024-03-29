@@ -1,21 +1,27 @@
-<div class="text-md-right mb-3 px-4">
-    @if ($orders->status == '0' && $orders->metode_pembayaran == '0')
-        <button class="btn btn-success btn-icon icon-left" id="btn-konfirmasi"><i class="fa fa fa-check"
-                title="konformasi Pembayaran"></i> Konfirmasi</button>
-    @endif
-    @if ($orders->status == '1' || $orders->status == '2')
-        <button type="button" class="btn btn-primary btn-icon icon-left" data-bs-toggle="modal"
-            data-bs-target="#inputResi"><i class="fa fa-print"></i> Input Resi</button>
-    @endif
-    <button type="button" class="btn btn-warning btn-icon icon-left" id="btnPrint"><i class="fa fa-print"></i>
-        Print</button>
+<div class="row mt-2">
+    <div class="col text-left">
+        <a href="{{ url()->previous() }}" type="button" class="btn btn-primary btn-data-sec">
+            <i class="fa fa-chevron-left"></i> <span>Kembali</span>
+        </a>
+    </div>
+    <div class=" col text-md-right mb-3 px-4">
+        @if ($orders->status == '0' && $orders->metode_pembayaran == '0')
+            <button class="btn btn-success btn-icon icon-left" id="btn-konfirmasi"><i class="fa fa fa-check"
+                    title="konformasi Pembayaran"></i> Konfirmasi</button>
+        @endif
+        @if ($orders->status == '1' || $orders->status == '2')
+            <button type="button" class="btn btn-primary btn-icon icon-left" data-bs-toggle="modal"
+                data-bs-target="#inputResi"><i class="fa fa-print"></i> Input Resi</button>
+        @endif
+        <button type="button" class="btn btn-warning btn-icon icon-left" id="btnPrint"><i class="fa fa-print"></i>
+            Print</button>
+    </div>
 </div>
 <div class="card p-3">
     <div class="card-body" id="id-content">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-
                     <div class="invoice" style="border-top: 2px solid #6777ef;">
                         <div class="invoice-print">
                             <div class="row">
@@ -23,7 +29,6 @@
                                     <div class="invoice-title">
                                         <h2>Invoice</h2>
                                         <div class="invoice-number">No Order : {{ $orders->invoice_number }}</div>
-
                                     </div>
 
                                     <hr>

@@ -28,25 +28,26 @@ class Notificationtele extends Notification
         try {
             $invoice = $request['invoice'];
             $order = Order::where('invoice_number', $invoice)->first();
-            $total = $request['total'];
-            $idBank = $request['idBank'];
-            $bank = Bank::where('id', $idBank)->first();
             $tipe = $request['tipe'];
-            
 
             if ($tipe == '0') {
+                $total = $request['total'];
+                $idBank = $request['idBank'];
+                $bank = Bank::where('id', $idBank)->first();
                 $totalRupiah = "Rp " . number_format($total, 0, ',', '.');
                 // Membuat content point-point
                 $content = "Ada Invoice baru:\n";
                 $content .= "Invoice: #" . $invoice . "\n";
+                $content .= "Nama Pemesan: " . $order->recipient_name. "\n";
+                $content .= "No TLP: " . $order->phone_number. "\n";
                 $content .= "Total Pembayaran: " . $totalRupiah . "\n";
                 $content .= "Mohon cek bank tujuan berikut: \n";
                 $content .= "Bank: " . $bank->nama_bank . "\n";
                 $content .= "Atas nama: " . $bank->atas_nama."\n";
                 $content .= "Konfirmasi pada web admin";
-    
-            } else {
-                $orderCreate= Carbon::parse($order->created_at)->format('d F Y H:i:s');;
+                
+            } else if ($tipe == '1') {
+                $orderCreate= Carbon::parse($order->created_at)->format('d F Y H:i:s');
                 $totalRupiah = "Rp " . number_format($order->total_pay, 0, ',', '.');
                 $content = "Ada order baru masuk $orderCreate:\n";
                 $content .= "Invoice: #" . $invoice . "\n";
@@ -56,14 +57,14 @@ class Notificationtele extends Notification
                 $content .= "kurir : ". $order->courier. "\n";
                 $content .= "Pengiriman : ". $order->shipping_method. "\n";
                 $content .= "segera proses untuk kirim ";
-    
             }
 
             return TelegramMessage::create()
-                    ->to(1533092542)
+                    ->to(1104082522)
                     ->content($content);
-        } catch (\Exception $ex) {
-            \Log::error($ex);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
         }
     }
 

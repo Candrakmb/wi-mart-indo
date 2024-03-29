@@ -50,6 +50,7 @@ class TransacationController extends Controller
         try {
             $invoice = $request->input('invoice');
             $method = $request->input('method');
+            $adminBank = 5000;
     
             $order = Order::where('invoice_number', $invoice)->first();
             
@@ -61,6 +62,9 @@ class TransacationController extends Controller
                 $order->metode_pembayaran = $method;
                 $order->updated_at = Carbon::now();
             } else {
+                $total = $order->total_pay;
+                $totalMidtrans = $total + $adminBank;
+                $order->total_pay = $totalMidtrans;
                 $order->metode_pembayaran ='1';
             }
             $order->save();

@@ -17,10 +17,15 @@ class CreateSnapTokenService extends Midtrans
  
     public function getSnapToken()
     {
+        $totalPay = $this->order->total_pay;
+        $adminBank = 5000; 
+        $totalMidtrans = $totalPay + $adminBank;
+
+        // Adding $adminBank to the gross_amount parameter
         $params = [
             'transaction_details' => [
                 'order_id' => $this->order->invoice_number,
-                'gross_amount' => $this->order->total_pay,
+                'gross_amount' => $totalMidtrans,
             ],
             'customer_details' => [
                 'first_name' => $this->order->user->name,
@@ -29,9 +34,9 @@ class CreateSnapTokenService extends Midtrans
             ]
         ];
 
- 
+        // Assuming Snap class is available and has the getSnapToken method
         $snapToken = Snap::getSnapToken($params);
- 
+
         return $snapToken;
     }
 }
