@@ -19,7 +19,6 @@ class MidtransController extends Controller
             $order = Order::where('invoice_number', $request->order_id)->first();
                 if($request->transaction_status == 'settlement'){
                     $order->update(['status' => '1', 'paid_at' => Carbon::now()]);
-                    return back()->with('success',__('message.paid_success'));
                 }
                 else if($request->transaction_status == 'pending'){
                     $order->update(['status' => '0']);
@@ -29,7 +28,6 @@ class MidtransController extends Controller
                 }
                 else if($request->transaction_status == 'expire'){
                     $order->update(['status' => '5']);
-                    return back()->with('success',__('message.paid_expired'));
                 }
                 else if($request->transaction_status == 'cancel'){
                     $order->update(['status' => '4']);

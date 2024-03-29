@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="table-responsive table-invoice">
-                        <table class="table table-striped">
+                        <table class="table table-striped table-md">
                           <tbody><tr>
                             <th>Invoice ID</th>
                             <th>Products</th>
