@@ -1053,60 +1053,23 @@ ol {
 	-webkit-box-align: center;
 	-ms-flex-align: center;
 	align-items: center;
-	padding-left: 30px;
-	margin-bottom: 30px;
-	margin-right: 10px;
+	margin-bottom: 10px;
 	border-radius: 10px;
 	box-shadow: 0px 0px 5px #888888;
-	margin-left: 30px;
 	margin-top: 20px;
-}
-
-.kategori:nth-child(1) {
-	margin-left: 40px;
-}
-.kategori:nth-child(2) {
-	margin-left: -40px;
-}
-.kategori:nth-child(3) {
-	margin-left: -40px;
-}
-.kategori:nth-child(4) {
-	margin-left: 220px;
-}
-.kategori:nth-child(5) {
-	margin-left: -50px;
+	background-color: #ECEDFF;
+	background-size: 230px 230px;
+	background-position-x: 20px;
+	background-position-y: 20px;
 }
 
 .kategori a{
 	font-family: "Roboto", sans-serif;
 	color: #3f3f3f;
 	font-weight: bold;
-	font-size: 25px;
-}
+	font-size: 22px;
 
-.kategori:nth-child(1) a{
 	margin: 240px 0 0 0px;
-	width: 260px;
-	text-align: center;
-}
-.kategori:nth-child(2) a{
-	margin: 240px 0 0 0;
-	width: 260px;
-	text-align: center;
-}
-.kategori:nth-child(3) a{
-	margin: 240px 0 0 0;
-	width: 260px;
-	text-align: center;
-}
-.kategori:nth-child(4) a{
-	margin: 240px 0 0 0;
-	width: 260px;
-	text-align: center;
-}
-.kategori:nth-child(5) a{
-	margin: 240px 0 0 0;
 	width: 260px;
 	text-align: center;
 }
@@ -3615,12 +3578,10 @@ ol {
 
 	.categories .container .kategori:nth-child(odd) .categories__item {
 		width: 440px;
-		height: 400px;
 	}
 
 	.categories .container .kategori:nth-child(even) .categories__item {
 		width: 440px;
-		height: 400px;
 		margin-left: 110px
 	}
 
@@ -3898,58 +3859,33 @@ ol {
 		padding: 30px 0;
 	}
 
-	.kategori:nth-child(odd),
-	.kategori:nth-child(even) {
-		margin-left: 0;
-		padding-left: 0;
+	.categories__item {
+		height: 550px;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
+		align-items: center;
+		margin-bottom: 10px;
+		border-radius: 10px;
+		box-shadow: 0px 0px 5px #888888;
+		margin-top: 20px;
+		background-color: #ECEDFF;
+		background-size: 380px 380px;
+		background-position-x: 35px;
+		background-position-y: 20px;
 	}
-
-	.kategori:nth-child(odd) .categories__item,
-	.kategori:nth-child(even) .categories__item {
-		height: 500px;
-		margin-left: 0;
-	}
-
-	.categories .container .kategori:nth-child(odd) .categories__item,
-	.categories .container .kategori:nth-child(even) .categories__item {
-		height: 500px;
-		margin-left: 0;
-	}
-
-	.kategori:nth-child(odd) .categories__item {
-		height: 500px;
-		margin-left: 20px;
-	}
-
-	.categories .container  .kategori:nth-child(odd) .categories__item {
-		height: 500px;
-		margin-left: 10px;
-	}
-
-	.kategori:nth-child(even) .categories__item {
-		height: 500px;
-		margin-left: 130px;
-	}
-
-	.categories .container .kategori:nth-child(even) .categories__item {
-		height: 500px;
-		margin-left: 130px;
-	}
-
-	.kategori:nth-child(5) .categories__item {
-		height: 500px;
-		margin-left: 240px;
-	}
-
-	.categories .container .kategori:nth-child(5) .categories__item {
-		height: 500px;
-		margin-left: 240px;
-	}
-
-	.kategori .categories__item a {
-		font-size: 35px;
-		margin-top: 330px;
-		width: 380px;
+	
+	.kategori a{
+		font-family: "Roboto", sans-serif;
+		color: #3f3f3f;
+		font-weight: bold;
+		font-size: 32px;
+	
+		margin: 400px 0 0 0px;
+		width: 430px;
+		text-align: center;
 	}
 }
 
