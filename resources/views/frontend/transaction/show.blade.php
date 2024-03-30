@@ -101,7 +101,7 @@
                                                 </table>
                                             </div>
                                             <div class="row mt-4">
-                                                <div class="col-md-7">
+                                                <div class="col-md-8">
                                                     <address>
                                                         <strong>{{ __('text.shipping_method') }}</strong>
                                                         <div class="mt-2">
@@ -120,29 +120,39 @@
                                                         </address>
                                                     @endif
                                                 </div>
-                                                <div class="col-md-5">
+                                                <div class="col-md-4">
                                                     <div class="table-responsive">
-                                                        <table class="table table-borderless">
+                                                        <table class="table table-borderless table-sm">
                                                             <tbody>
-                                                                <tr>
+                                                                <tr >
                                                                     <td class="text-left">Subtotal</td>
                                                                     <td>:</td>
                                                                     <td class="text-right">
                                                                         {{ rupiah($data['order']->subtotal) }}</td>
                                                                 </tr>
-                                                                <tr>
+                                                                <tr >
                                                                     <td>shipping cost</td>
                                                                     <td>:</td>
                                                                     <td class="text-right">
                                                                         {{ rupiah($data['order']->shipping_cost) }}</td>
                                                                 </tr>
                                                                 @if ($data['order']->kode_unik != null)
-                                                                    <tr>
+                                                                    <tr >
                                                                         <td>Kode unik</td>
                                                                         <td>:</td>
                                                                         <td class="text-right">
                                                                             {{ rupiah($data['order']->kode_unik) }}</td>
                                                                     </tr>
+                                                                @endif
+                                                                @if ($data['order']->metode_pembayaran != null)
+                                                                @if ($data['order']->metode_pembayaran == '1')
+                                                                <tr >
+                                                                    <td>Admin Bank</td>
+                                                                    <td>:</td>
+                                                                    <td class="text-right">
+                                                                        {{ rupiah(5000) }}</td>
+                                                                </tr>
+                                                                @endif
                                                                 @endif
                                                                 <tr class="border-top">
                                                                     <td>Total</td>
@@ -625,7 +635,7 @@
                     <div class="card" style="width: auto;">
                          <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-borderless">
+                                <table class="table table-borderless table-md">
                                     <tbody>
                                         <tr>
                                         <td class="text-left">Total</td>
@@ -686,7 +696,9 @@
                 snap.pay('{{ $data['order']->snap_token }}', {
                     // Optional
                     onSuccess: function(result) {
-                        console.log(result.order_id);
+                        var apiUrl = "{{ env('TELEGRAM_BOT_TOKEN') }}";
+                        console.log(result.transaction_status);
+                        console.log(apiUrl);
                         $.ajax({
                             type: "POST",
                             url: "/notifikasi",
@@ -705,7 +717,14 @@
                                 console.error(xhr.responseText);
                             }
                         });
+                       
+                        // if(result.transaction_status == 'settlement'){
+                        //     window.location.href = '{{ route('transaction.success') }}';
+                        // }else if(result.transaction_status == 'expire'){
+                        //     window.location.href = '{{ route('transaction.expiredmidtrans') }}';
+                        // }
                         localStorage.removeItem('pembayaran');
+                        location.reload(); // Reload halaman
                     },
                     // Optional
                     onPending: function(result) {
@@ -839,7 +858,7 @@
         /* On mouse-over */
         .sidenav .down:hover,
         .dropdown-btn:hover {
-            color: #f1f1f1;
+            color: #187080;
         }
 
         /* Main content */
@@ -853,14 +872,12 @@
 
         /* Add an active class to the active dropdown button */
         .active {
-            background-color: rgb(23, 10, 206);
-            color: white;
+            color: rgb(26, 105, 151);
         }
 
         /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
         .dropdown-container {
             display: none;
-            background-color: rgb(94, 92, 89);
             padding-left: 8px;
         }
 

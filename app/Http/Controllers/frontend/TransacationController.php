@@ -102,10 +102,9 @@ class TransacationController extends Controller
         }
     }    
 
-    public function success($invoice_number)
+    public function success()
     {
-        $this->order->Query()->where('invoice_number',$invoice_number)->first()->update(['status' => 1,'paid_at' => Carbon::now()] );
-        return back()->with('success',__('message.pembayaran berhasil'));
+        return back()->with('success',__('message.paid_success'));
     }
 
     public function received($invoice_number)
@@ -114,10 +113,15 @@ class TransacationController extends Controller
         return back()->with('success',__('message.order_received'));
     }
 
+    public function expiredMidtrans()
+    {
+        return back()->with('success',__('message.paid_expired'));
+    }
+
     public function expired($invoice_number)
     {
         $this->order->Query()->where('invoice_number',$invoice_number)->first()->update(['status' => 5]);
-        return back()->with('success',__('message.pembayaran kadaluarsa'));
+        return back()->with('success',__('message.paid_expired'));
     }
 
     public function canceled($invoice_number)

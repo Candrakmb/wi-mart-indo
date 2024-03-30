@@ -27,4 +27,7 @@ return [
     'order_track_receive'=> 'Pembeli Sudah Menerima Pesanan',
     'order_track_cancel' => 'Pembeli Membatalkan Pesanan',
     'order_track_expired'=> 'Pesanan Telah Kadaluarsa',
+
+    'paid_success'    => 'Pembayaran Berhasil',
+    'paid_expired'    => 'Pembayaran Expired',
 ];

@@ -110,7 +110,8 @@ Route::middleware('auth','role:user')->group(function(){
         Route::get('/{invoice_number}/received',[TransacationController::class,'received'])->name('received');
         Route::get('/{invoice_number}/canceled',[TransacationController::class,'canceled'])->name('canceled');
         Route::get('/{invoice_number}/expired',[TransacationController::class,'expired'])->name('expired');
-        Route::get('/{invoice_number}/success',[TransacationController::class,'success'])->name('success');
+        Route::get('/expiredmidtrans',[TransacationController::class,'expiredMidtrans'])->name('expiredmidtrans');
+        Route::get('/success',[TransacationController::class,'success'])->name('success');
         Route::post('/metodePembayaran',[TransacationController::class,'metodePembayaran'])->name('metodePembayaran');
         Route::post('/updatePembayaranManual',[TransacationController::class,'updatePembayaranManual'])->name('updatePembayaranManual');
     });    
