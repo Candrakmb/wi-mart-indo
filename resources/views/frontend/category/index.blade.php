@@ -20,7 +20,7 @@
         <div class="container">
             <div class="row">
                 @foreach ($data['category'] as $category)
-                    <div class="col-lg-4 col-md-6 kategori">
+                    <div class="col-lg-3 col-md-6 kategori">
                         <div class="categories__item set-bg" data-setbg="{{ asset('storage/image/kategori/' . $category->thumbnails) }}">
                             <a href="{{ route('category.show',$category->slug) }}">{{ $category->name }}</a>
                         </div>
