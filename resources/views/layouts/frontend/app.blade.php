@@ -9,7 +9,7 @@
 
     @include('layouts.frontend.data.navbar')
     @yield('content')
-    @include('layouts.frontend.data.footer')
+    
 
     <!-- Search Begin -->
     <div class="search-model">
@@ -22,6 +22,7 @@
     </div>
     <!-- Search End -->
     @include('layouts.frontend.data.scripts')
+    @include('layouts.frontend.data.footer')
 </body>
 
 </html>

@@ -11,14 +11,17 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     protected $category;
-    public function __construct(Categori $category)
+    protected $product;
+    public function __construct(Categori $category, Product $product)
     {
         $this->category = new CrudRepositories(new Categori());
+        $this->product = new CrudRepositories(new Product());
     }
 
     public function index()
     {
-        $data['category'] = $this->category->Query()->orderBy('id', 'desc')->limit(6)->get();
+        $data['category'] = $this->category->Query()->get();
+        $data['product'] = $this->product->Query()->orderBy('id', 'desc')->limit(6)->get();
         return view('frontend.home', compact('data'));
     }
 }

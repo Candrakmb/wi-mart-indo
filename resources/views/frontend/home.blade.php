@@ -32,13 +32,50 @@
 
             <div class="row">
                 @foreach ($data['category'] as $category)
-                    <div class="col-lg-3 col-md-6 kategori">
+                <div class="col-lg-3 col-md-6 kategori">
+                    <a href="{{ route('category.show',$category->slug) }}">
                         <div class="categories__item set-bg" data-setbg="{{ asset('storage/image/kategori/' . $category->thumbnails) }}">
-                            <a href="{{ route('category.show',$category->slug) }}">{{ $category->name }}</a>
+                            <p>{{ $category->name }}</p>
                         </div>
-                    </div>
+                    </a>
+                </div>
                 @endforeach
             </div>
 
         <!-- Product Section End -->
-    @endsection
+    </section>
+
+
+    <!-- Shop Section Begin -->
+    <section class="shop spad">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4">
+                    <div class="section-title">
+                        <h4>Best Products</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="row">
+                        @foreach ($data['product'] as $product)
+                            <div class="col-lg-2 col-md-6 produk">
+                                @component('components.frontend.product-card')
+                                    @slot('image', asset('storage/image/product/' . $product->thumbnails))
+                                    @slot('route', route('product.show', ['categoriSlug' => trim($product->categori->slug), 'productSlug' =>
+                                    $product->slug]))
+                                        @slot('name', $product->name)
+                                        @slot('price', rupiah($product->price))
+                                @endcomponent
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shop Section End -->
+@endsection

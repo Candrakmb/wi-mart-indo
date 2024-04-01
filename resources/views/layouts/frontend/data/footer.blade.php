@@ -1,16 +1,81 @@
-
-<!-- Footer Section Begin -->
-<footer class="footer">
-    <div class="container">
+<!-- Start Footer -->
+<footer class="bg-light container_footer">
+    <div class="container" style="margin-top: 100px;">
         <div class="row">
-            <div class="col-lg-12">
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                <div class="footer__copyright__text">
-                    <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> By Wi Mart</p>
-                </div>
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            <div class="col-lg-4 md-12 pt-5">
+                <a class="logo" href="{{ url('/') }}"><img src="{{ asset('img') }}/logo.png" alt="">Wimartindo</a>
+                <ul class="list-unstyled text-dark footer-link-list">
+                    <li>
+                        <i class="fas fa-map-marker-alt fa-fw"></i>
+                        Alamat
+                    </li>
+                    <li>
+                        <i class="fa fa-phone fa-fw"></i>
+                        <a class="text-decoration-none" href="https://wa.me/62895341044500">+62 895-3410-44500</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-envelope fa-fw"></i>
+                        <a class="text-decoration-none" href="mailto:Boindonusantara@gmail.com">Boindonusantara@gmail.com</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-4 md-12 pt-5">
+                <h2 class="h2 text-dark border-bottom pb-3 border-dark">Category</h2>
+                <ul class="list-unstyled text-dark footer-link-list">
+                    <li><a class="text-decoration-none" href="{{ route('category.show', 'lifestyle') }}">Lifestyle</a></li>
+                    <li><a class="text-decoration-none" href="{{ route('category.show', 'kebutuhan-rumah') }}">Kebutuhan Rumah</a></li>
+                    <li><a class="text-decoration-none" href="{{ route('category.show', 'makanan--minuman') }}">Makanan & Minuman</a></li>
+                    <li><a class="text-decoration-none" href="{{ route('category.show', 'elektronik') }}">Elektronik</a></li>
+                    <li><a class="text-decoration-none" href="{{ route('category.show', 'fashion-pria--wanita') }}">Fashion Pria & Wanita</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-4 md-12 pt-5">
+                <h2 class="h2 text-dark border-bottom pb-3 border-dark">Further Info</h2>
+                <ul class="list-unstyled text-dark footer-link-list">
+                    <li><a class="text-decoration-none" href="{{ url('/') }}">Home</a></li>
+                    <li><a class="text-decoration-none" href="/product_list">Shop</a></li>
+                    <li><a class="text-decoration-none" href="{{ route('category.index') }}">Category</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="row text-dark mb-4 garis">
+            <div class="col-12 mb-3">
+                <div class="w-100 my-3 border-top border-dark"></div>
+            </div>
+            <div class="col-auto me-auto">
+                <ul class="list-inline text-left footer-icons">
+                    <li class="list-inline-item border border-dark rounded-circle text-center">
+                        <a class="text-dark text-decoration-none" target="_blank" href="http://facebook.com/"><i class="fab fa-facebook-f fa-lg fa-fw"></i></a>
+                    </li>
+                    <li class="list-inline-item border border-dark rounded-circle text-center">
+                        <a class="text-dark text-decoration-none" target="_blank" href="https://www.instagram.com/wirawiri.indonesia?igsh=MW9yZHk5NmNpdWViZQ=="><i class="fab fa-instagram fa-lg fa-fw"></i></a>
+                    </li>
+                    <li class="list-inline-item border border-dark rounded-circle text-center">
+                        <a class="text-dark text-decoration-none" target="_blank" href="https://twitter.com/"><i class="fab fa-twitter fa-lg fa-fw"></i></a>
+                    </li>
+                    <li class="list-inline-item border border-dark rounded-circle text-center">
+                        <a class="text-dark text-decoration-none" target="_blank" href="https://www.linkedin.com/"><i class="fab fa-linkedin fa-lg fa-fw"></i></a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-</footer>   
-<!-- Footer Section End -->
+
+    <div class="w-100 bg-black py-3">
+        <div class="container">
+            <div class="row pt-2">
+                <div class="col-12">
+                    <p class="text-left text-dark">
+                        Copyright &copy; 2024 Company Name 
+                        | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">Wimartindo</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</footer>
