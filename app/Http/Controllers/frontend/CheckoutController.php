@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\order\Cart;
-use App\Models\setting\Alamatpengirim;
+use App\Models\Setting\Alamatpengirim;
 use App\Models\master\Categori;
 use App\Repositories\CrudRepositories;
 use App\Services\Feature\CartService;

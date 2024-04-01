@@ -3226,18 +3226,22 @@ ol {
 }
 
 .container_footer .container .logo {
-	font-size: 20px;
+	font-size: 15px;
 	font-family: "Figtree", sans-serif;
 	font-weight: bold;
 	color: #237B9F;
 }
 
 .container_footer .container .logo img {
-	width: 150px;
+	width: 100px;
 }
 
 .container_footer {
 	font-family: "Figtree", sans-serif;
+}
+
+.container_footer .container h2 {
+	font-size: 22px;
 }
 
 .container_footer .container .list-unstyled li {
@@ -3247,6 +3251,25 @@ ol {
 
 .container_footer .container .garis ul li {
 	width: 30px;
+}
+
+.container_footer .container .garis ul li a i {
+	margin-right: 3px;
+}
+
+.container_footer .container .gambar_pembayaran .gambar{
+	padding: 0 0 0 15px;
+}
+
+.container_footer .container .gambar_pembayaran .gambar .container_gambar{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	height: 40px;
+	background-color: white;
+	margin: 5px 0;
+	padding: 5px;
+	box-shadow: 0 1px 2px rgb(173, 173, 173);	
 }
 
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
@@ -3956,6 +3979,28 @@ ol {
 
 	.container_footer .container p{
 		font-size: 20px;
+	}
+
+	.container_footer .container h2 {
+		font-size: 40px;
+	}
+
+	.container_footer .container .gambar_pembayaran .gambar .container_gambar {
+		width: 280px;
+		height: 150px;
+		padding: 0 30px;
+	}
+
+	.container_footer .container .gambar_pembayaran .gambar:nth-child(2) .container_gambar,
+	.container_footer .container .gambar_pembayaran .gambar:nth-child(5) .container_gambar,
+	.container_footer .container .gambar_pembayaran .gambar:nth-child(8) .container_gambar {
+		margin-left: 70px;
+	}
+
+	.container_footer .container .gambar_pembayaran .gambar:nth-child(3) .container_gambar,
+	.container_footer .container .gambar_pembayaran .gambar:nth-child(6) .container_gambar,
+	.container_footer .container .gambar_pembayaran .gambar:nth-child(9) .container_gambar {
+		margin-left: 140px;
 	}
 }
 
