@@ -1104,12 +1104,11 @@ ol {
 	margin-bottom: 5px;
 }
 
-
 .title-logo {
 	font-size: 35px;
     color: #237B9F;
     -webkit-text-stroke: 1px black;
-    font-family: 'Luckiest Guy', cursive;
+    font-family: "Figtree", sans-serif;
     margin-left: 15px;
     margin-top: 12px;
 	letter-spacing: -2px;
@@ -1119,7 +1118,7 @@ ol {
 	color: #000000;
 	font-weight: 100;
 	font-size: 20px;
-	font-family: 'Luckiest Guy', cursive;
+	font-family: "Figtree", sans-serif;
 }
 
 .categories__text p {
@@ -1172,7 +1171,7 @@ ol {
 	color: #000000;
 	font-weight: 100;
 	font-size: 18px;
-	font-family: 'Luckiest Guy', cursive;
+	font-family: "Figtree", sans-serif;
 }
 
 .categories__card p {
@@ -1736,7 +1735,7 @@ ol {
 	font-weight: 600;
 	text-transform: uppercase;
 	margin-bottom: 12px;
-	font-family: 'Luckiest Guy', cursive;
+	font-family: "Figtree", sans-serif;
 }
 
 .product__details__text h3 span {
