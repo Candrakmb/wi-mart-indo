@@ -30,11 +30,11 @@
             </div>
 
             <div class="col-lg-3 col-md-12 pt-5">
-                <h2 class="h2 text-dark border-bottom pb-3 border-dark">Pengiriman</h2>
+                <h2 class="h2 text-dark border-bottom pb-3 border-dark">Pembayaran</h2>
                 <div class="row gambar_pembayaran">
                     <div class="col-lg-4 col-md-4 gambar">
                         <div class="container_gambar">
-                            <img src="{{ asset('img') }}/Pembayaran/seabank.png" alt="">
+                            <img src="{{ asset('img') }}/Pembayaran/danamon.png" alt="">
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 gambar">
@@ -54,12 +54,12 @@
                     </div>
                     <div class="col-lg-4 col-md-4 gambar">
                         <div class="container_gambar">
-                            <img src="{{ asset('img') }}/Pembayaran/bsi.png" alt="">
+                            <img src="{{ asset('img') }}/Pembayaran/qris.png" alt="">
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 gambar">
                         <div class="container_gambar">
-                            <img src="{{ asset('img') }}/Pembayaran/cimb.png" alt="">
+                            <img src="{{ asset('img') }}/Pembayaran/dana.png" alt="">
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 gambar">
@@ -74,30 +74,15 @@
                     </div>
                     <div class="col-lg-4 col-md-4 gambar">
                         <div class="container_gambar">
-                            <img src="{{ asset('img') }}/Pembayaran/spay.png" alt="">
+                            <img src="{{ asset('img') }}/Pembayaran/ovo.png" alt="">
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-3 col-md-12 pt-5">
-                <h2 class="h2 text-dark border-bottom pb-3 border-dark">Pembayaran</h2>
+                <h2 class="h2 text-dark border-bottom pb-3 border-dark">Pengiriman</h2>
                 <div class="row gambar_pembayaran">
-                    <div class="col-lg-4 col-md-4 gambar">
-                        <div class="container_gambar">
-                            <img src="{{ asset('img') }}/Pengiriman/spx.png" alt="">
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 gambar">
-                        <div class="container_gambar">
-                            <img src="{{ asset('img') }}/Pengiriman/jnt_express.png" alt="">
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 gambar">
-                        <div class="container_gambar">
-                            <img src="{{ asset('img') }}/Pengiriman/jnt_cargo.png" alt="">
-                        </div>
-                    </div>
                     <div class="col-lg-4 col-md-4 gambar">
                         <div class="container_gambar">
                             <img src="{{ asset('img') }}/Pengiriman/jne.png" alt="">
@@ -105,12 +90,17 @@
                     </div>
                     <div class="col-lg-4 col-md-4 gambar">
                         <div class="container_gambar">
-                            <img src="{{ asset('img') }}/Pengiriman/ninja.png" alt="">
+                            <img src="{{ asset('img') }}/Pengiriman/tiki.png" alt="">
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 gambar">
                         <div class="container_gambar">
-                            <img src="{{ asset('img') }}/Pengiriman/sicepat.png" alt="">
+                            <img src="{{ asset('img') }}/Pengiriman/pos.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 gambar">
+                        <div class="container_gambar">
+                            <img src="{{ asset('img') }}/Pengiriman/wimart.png" alt="">
                         </div>
                     </div>
                 </div>
