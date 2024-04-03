@@ -22,6 +22,8 @@ class Product extends Model
         'slug',
         'thumbnail',
         'price',
+        'berat_display',
+        'label',
         'weight',
         'description',
     ];

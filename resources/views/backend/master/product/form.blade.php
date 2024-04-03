@@ -28,7 +28,7 @@
                          <div class="col-md-6 mt-2">
                              <label for="categories_id" class="label1">kategori</label><span class="required">*</span>
                              <select name="categories_id" class="form-select" required>
-                                 <option value="" {{ $type == 'create' ? 'selected' : '' }}>
+                                 <option value="" {{ $type == 'create' ? 'selected' : '' }} disabled>
                                      pilih kategori....
                                  </option>
                                  @foreach ($data_categori as $category)
@@ -48,14 +48,36 @@
                          </div>
                          <div class="col-md-6 mt-2">
                              <label for="price" class="label1">Harga</label><span class="required">*</span>
-                             <input type="number" name="price" class="form-control price"
+                             <input type="text" name="price" id="price" class="form-control price"
                                  value="{{ $type == 'create' ? '' : $data->price }}" required>
                              <p class="help-block" style="display: none;"></p>
                          </div>
                          <div class="col-md-6 mt-2">
+                            <label for="berat_display" class="label1">Unit produk</label><span class="required">*</span>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="number" name="berat_display" class="form-control berat_display"
+                                    value="{{ $type == 'create' ? '' : $data->berat_display }}" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <select name="label" class="form-select" required>
+                                        <option value="" {{ $type == 'create' ? 'selected' : '' }} disabled>pilih satuan...</option>
+                                        <option value="L" {{ $type == 'update' && $data->label == 'L' ? 'selected' : '' }}>Liter</option>
+                                        <option value="KG" {{ $type == 'update' && $data->label == 'KG' ? 'selected' : '' }}>kg</option>
+                                        <option value="g" {{ $type == 'update' && $data->label == 'g' ? 'selected' : '' }}>g</option>
+                                        <option value="pack" {{ $type == 'update' && $data->label == 'pack' ? 'selected' : '' }}>PACK</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <p class="help-block" style="display: none;"></p>
+                        </div>
+                         <div class="col-md-6 mt-2">
                              <label for="weight" class="label1">Berat</label><span class="required">*</span>
+                             <div class="input-group">
                              <input type="number" name="weight" class="form-control weight"
-                                 value="{{ $type == 'create' ? '' : $data->weight }}" required>
+                                 value="{{ $type == 'create' ? '' : $data->weight }}" aria-describedby="basic-addon2" required>
+                                 <span class="input-group-text" id="basic-addon2">Gram</span>
+                             </div>
                              <p class="help-block" style="display: none;"></p>
                          </div>
                          <div class="col-md-6 mt-2">
@@ -64,6 +86,11 @@
                                  value="{{ $type == 'create' ? '' : $data->stok }}" required>
                              <p class="help-block" style="display: none;"></p>
                          </div>
+                         <div class="col-md-6 mt-2">
+                            <label for="description" class="label1">Description</label><span class="required">*</span>
+                            <textarea type="number" name="description" class="form-control description" required>{{ $type == 'create' ? '' : $data->description }}</textarea>
+                            <p class="help-block" style="display: none;"></p>
+                        </div>
                      </div>
                      <script>
                          $(document).on('keyup', '#name', function() {
@@ -73,11 +100,7 @@
                          });
                      </script>
                      <div class="row justify-content-md-center mt-3">
-                         <div class="col-md-6 mt-2">
-                             <label for="description" class="label1">Description</label><span class="required">*</span>
-                             <textarea type="number" name="description" class="form-control description" required>{{ $type == 'create' ? '' : $data->description }}</textarea>
-                             <p class="help-block" style="display: none;"></p>
-                         </div>
+                         
                          <div class="col-md-6 mt-2">
                              <div class="d-flex justify-content-center align-items-center mb-2">
                                  <a href="{{ $type == 'create' ? asset('assets/images/no-image.jpg') : asset('storage/image/product/' . $data->thumbnails) }}"
@@ -104,7 +127,8 @@
                              <button type="button" id="add_row" class="btn btn-info"><b>+</b> Add</button>
                          </div>
                          <div class="col-md-12 mt-2">
-                             <table class="table table-sm table-borderless table-responsive-sm table_variasi">
+                            <div class="table-responsive">
+                             <table class="table table-sm table-borderless table_variasi">
                                  <tbody>
                                     @if ($type == 'update')
                                      @if ($data_variasi != null)
@@ -163,6 +187,7 @@
                                     @endif
                                  </tbody>
                              </table>
+                            </div>
                          </div>
                      </div>
                      @if ($type != 'lihat')

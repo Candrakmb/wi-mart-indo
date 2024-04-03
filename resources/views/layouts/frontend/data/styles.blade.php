@@ -1,9 +1,11 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Wii Mart Indo</title>
+<title>WiMartIndo</title>
+
   {{-- <link rel="shortcut icon" href="{{ $app_logo }}" type="image/x-icon"> --}}
 
 <!-- Google Font -->
+<link rel="shortcut icon" href="{{ asset('img/logo.png') }}" />
 <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
 rel="stylesheet">

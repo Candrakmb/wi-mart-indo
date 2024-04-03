@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('carts', function (Blueprint $table) {
-            $table->foreignId('variasi_warna_id')->constrained('variasi_produks')->onDelete('cascade')->nullable();
-            $table->foreignId('variasi_ukuran_id')->constrained('variasi_produks')->onDelete('cascade')->nullable();
+            $table->foreignId('variasi_warna_id')->nullable()->constrained('variasi_produks')->onDelete('cascade');
+            $table->foreignId('variasi_ukuran_id')->nullable()->constrained('variasi_produks')->onDelete('cascade');
         });
     }
 

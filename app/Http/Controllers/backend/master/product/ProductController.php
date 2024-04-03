@@ -92,7 +92,6 @@ class ProductController extends Controller
                 'categories_id' => 'required|integer',
                 'name' => 'required|string|max:255',
                 'slug' => 'required|string|max:255|unique:categories,slug',
-                'price' => 'required|integer',
                 'weight'=> 'required|integer',
                 'stok'=> 'required|integer',
                 'description' => 'required',
@@ -112,13 +111,17 @@ class ProductController extends Controller
                 // Simpan gambar ke dalam folder storage/app/public/
                 $gambar_productName = time() . '.' . $request->gambar_product->extension();
                 $request->gambar_product->storeAs('public/image/product', $gambar_productName);
-    
+                $priceWithoutDot = str_replace('.', '', $request->price);
+                $priceWithoutRp = str_replace('Rp ', '', $priceWithoutDot);
+                // dd( $priceWithoutRp);
                 // Buat objek kategori baru
                 $product = new Product;
                 $product->categories_id = $request->categories_id;
                 $product->name = $request->name;
                 $product->slug = $request->slug;
-                $product->price = $request->price;
+                $product->price = $priceWithoutRp;
+                $product->berat_display = $request->berat_display;
+                $product->label = $request->label;
                 $product->weight = $request->weight;
                 $product->stok = $request->stok;
                 $product->description = $request->description;
@@ -134,7 +137,7 @@ class ProductController extends Controller
                     ]
                 );
 
-                if ($data['spesifikasi']) {
+                if (isset($data['spesifikasi'])) {
                     foreach ($data['spesifikasi'] as $key => $value) {
                         $variasi = new VariasiProduk();
                         $variasi->product_id=$product->id;
