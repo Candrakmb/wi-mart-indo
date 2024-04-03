@@ -30,4 +30,7 @@ return [
 
     'paid_success'    => 'Pembayaran Berhasil',
     'paid_expired'    => 'Pembayaran Expired',
+
+    'isi_warna'    => 'Belum Memilih Warna',
+    'isi_ukuran'    => 'Belum Memilih Size',
 ];

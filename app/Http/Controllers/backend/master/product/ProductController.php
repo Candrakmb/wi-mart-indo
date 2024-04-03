@@ -8,6 +8,7 @@ use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 use App\Models\master\Categori;
 use App\Models\master\Product;
+use App\Models\master\VariasiProduk;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -47,6 +48,12 @@ class ProductController extends Controller
                 ->orderBy('products.id');
         $query = $query->first();
         $this->data['data'] = $query;
+        $variasi = VariasiProduk::where('product_id', '=', $id)
+                ->orderBy('variasi_produks.id');
+        $variasi = $variasi->get();
+        $count = $variasi->count();
+        $this->data['count'] = $count;
+        $this->data['data_variasi'] = $variasi;
     	return view($this->data['sektor'].'.'.$this->data['parent'].'.'.$this->data['modul'].'.index', $this->data);
     }
 
@@ -117,7 +124,28 @@ class ProductController extends Controller
                 $product->description = $request->description;
                 $product->thumbnails = $gambar_productName; // Simpan nama gambar ke dalam kolom thumbnails
                 $product->save();
-    
+
+                $data = $request->only(
+                    [
+                        'jenis',
+                        'spesifikasi', 
+                        'stok_variasi', 
+                        'status',
+                    ]
+                );
+
+                if ($data['spesifikasi']) {
+                    foreach ($data['spesifikasi'] as $key => $value) {
+                        $variasi = new VariasiProduk();
+                        $variasi->product_id=$product->id;
+                        $variasi->jenis=$data['jenis'][$key];
+                        $variasi->spesifikasi = $data['spesifikasi'][$key];
+                        $variasi->stok = $data['stok_variasi'][$key];
+                        $variasi->status= $data['status'][$key];
+                        $variasi->save();
+                    } 
+                }
+
                 DB::commit();
                 return response()->json(['title' => 'Success!', 'icon' => 'success', 'text' => 'Data Berhasil Ditambah!', 'ButtonColor' => '#66BB6A', 'type' => 'success']);
             } else {
@@ -188,6 +216,43 @@ class ProductController extends Controller
 
                 // Simpan perubahan
                 $product->save();
+
+                $data = $request->only(
+                    [
+                        'id_variasi',
+                        'jenis',
+                        'spesifikasi', 
+                        'stok_variasi', 
+                        'status',
+                    ]
+                );
+
+                if ($data['spesifikasi']) {
+                    $existingvariasis = VariasiProduk::where('product_id', $request->id)->get();
+                
+                    // Ambil id_variasi dari data variasi yang sudah ada
+                    $existingvariasiIds = $existingvariasis->pluck('id')->toArray();
+                
+                    if ($existingvariasis->isNotEmpty()) {
+                        VariasiProduk::where('product_id', $request->id)->delete();
+                    }
+                
+                    foreach ($data['spesifikasi'] as $key => $value) {
+                        $variasi = new VariasiProduk();
+                
+                        // Jika id_variasi ada dalam data variasi yang sudah ada, gunakan id_variasi tersebut
+                        if (isset($data['id_variasi'][$key]) && in_array($data['id_variasi'][$key], $existingvariasiIds)) {
+                            $variasi->id = $data['id_variasi'][$key];
+                        }
+                
+                        $variasi->product_id = $request->id;
+                        $variasi->jenis=$data['jenis'][$key];
+                        $variasi->spesifikasi = $data['spesifikasi'][$key];
+                        $variasi->stok = $data['stok_variasi'][$key];
+                        $variasi->status= $data['status'][$key];
+                        $variasi->save();
+                    }
+                }
 
                 DB::commit();
                 return response()->json(['title' => 'Success!', 'icon' => 'success', 'text' => 'Data Berhasil Diubah!', 'ButtonColor' => '#66BB6A', 'type' => 'success']);

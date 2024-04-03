@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\order\Order;
 use App\Models\master\Product;
+use App\Models\master\VariasiProduk;
 
 class OrderDetail extends Model
 {
@@ -24,6 +25,14 @@ class OrderDetail extends Model
     {
         return $this->belongsTo(Product::class,'product_id');
     }
+    public function variasiWarna()
+    {
+        return $this->belongsTo(VariasiProduk::class,'variasi_warna_id');
+    }
+    public function variasiUkuran()
+    {
+        return $this->belongsTo(VariasiProduk::class,'variasi_ukuran_id');
+    }       
 
     public function getTotalPricePerProductAttribute()
     {

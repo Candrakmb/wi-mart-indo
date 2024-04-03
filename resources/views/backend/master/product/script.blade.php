@@ -162,7 +162,61 @@
                 $('#table').DataTable().ajax.reload();
             });
         }
-
+        var addRow = function(){
+            $('#add_row').on('click', function(){
+                var no = $('.spesifikasi').length;
+                var html = "";
+                if(no == 0){
+                    $('.table_variasi tbody').html("");
+                }
+                html += ` 
+                <tr>
+                <th scope="row">${no + 1}</th>
+                <td>
+                    <label for="jenis[]" class="label1">jenis</label><span class="required">*</span>
+                    <select name="jenis[]" class="form-select" required>
+                    <option value="" selected disabled>pilih ....</option>
+                    <option value="ukuran" >Ukuran</option>
+                    <option value="warna" >Warna</option>
+                     </select>
+                <td>
+                    <label for="spesifikasi[]" class="label1">Spesifikasi</label><span class="required">*</span>
+                    <input type="text" name="spesifikasi[]" class="form-control spesifikasi"  required>
+                </td>
+                <td>
+                    <label for="stok_variasi[]" class="label1">Stok</label><span class="required">*</span>
+                    <input type="number" name="stok_variasi[]" class="form-control stok_variasi"  required>
+                </td>
+                <td>
+                    <label for="status[]" class="label1">Status</label><span class="required">*</span>
+                    <select name="status[]" class="form-select" required>
+                    <option value="" selected disabled>pilih ....</option>
+                    <option value="0" >Kosong</option>
+                    <option value="1" >Tersedia</option>
+                     </select>
+                </td>
+                <td>
+                <button style="width: 100%; height: 70px;" type="button" class="btn btn-danger btn-raised btn-xs btn-hapus-detail" title="Hapus"><i class="icon-trash"></i></button>
+                </td>
+                </tr>
+                    `;
+                $('.table_variasi tbody').append(html);
+                deleteRow();
+            });
+        }
+        var deleteRow = function(){
+            $('.btn-hapus-detail').unbind().click(function(){
+                $(this).parent().parent().remove();
+                var html = "";
+                var jmlrow = $('.spesifikasi').length;
+                if(jmlrow == 0){
+                    html += `<tr>
+                                <td colspan="99" class="text-center">klik add</td>
+                            </tr>`;
+                    $('.table_variasi tbody').html(html);
+                }
+            });
+        }
         var create = function() {
             $('#simpan').click(function(e) {
                 e.preventDefault();
@@ -355,6 +409,8 @@
                 setData();
                 create();
                 hapus();
+                addRow();
+                deleteRow();
             }
         }
     }();

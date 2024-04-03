@@ -37,7 +37,9 @@
                                         <td class="cart__product__item">
                                             <img src="{{ $carts->Product->thumbnails_path}}" alt="" width="90">
                                             <div class="cart__product__item__title">
-                                                <h6> {{ $carts->Product->name }} </h6>
+                                                <h6> {{ $carts->Product->name }}
+                                                    {{ $carts->variasi_warna_id != null ? "Warna :  {$carts->variasiWarna->spesifikasi}" : '' }}
+                                                    {{ $carts->variasi_ukuran_id != null ? "Size : " . strtoupper($carts->variasiUkuran->spesifikasi) : '' }} </h6>
                                             </div>
                                         </td>
                                         <td class="cart__price">{{ $carts->Product->price_rupiah }}</td>

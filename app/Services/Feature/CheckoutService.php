@@ -4,6 +4,7 @@ namespace App\Services\Feature;
 use App\Models\order\Order;
 use App\Models\order\OrderDetail;
 use App\Repositories\CrudRepositories;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class CheckoutService{
@@ -39,12 +40,28 @@ class CheckoutService{
         ];
         // dd($dataOrder);
         $orderStore = $this->order->store($dataOrder);
-        foreach($userCart as $cart){
-            $this->ordeDetail->store([
-                'order_id' => $orderStore->id,
-                'product_id' => $cart->product_id,
-                'qty' => $cart->qty
-            ]);
+        DB::beginTransaction();
+        try {
+            foreach ($userCart as $cart) {
+                $orderDetailData = new OrderDetail;
+                $orderDetailData->order_id =$orderStore->id;
+                $orderDetailData->product_id = $cart->product_id;
+                $orderDetailData->qty =$cart->qty;
+        
+                if ($cart->variasi_warna_id != null) {
+                    $orderDetailData->variasi_warna_id = $cart->variasi_warna_id;
+                } 
+                if ($cart->variasi_ukuran_id != null) {
+                    $orderDetailData->variasi_ukuran_id = $cart->variasi_ukuran_id;
+                }
+        
+                $orderDetailData->save();
+            }
+            // dd($orderDetailData);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            // Handle exception
         }
         $this->cartService->deleteUserCart();
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\order\Cart;
 use App\Models\Master\Product;
+use App\Models\master\VariasiProduk;
 use App\Repositories\CrudRepositories;
 use App\Services\Feature\CartService;
 use Illuminate\Http\Request;
@@ -29,11 +30,84 @@ class CartController extends Controller
     public function store(Request $request)
     {
         try {
-           $this->cartService->store($request);
-            return redirect()->route('cart.index')->with('success',__('message.cart_success'));
+            $cek = VariasiProduk::where('product_id', $request->cart_product_id)->get();
+            $ukuranDitemukan = false;
+            $warnaDitemukan = false;
+            foreach ($cek as $item) {
+                if ($item->jenis == 'ukuran') {
+                    $ukuranDitemukan = true;
+                }
+                if ($item->jenis == 'warna') {
+                    $warnaDitemukan = true;
+                }
+            }
+            if($ukuranDitemukan && $warnaDitemukan){
+                if($request->warna == '' || $request->size == '' ){
+                    if ($request->warna == '') {
+                        return response()->json([
+                            'title' => 'Peringatan!',
+                            'icon' => 'warning',
+                            'text' => 'belum memilih warna!',
+                            'ButtonColor' => '#FFA500',
+                            'type' => 'warning'
+                        ]);
+                    } else if($request->size == '') {
+                        return response()->json([
+                            'title' => 'Peringatan!',
+                            'icon' => 'warning',
+                            'text' => 'belum memilih Size!',
+                            'ButtonColor' => '#FFA500',
+                            'type' => 'warning'
+                        ]);
+                    }
+                }else {
+                    $this->cartService->store($request);
+                    return response()->json([
+                        'type' => 'success'
+                    ]);
+                }  
+            } else if ($ukuranDitemukan){
+                if ($request->size == '') {
+                    return response()->json([
+                        'title' => 'Peringatan!',
+                        'icon' => 'warning',
+                        'text' => 'belum memilih Size!',
+                        'ButtonColor' => '#FFA500',
+                        'type' => 'warning'
+                    ]);
+                }else {
+                    $this->cartService->store($request);
+                    return response()->json([
+                        'type' => 'success'
+                    ]);
+                }  
+            }
+            else if ($warnaDitemukan){
+                if ($request->warna == '') {
+                    return response()->json([
+                        'title' => 'Peringatan!',
+                        'icon' => 'warning',
+                        'text' => 'belum memilih warna!',
+                        'ButtonColor' => '#FFA500',
+                        'type' => 'warning'
+                    ]);
+                }else {
+                    $this->cartService->store($request);
+                    return response()->json([
+                        'type' => 'success'
+                    ]);
+                }  
+            }else if( !$ukuranDitemukan && !$warnaDitemukan ){
+                $this->cartService->store($request);
+                return response()->json([
+                    'type' => 'success'
+                ]);
+            }
         } catch (\Throwable $th) {
             dd($th);
         }
+         //    $this->cartService->store($request);
+        //     return redirect()->route('cart.index')->with('success',__('message.cart_success'));
     }
 
     public function delete($id)
@@ -50,7 +124,7 @@ class CartController extends Controller
             {
                 $cart = $this->cart->find($cart_id);
                 $cart->qty = $request['cart_qty'][$i];
-                $cart->save();
+                $cart->save();                    
                 $i++;
             }
             return redirect()->route('cart.index')->with('success',__('message.cart_update'));

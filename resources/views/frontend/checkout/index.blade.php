@@ -91,7 +91,10 @@
                                         <span class="top__text__right">Total</span>
                                     </li>
                                     @foreach ($data['carts'] as $cart)
-                                        <li>{{ $loop->iteration }}. {{ $cart->Product->name}} x
+                                        <li>{{ $loop->iteration }}. {{ $cart->Product->name }}
+                                            {{ $cart->variasi_warna_id != null ? $cart->variasiWarna->spesifikasi : '' }}
+                                            {{ $cart->variasi_ukuran_id != null ? strtoupper($cart->variasiUkuran->spesifikasi) : '' }}
+                                             x
                                             {{-- $cart->Product->categori()->first()->name --}}
                                             {{ $cart->qty }}<span>{{ rupiah($cart->total_price_per_product) }}</span>
                                         </li>
