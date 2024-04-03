@@ -174,7 +174,6 @@ class ProductController extends Controller
                 'categories_id' => 'required|integer',
                 'name' => 'required|string|max:255',
                 'slug' => 'required|string|max:255|unique:categories,slug,' . $request->id . ',id',
-                'price' => 'required|numeric',
                 'weight' => 'required|numeric',
                 'stok' => 'required|integer',
                 'description' => 'required|string',
@@ -195,11 +194,16 @@ class ProductController extends Controller
             // Jika nama belum digunakan selain oleh id yang sedang diperbarui, update data
             if ($cek == null) {
                 // Update data category
+                $priceWithoutDot = str_replace('.', '', $request->price);
+                $priceWithoutRp = str_replace('Rp ', '', $priceWithoutDot);
+
                 $product = Product::findOrFail($request->id);
                 $product->categories_id = $request->categories_id;
                 $product->name = $request->name;
                 $product->slug = $request->slug;
-                $product->price = $request->price;
+                $product->price = $priceWithoutRp;
+                $product->berat_display = $request->berat_display;
+                $product->label = $request->label;
                 $product->weight = $request->weight;
                 $product->stok = $request->stok;
                 $product->description = $request->description;
@@ -230,7 +234,7 @@ class ProductController extends Controller
                     ]
                 );
 
-                if ($data['spesifikasi']) {
+                if (isset($data['spesifikasi'])) {
                     $existingvariasis = VariasiProduk::where('product_id', $request->id)->get();
                 
                     // Ambil id_variasi dari data variasi yang sudah ada
