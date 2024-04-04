@@ -20,7 +20,7 @@
             <div class="card-body" id="id-content">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-12 invoice">
                             <div class="invoice" style="border-top: 2px solid #6777ef;">
                                 <div class="invoice-print">
                                     <div class="row">
@@ -207,7 +207,7 @@
     <section>
         <div class="container" id="content-print">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 order_track">
                     <div class="card card-primary">
                         <div class="card-header">
                             <h4 class="card-title">Order Track</h4>

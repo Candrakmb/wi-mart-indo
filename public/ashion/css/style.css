@@ -3271,6 +3271,8 @@ ol {
 	box-shadow: 0 1px 2px rgb(173, 173, 173);	
 }
 
+
+
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
 
 @media only screen and (min-width: 1600px) and (max-width: 1900px) {
@@ -4001,6 +4003,27 @@ ol {
 	.container_footer .container .gambar_pembayaran .gambar:nth-child(9) .container_gambar {
 		margin-left: 140px;
 	}
+
+	.shop-cart .container .row .container_transaksi tbody tr th {
+		font-size: 20px;
+	}
+	
+	.shop-cart .container .row .container_transaksi tbody tr td {
+		font-size: 18px;
+	}
+	
+	.shop-cart .container .row .transaksi {
+		width: 900px;
+		margin-left: 50px;
+	}
+
+	.shop-cart .card .card-body .container .row .invoice {
+		width: 780px;
+	}
+
+	.container .row .order_track .card {
+		width: 900px;
+	}
 }
 
 /* Wide Mobile = 480px */
@@ -4295,6 +4318,4 @@ ol {
 		width: 100%;
 		font-size: 24px;
 	}
-
-	
 }

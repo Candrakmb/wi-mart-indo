@@ -17,16 +17,17 @@
     <section class="shop-cart spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="table-responsive table-invoice">
+                <div class="col-lg-12 transaksi">
+                    <div class="table-responsive table-invoice container_transaksi">
                         <table class="table table-striped table-md">
-                          <tbody><tr>
-                            <th>Invoice ID</th>
-                            <th>Products</th>
-                            <th>Status</th>
-                            <th>Created At</th>
-                            <th>Action</th>
-                          </tr>
+                          <tbody>
+                            <tr>
+                                <th>Invoice ID</th>
+                                <th>Products</th>
+                                <th>Status</th>
+                                <th>Created At</th>
+                                <th>Action</th>
+                            </tr>
                           @foreach ($data['orders'] as $order)
                           <tr>
                             <td><a href="{{ route('transaction.show',$order->invoice_number) }}">{{ $order->invoice_number }}</a></td>
