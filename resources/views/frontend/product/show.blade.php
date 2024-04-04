@@ -62,7 +62,7 @@
                                                 <div class="quantity">
                                                     <span>Warna:</span>
                                                     @foreach ($data['variasi_produk'] as $warna)
-                                                        @if ($warna->jenis == 'warna')
+                                                        @if ($warna->jenis == 'warna' && $warna->status == '1' )
                                                             <button type="button" class="btn btn-outline-primary btn-warna"
                                                                 data-id="{{ $warna->id }}">{{ $warna->spesifikasi }}</button>
                                                         @endif
@@ -79,7 +79,7 @@
                                                 <div class="quantity">
                                                     <span>Size:</span>
                                                     @foreach ($data['variasi_produk'] as $size)
-                                                        @if ($size->jenis == 'ukuran')
+                                                        @if ($size->jenis == 'ukuran' && $size->status == '1')
                                                             <button type="button" class="btn btn-outline-primary btn-size"
                                                                 data-id="{{ $size->id }}">{{ $size->spesifikasi }}</button>
                                                         @endif

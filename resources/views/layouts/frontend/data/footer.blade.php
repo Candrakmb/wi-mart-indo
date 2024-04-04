@@ -39,7 +39,7 @@
                     </div>
                     <div class="col-lg-4 col-md-4 gambar">
                         <div class="container_gambar">
-                            <img src="{{ asset('img') }}/Pembayaran/bca.webp" alt="">
+                            <img src="{{ asset('img') }}/Pembayaran/bca.png" alt="">
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 gambar">

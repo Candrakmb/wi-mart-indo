@@ -84,7 +84,8 @@
                                                         @foreach ($data['order']->orderDetail()->get() as $detail)
                                                             <tr>
                                                                 <td>{{ $loop->iteration }}</td>
-                                                                <td>{{ $detail->product->name }}
+                                                                <td>{{ $detail->product->name }} {{ $detail->variasi_warna_id != null ? "Warna :  {$detail->variasiWarna->spesifikasi}" : '' }}
+                                                                    {{ $detail->variasi_ukuran_id != null ? "Size : " . strtoupper($detail->variasiUkuran->spesifikasi) : '' }}
                                                                     {{-- <a>
                                                                     href="{{ route('product.show', ['categoriSlug' => $detail->Product->category->slug, 'productSlug' => $detail->Product->slug]) }}">{{ $detail->product->name }}
                                                                 </a> --}}
@@ -189,9 +190,9 @@
                                                         Order Received</a>
                                                 @endif
                                             </div>
-                                            <button class="btn btn-warning btn-icon icon-left" id="btnPrint"><i
+                                            {{-- <button class="btn btn-warning btn-icon icon-left" id="btnPrint"><i
                                                     class="fa fa-print"></i>
-                                                Print</button>
+                                                Print</button> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -259,7 +260,7 @@
                                     <button class="down payManual" data-id="{{ $bank->id }}"
                                         data-nama="{{ $bank->nama_bank }}" data-atasNama="{{ $bank->atas_nama }}"
                                         data-rek="{{ $bank->no_rekening }}"
-                                        data-total="{{ $data['order']->total_pay }}">{{ strtoupper($bank->nama_bank) }}</button>
+                                        data-total="{{ $data['order']->total_pay }}"><img class="text-center" style="width:10%;" src="{{ asset('img/Pembayaran/'.strtolower($bank->nama_bank).'.png') }}" alt="">  {{ strtoupper($bank->nama_bank) }}</button>
                                 @endforeach
                             </div>
                             <button class="down" id="pay-button">Transfer Online</button>
@@ -412,7 +413,7 @@
                 total = total + nRandom;
                 var csrfToken = $('meta[name="csrf-token"]').attr('content');
                 var startTime = new Date();
-                console.log(dataId, nama, atasNama, noRek, total);
+                // console.log(dataId, nama, atasNama, noRek, total);
 
                 let pembayaran = JSON.parse(localStorage.getItem('pembayaran'));
                 pembayaran.statusMetodePembayaran = '1';
@@ -437,7 +438,7 @@
                     },
                     success: function(response) {
                         var timeStart = '{{ $data['order']->updated_at }}';
-                        console.log(timeStart);
+                        // console.log(timeStart);
                         // Lakukan tindakan tambahan jika diperlukan setelah permintaan berhasil
                     },
                     error: function(xhr, status, error) {
@@ -458,10 +459,10 @@
             const pembayaran = JSON.parse(localStorage.getItem('pembayaran'));
             var startTime = new Date(pembayaran.startTime);
             // Menambahkan 5 menit ke waktu awal untuk mendapatkan waktu akhir
-            var endTime = new Date(startTime.getTime() + 5 * 60000);
+            var endTime = new Date(startTime.getTime() + 24 * 60 * 60 * 1000);
             var endTimeFormatted = endTime.toLocaleString();
             // 5 menit dalam milidetik
-            console.log(startTime);
+            // console.log(startTime);
             var html = "";
             var totalRupiah = formatRupiah(total);
             var upBank = nama.toUpperCase();
@@ -522,7 +523,7 @@
             document.querySelectorAll('#konfirmasi').forEach(function(buttonKonfirmasi) {
                 buttonKonfirmasi.addEventListener('click', function() {
                     var csrfToken = $('meta[name="csrf-token"]').attr('content');
-                    console.log(dataId, nama, atasNama, noRek, total, nRandom);
+                    // console.log(dataId, nama, atasNama, noRek, total, nRandom);
                     $('#pilihMetodePay').modal('hide');
                     let pembayaran = JSON.parse(localStorage.getItem('pembayaran'));
                     pembayaran.sudahBayar = true;
@@ -539,7 +540,7 @@
                             'X-CSRF-TOKEN': csrfToken
                         },
                         success: function(response) {
-                            console.log(response);
+                            // console.log(response);
                             // Lakukan tindakan tambahan jika diperlukan setelah permintaan berhasil
                         },
                         error: function(xhr, status, error) {
@@ -560,7 +561,7 @@
                             'X-CSRF-TOKEN': csrfToken
                         },
                         success: function(response) {
-                            console.log(response);
+                            // console.log(response);
                             // Lakukan tindakan tambahan jika diperlukan setelah permintaan berhasil
                         },
                         error: function(xhr, status, error) {
@@ -685,7 +686,7 @@
                         'X-CSRF-TOKEN': csrfToken
                     },
                     success: function(response) {
-                        console.log(response);
+                        // console.log(response);
                         // Lakukan tindakan tambahan jika diperlukan setelah permintaan berhasil
                     },
                     error: function(xhr, status, error) {
@@ -696,9 +697,6 @@
                 snap.pay('{{ $data['order']->snap_token }}', {
                     // Optional
                     onSuccess: function(result) {
-                        var apiUrl = "{{ env('TELEGRAM_BOT_TOKEN') }}";
-                        console.log(result.transaction_status);
-                        console.log(apiUrl);
                         $.ajax({
                             type: "POST",
                             url: "/notifikasi",
@@ -710,7 +708,7 @@
                                 'X-CSRF-TOKEN': csrfToken
                             },
                             success: function(response) {
-                                console.log(response);
+                                // console.log(response);
                                 // Lakukan tindakan tambahan jika diperlukan setelah permintaan berhasil
                             },
                             error: function(xhr, status, error) {

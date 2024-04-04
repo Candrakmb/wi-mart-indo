@@ -84,7 +84,8 @@
                                                 @foreach ($orders->orderDetail()->get() as $detail)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $detail->product->name }}
+                                                        <td>{{ $detail->product->name }} {{ $detail->variasi_warna_id != null ? "Warna :  {$detail->variasiWarna->spesifikasi}" : '' }}
+                                                            {{ $detail->variasi_ukuran_id != null ? "Size : " . strtoupper($detail->variasiUkuran->spesifikasi) : '' }}
                                                             {{-- <a>
                                                             href="{{ route('product.show', ['categoriSlug' => $detail->Product->category->slug, 'productSlug' => $detail->Product->slug]) }}">{{ $detail->product->name }}
                                                         </a> --}}

@@ -28,8 +28,9 @@ class Notificationtele extends Notification
         try {
             $invoice = $request['invoice'];
             $order = Order::where('invoice_number', $invoice)->first();
+            $url = url('https://wimartindo.com/order/lihat/'.$order->id);
             $tipe = $request['tipe'];
-
+            
             if ($tipe == '0') {
                 $total = $request['total'];
                 $idBank = $request['idBank'];
@@ -47,6 +48,7 @@ class Notificationtele extends Notification
                 $content .= "Konfirmasi pada web admin";
                 
             } else if ($tipe == '1') {
+                
                 $orderCreate= Carbon::parse($order->created_at)->format('d F Y H:i:s');
                 $totalRupiah = "Rp " . number_format($order->total_pay, 0, ',', '.');
                 $content = "Ada order baru masuk $orderCreate:\n";
@@ -61,7 +63,8 @@ class Notificationtele extends Notification
 
             return TelegramMessage::create()
                     ->to(1104082522)
-                    ->content($content);
+                    ->content($content)
+                    ->button('View Invoice', $url);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
