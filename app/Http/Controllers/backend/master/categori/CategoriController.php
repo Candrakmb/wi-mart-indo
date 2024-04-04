@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoriController extends Controller
 {
-
+    
     public $data = [
         'title' => 'Category',
         'modul' => 'categori',

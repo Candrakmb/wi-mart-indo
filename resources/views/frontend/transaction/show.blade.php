@@ -241,8 +241,8 @@
             </div>
         </div>
         <!-- Modal pilih pembayaran -->
-        <div class="modal fade" id="pilihMetodePay" tabindex="-1" aria-labelledby="pilihMetodePayLabel" aria-hidden="true">
-            <div class="modal-dialog">
+        <div class="modal fade" id="pilihMetodePay" tabindex="-1" aria-labelledby="pilihMetodePayLabel" aria-hidden="true"> 
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="pilihMetodePayLabel">Metode Pembayaran</h5>
@@ -276,7 +276,7 @@
         <!-- Modal proses pembayran offline -->
         <div class="modal fade" id="prosesPembayaran" tabindex="-1" aria-labelledby="prosesPembayaran"
             aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="prosesPembayaran">Pembayaran</h5>

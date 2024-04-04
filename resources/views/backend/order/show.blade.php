@@ -17,20 +17,19 @@
             Print</button>
     </div>
 </div>
-<div class="card p-3">
-    <div class="card-body" id="id-content">
-        <div class="container">
+{{-- <div class="card"> --}}
+    {{-- <div class="card-body" > --}}
+        <div class="container" id="id-content">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12 invoice">
                     <div class="invoice" style="border-top: 2px solid #6777ef;">
                         <div class="invoice-print">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="invoice-title">
-                                        <h2>Invoice</h2>
-                                        <div class="invoice-number">No Order : {{ $orders->invoice_number }}</div>
-                                    </div>
-
+                                        <div class="invoice-title">
+                                                <h2>Invoice</h2>
+                                                <div class="invoice-number">No Order : {{ $orders->invoice_number }}</div>
+                                        </div>
                                     <hr>
                                     <div class="row">
                                         <div class="col-md-6">
@@ -156,8 +155,8 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    {{-- </div> --}}
+{{-- </div> --}}
 
 
 <div class="modal fade" id="inputResi" tabindex="-1" aria-labelledby="inputResiLabel" aria-hidden="true">

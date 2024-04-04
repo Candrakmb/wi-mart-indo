@@ -130,43 +130,33 @@
             <div class="card-body">
                 <div class="owl-carousel owl-theme" id="products-carousel">
                     @foreach ($best_products as $best_product)
-                        <div>
-                            <div class="product-item pb-3">
-                                <div class="product-image">
-                                    <img alt="image" src="{{ $best_product->thumbnails_path }}" class="img-fluid">
-                                </div>
-                                <div class="product-details">
-                                    <div class="product-name">{{ $best_product->name }}</div>
-                                    <div class="product-review">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <div class="text-muted text-small">{{ $best_product->total_sold }}
-                                        {{ __('text.sold') }}</div>
-                                    <div class="product-cta">
-                                        <a href="#" class="btn btn-primary">Detail</a>
+                    <div class="card border-dark bg-light" style="width: auto;">
+                        <div style="height: 200px; width: 241px;"> <!-- Contoh tinggi dan lebar elemen induknya -->
+                            <img src="{{ $best_product->thumbnails_path }}" style="height: 100%; width: 100%;" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <div class="produk">
+                                <div class="product-item pb-3">
+                                    {{-- <div class="product-image">
+                                        <img alt="image" src="" class="img-fluid">
+                                    </div> --}}
+                                    <div class="product-details">
+                                        <div class="product-name">{{ $best_product->name }}</div>
+                                      
+                                        <div class="text-muted text-small">{{ $best_product->total_sold }}
+                                            {{ __('text.sold') }}</div>
+                                        <div class="product-cta">
+                                            <a href="/product" class="btn btn-primary">Detail</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                      </div>
                     @endforeach
                 </div>
             </div>
         </div>
-        </div>
-        <div class="col-lg-4">
-          
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-          
-        </div>
-        <div class="col-md-4">
-         
         </div>
     </div>
 @endsection

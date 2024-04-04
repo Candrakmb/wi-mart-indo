@@ -35,7 +35,11 @@ Route::post('/payments/midtrans-success', [MidtransController::class, 'success']
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::prefix('categori')->name('categori.')->group(function(){
+    Route::group(['middleware' => ['can:manage admin portal']], function () { 
+        Route::get('/dashboard',[DashboardController::class,'index'])->name('admin.dashboard');
+Route::get('/customer',[CustomerController::class,'customer'])->name('admin.customer');
+Route::post('/customer/table', [CustomerController::class, 'table'])->name('admin.customer.table');
+        Route::prefix('categori')->name('categori.')->group(function(){
         Route::get('/',[CategoriController::class,'categori'])->name('categori');
         Route::post('/table', [CategoriController::class, 'table'])->name('table');
         Route::get('/create',[CategoriController::class,'create'])->name('create');
@@ -78,7 +82,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/lihat/{id}',[OrderController::class,'lihat'])->name('lihat');
         Route::post('/konfirmasiform',[OrderController::class,'konfirmasiform'])->name('konfirmasiform');
         Route::post('/resiform',[OrderController::class,'resiform'])->name('resiform');
+    });  
     });
+   
 });
 
 
@@ -120,9 +126,7 @@ Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/product_list', [FrontendProductController::class,'index'])->name('product.index');
 Route::get('/category', [FrontendCategoryController::class,'index'])->name('category.index');
 Route::get('/category/{slug}', [FrontendCategoryController::class,'show'])->name('category.show');
-Route::get('/dashboard',[DashboardController::class,'index'])->name('admin.dashboard');
-Route::get('/customer',[CustomerController::class,'customer'])->name('admin.customer');
-Route::post('/customer/table', [CustomerController::class, 'table'])->name('admin.customer.table');
+
 
 Route::get('/product/{categoriSlug}/{productSlug}',[FrontendProductController::class,'show'])->name('product.show');
 

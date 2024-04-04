@@ -590,6 +590,10 @@
     
     
     @media screen and (max-width: 768px) {
+        .invoice .invoice-title .invoice-number{
+            float: left;
+            margin-top: 1px;
+        }
         #content {
             position: relative;
             width: calc(100% - 60px);
