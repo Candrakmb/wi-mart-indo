@@ -66,13 +66,13 @@
                         class: 'text-left'
                     },
                     {
-                        data: 'slug',
-                        name: 'slug',
+                        data: 'categori.name',
+                        name: 'categori.name',
                         class: 'text-left'
                     },
                     {
-                        data: 'categori.name',
-                        name: 'categori.name',
+                        data: 'slug',
+                        name: 'slug',
                         class: 'text-left'
                     },
                     {
