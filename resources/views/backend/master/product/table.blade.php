@@ -27,7 +27,7 @@
                     <label class="dropdown-item"><input class="toggle-vis" data-column="5" type="checkbox" checked> Harga </label>
                     <label class="dropdown-item"><input class="toggle-vis" data-column="6" type="checkbox" checked> Berat </label>
                     <label class="dropdown-item"><input class="toggle-vis" data-column="7" type="checkbox" checked> Stok </label>
-                    <label class="dropdown-item"><input class="toggle-vis" data-column="8" type="checkbox" checked> Deskripsi </label>
+                    <label class="dropdown-item"><input class="toggle-vis" data-column="8" type="checkbox"> Deskripsi </label>
                 </div>
             </div>
         </div>
