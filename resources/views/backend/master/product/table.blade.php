@@ -44,7 +44,7 @@
                     <th class="th-table" style="font-size: 12px;">Harga</th>
                     <th class="th-table" style="font-size: 12px;">Berat</th>
                     <th class="th-table" style="font-size: 12px;">Stok</th>
-                    <th class="th-table" style="font-size: 12px;">Deskripsi</th>
+                    <th class="th-table" style="font-size: 12px; max-width: 40px;" >Deskripsi</th>
                 </tr>
             </thead>
             <tbody class="text-center">

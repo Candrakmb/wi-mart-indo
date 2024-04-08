@@ -102,6 +102,25 @@ class TransacationController extends Controller
         }
     }    
 
+    public function getOrderStatus($invoiceNumber)
+    {
+        // Cari order berdasarkan nomor faktur
+        $order = Order::where('invoice_number', $invoiceNumber)->first();
+
+        // Periksa apakah order ditemukan
+        if ($order) {
+            // Jika ditemukan, kembalikan status order dalam respons JSON
+            return response()->json([
+                'status' => $order->status,
+            ]);
+        } else {
+            // Jika tidak ditemukan, kembalikan respons JSON dengan status 404 (Not Found)
+            return response()->json([
+                'error' => 'Order not found',
+            ], 404);
+        }
+    }
+
     public function success()
     {
         return back()->with('success',__('message.paid_success'));

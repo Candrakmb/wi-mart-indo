@@ -72,13 +72,31 @@ class ProductController extends Controller
             ->addColumn('action', function($row){
                 $btn = '';
                 $btn .= '<div class="text-center">';
-                $btn .= '<div class="btn-group btn-group-solid mx-5">';
+                $btn .= '<div class="btn-group btn-group-solid mx-3">';
                 $btn .= '<a class="btn btn-warning ml-1" href="/product/update/'.$row->id.'"><i class="icon-edit"></i></a> &nbsp';
                 $btn .= '<button class="btn btn-danger btn-raised btn-xs" id="btn-hapus" title="Hapus"><i class="icon-trash"></i></button>';
                 $btn .= '</div>';    
                 $btn .= '</div>';
                 return $btn;
             })
+            ->addColumn('satuan_berat', function($row){
+                $berat_kg = $row->weight/1000; // Konversi dari gram ke kilogram
+                $berat = '';
+                $berat .= '<div class="text-center">';
+                $berat .= '<p>'.$berat_kg.' kg</p>'; // Menampilkan hasil konversi berat dalam kilogram
+                $berat .= '</div>';
+                return $berat;
+            })
+            ->addColumn('harga', function($row){
+                $price = $row->price;
+                $formatted_price = number_format($price, 0, ',', '.'); // Format angka menjadi format mata uang rupiah
+                $harga = '';
+                $harga .= '<div class="text-center">';
+                $harga .= '<p>Rp '.$formatted_price.'</p>'; // Menampilkan harga dalam format rupiah
+                $harga .= '</div>';
+                return $harga;
+            })
+            ->rawColumns(['satuan_berat','action','harga'])
             ->make(true);
     }
     

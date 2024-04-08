@@ -259,7 +259,7 @@
         {
             var subtotal = `{{$data['carts']->sum('total_price_per_product')}}`;
             var total = parseInt(subtotal) + ongkir;
-            console.log(ongkir)
+            // console.log(ongkir)
             $('#text-cost').text(rupiah(ongkir));
             $('#shipping_cost').val(ongkir);
             $('#total').text(rupiah(total))

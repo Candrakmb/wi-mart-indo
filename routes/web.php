@@ -120,6 +120,7 @@ Route::middleware('auth','role:user')->group(function(){
         Route::get('/success',[TransacationController::class,'success'])->name('success');
         Route::post('/metodePembayaran',[TransacationController::class,'metodePembayaran'])->name('metodePembayaran');
         Route::post('/updatePembayaranManual',[TransacationController::class,'updatePembayaranManual'])->name('updatePembayaranManual');
+        Route::get('/getstatus/{invoice_number}',[TransacationController::class,'getOrderStatus'])->name('getOrderStatus');
     });    
 });
 Route::get('/',[HomeController::class,'index'])->name('home');

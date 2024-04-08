@@ -62,10 +62,12 @@
                                 <div class="col-md-6">
                                     <select name="label" class="form-select" required>
                                         <option value="" {{ $type == 'create' ? 'selected' : '' }} disabled>pilih satuan...</option>
-                                        <option value="L" {{ $type == 'update' && $data->label == 'L' ? 'selected' : '' }}>Liter</option>
-                                        <option value="KG" {{ $type == 'update' && $data->label == 'KG' ? 'selected' : '' }}>kg</option>
+                                        <option value="l" {{ $type == 'update' && $data->label == 'L' ? 'selected' : '' }}>l</option>
+                                        <option value="ml" {{ $type == 'update' && $data->label == 'ml' ? 'selected' : '' }}>ml</option>
+                                        <option value="kg" {{ $type == 'update' && $data->label == 'KG' ? 'selected' : '' }}>kg</option>
                                         <option value="g" {{ $type == 'update' && $data->label == 'g' ? 'selected' : '' }}>g</option>
-                                        <option value="pack" {{ $type == 'update' && $data->label == 'pack' ? 'selected' : '' }}>PACK</option>
+                                        <option value="pack" {{ $type == 'update' && $data->label == 'pack' ? 'selected' : '' }}>pack</option>
+                                        <option value="pcs" {{ $type == 'update' && $data->label == 'pcs' ? 'selected' : '' }}>pcs</option>
                                     </select>
                                 </div>
                             </div>

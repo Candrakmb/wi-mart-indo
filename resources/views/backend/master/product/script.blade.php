@@ -76,13 +76,13 @@
                         class: 'text-left'
                     },
                     {
-                        data: 'price',
-                        name: 'price',
+                        data: 'harga',
+                        name: 'harga',
                         class: 'text-left'
                     },
                     {
-                        data: 'weight',
-                        name: 'weight',
+                        data: 'satuan_berat',
+                        name: 'satuan_berat',
                         class: 'text-left'
                     },
                     {
