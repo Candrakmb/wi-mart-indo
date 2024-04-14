@@ -33,7 +33,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="checkout__form__input">
                                     <p>Phone Number <span>*</span></p>
-                                    <input type="text" name="phone_number" >
+                                    <input type="text" name="phone_number" value="{{ auth()->user()->no_whatsapp }}">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
