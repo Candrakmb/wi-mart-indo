@@ -44,6 +44,7 @@
                 'columns': [
                     { data: 'DT_RowIndex', name: 'DT_RowIndex', class: 'text-center', orderable: false, searchable: false },
                     { data: 'name', name: 'nama', class: 'text-left' },
+                    { data: 'no_whatsapp', name: 'no_whatsapp', class: 'text-left' },
                     { data: 'email', name: 'email', class: 'text-left' },
                     // { data: 'alamat', name: 'alamat', class: 'text-left' },
                     // { data: 'no_telp', name: 'no_telp', class: 'text-left' },

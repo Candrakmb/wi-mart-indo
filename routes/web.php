@@ -97,7 +97,10 @@ Route::prefix('rajaongkir')->name('rajaongkir.')->group(function(){
 
 
 
-Route::middleware('auth','role:user')->group(function(){
+Route::middleware('auth','role:user', 'verified')->group(function(){
+
+    Route::get('/home',[HomeController::class,'index'])->name('dashboard-user');
+
     Route::prefix('cart')->name('cart.')->group(function(){
         Route::get('/',[CartController::class,'index'])->name('index');
         Route::post('/store',[CartController::class,'store'])->name('store');

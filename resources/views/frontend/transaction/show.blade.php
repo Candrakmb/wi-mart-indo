@@ -263,7 +263,7 @@
                                         data-total="{{ $data['order']->total_pay }}"><img class="text-center" style="width:10%;" src="{{ asset('img/Pembayaran/'.strtolower($bank->nama_bank).'.png') }}" alt="">  {{ strtoupper($bank->nama_bank) }}</button>
                                 @endforeach
                             </div>
-                            <button class="down" id="pay-button">Transfer Online</button>
+                            {{-- <button class="down" id="pay-button">Transfer Online</button> --}}
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -365,7 +365,7 @@
                     if (statusMetodePembayaran === '1') {
                         manualPayButton.style.display = 'block';
                         listBank.innerHTML = '';
-                        payButton.style.display = 'none';
+                        // payButton.style.display = 'none';
                         const pembayaran = JSON.parse(localStorage.getItem('pembayaran'));
                         const statusMetodePembayaran = pembayaran.statusMetodePembayaran;
                         const idBank = pembayaran.idBank;
@@ -388,12 +388,12 @@
 
                         })
                     } else if (statusMetodePembayaran === '2') {
-                        payButton.style.display = 'block';
+                        // payButton.style.display = 'block';
                         manualPayButton.style.display = 'none';
                         listBank.style.display = 'none';
 
                     } else {
-                        payButton.style.display = 'block';
+                        // payButton.style.display = 'block';
                         manualPayButton.style.display = 'block';
                     }
                 });
@@ -466,6 +466,7 @@
             var html = "";
             var totalRupiah = formatRupiah(total);
             var upBank = nama.toUpperCase();
+            var lowBank = nama.toLowerCase();
             html += `
             <div class="row justify-content-md-center">
             <div class="col-md-auto" style="width: 80%;">
@@ -481,12 +482,12 @@
                         
                         <div class="col-md-3 mb-3">
                             <div class="text-center">
-                           <img src="{{ asset('/img/bill.gif') }}">
+                           <img src="{{ asset('img/Pembayaran/${lowBank}.png') }}">
                         </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <h5> Bank ${upBank} </h5>
-                            <h5> ${atasNama}</h5>
+                            <h6 style="font-size: 15px; font-weight: bold;"> ${atasNama }</h6>
                         </div>
                         <div class="col-md-12">
                             <div class="input-group mb-3">
@@ -618,10 +619,10 @@
             }, 1500);
         }
 
-        payButton.addEventListener('click', function(e) {
-            $('#pilihMetodePay').modal('hide');
-            adminMidtrans();
-        });
+        // payButton.addEventListener('click', function(e) {
+        //     $('#pilihMetodePay').modal('hide');
+        //     adminMidtrans();
+        // });
 
         function adminMidtrans() {
             var totalPay = parseInt('{{$data['order']->total_pay}}');

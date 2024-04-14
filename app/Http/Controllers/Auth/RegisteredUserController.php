@@ -23,6 +23,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'no_whatsapp' => ['required', 'regex:/^(?:\+62|0)\d{9,12}$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -30,6 +31,7 @@ class RegisteredUserController extends Controller
         $user = new User();
         $user->id = (string) Str::uuid(); // Menggunakan UUID sebagai ID
         $user->name = $request->name;
+        $user->no_whatsapp = $request->no_whatsapp;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
 
@@ -41,6 +43,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('home');
+        return redirect()->route('dashboard-user');
     }
 }

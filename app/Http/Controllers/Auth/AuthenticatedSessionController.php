@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
         if(auth()->user()->getRoleNames()->contains('admin')) {
             return redirect()->route('admin.dashboard');
         }else{
-            return redirect()->route('home');
+            return redirect()->route('dashboard-user');
         }
     }
 

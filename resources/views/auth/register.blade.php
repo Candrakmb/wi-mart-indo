@@ -17,7 +17,14 @@
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
-
+                    
+                    <div class="form-group">
+                        <label for="">Nomor Whatsapp</label>
+                        <input type="number" name="no_whatsapp" class="form-control rounded-0">
+                        @error('no_whatsapp')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
 
                     <div class="form-group">
                         <label for="">Email</label>

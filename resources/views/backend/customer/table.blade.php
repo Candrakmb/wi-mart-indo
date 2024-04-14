@@ -28,6 +28,7 @@
                 <tr class="tr-table">
                     <th class="th-table" style="font-size: 12px;">No</th>
                     <th class="th-table" style="font-size: 12px;">Nama</th>
+                    <th class="th-table" style="font-size: 12px;">No Whatsapp</th>
                     <th class="th-table" style="font-size: 12px;">Email</th>
                 </tr>
             </thead>
