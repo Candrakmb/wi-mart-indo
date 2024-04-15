@@ -20,6 +20,7 @@ class CheckoutService{
 
     public function process($request)
     {
+
         $userCart = $this->cartService->getUserCart();
         $subtotal =  $userCart->sum('total_price_per_product');
         $total_pay = $subtotal + $request['shipping_cost']; 

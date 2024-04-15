@@ -27,6 +27,9 @@
                                 <div class="checkout__form__input">
                                     <p>Recipient Name <span>*</span></p>
                                     <input type="text" name="recipient_name" value="{{ auth()->user()->name }}" >
+                                    @error('recipient_name')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                     <input type="hidden" name="user_id" value="{{ auth()->user()->id }}" >
                                 </div>
                             </div>
@@ -34,6 +37,9 @@
                                 <div class="checkout__form__input">
                                     <p>Phone Number <span>*</span></p>
                                     <input type="text" name="phone_number" value="{{ auth()->user()->no_whatsapp }}">
+                                    @error('phone_number')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -46,6 +52,9 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                    @error('province_id')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -54,12 +63,18 @@
                                     <select name="city_id" id="city_id" class="select-2" disabled >
                                         <option value="" selected disabled>-- Select City --</option>
                                     </select>
+                                    @error('city_id')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="checkout__form__input">
                                     <p>Address Detail <span>*</span></p>
                                     <input type="text" name="address_detail" >
+                                    @error('address_detail')
+                                    <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -70,6 +85,9 @@
                                         <option value="tiki">TIKI</option>
                                         <option value="pos">POS INDONESIA</option> --}}
                                     </select>
+                                    @error('courier')
+                                    <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -77,6 +95,9 @@
                                     <p>Shipment Method <span>*</span></p>
                                     <select name="shipping_method" id="shipping_method" >
                                     </select>
+                                    @error('shipping_method')
+                                    <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

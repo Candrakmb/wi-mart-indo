@@ -17,6 +17,7 @@ use App\Http\Controllers\backend\setting\AddBankController;
 use App\Http\Controllers\Rajaongkir\RajaongkirController;
 use App\Http\Controllers\Midtrans\MidtransController;
 use App\Http\Controllers\backend\setting\AlamatPengirimController;
+use App\Http\Controllers\PrintController;
 use Illuminate\Support\Facades\Notification;
 
 /*
@@ -137,5 +138,7 @@ Route::get('/product/{categoriSlug}/{productSlug}',[FrontendProductController::c
 Route::post('/notifikasi',function(){
     Notification::route('telegram', env('TELEGRAM_CHAT_ID'))->notify(new Notificationtele);
 });
+
+Route::get('/print-pdf/{invoice_number}', [PrintController::class, 'printPDF'])->name('print.pdf');
 
 require __DIR__ . '/auth.php';

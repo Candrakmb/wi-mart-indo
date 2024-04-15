@@ -35,11 +35,17 @@ class CheckoutController extends Controller
 
     public function process(Request $request)
     {
-        try{
+            $request->validate([
+                'recipient_name' => ['required', 'string', 'max:255'],
+                'phone_number' => ['required', 'regex:/^(?:\+62|0)\d{9,12}$/'],
+                'province_id' => ['required' ],
+                'city_id' => ['required'],
+                'address_detail' => ['required', 'string', 'max:255'],
+                'courier' => ['required', 'string', 'max:255'],
+                'shipping_method' => ['required', 'string', 'max:255'],
+            ]);
+            
             $this->checkoutService->process($request->all());
             return redirect()->route('transaction.index')->with('success',__('message.order_success'));
-        }catch(Exception $e){
-            dd($e);
-        }
     }
 }

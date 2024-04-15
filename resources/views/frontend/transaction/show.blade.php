@@ -594,6 +594,40 @@
             `;
             $('#contenModel').append(html);
             $('#prosesPembayaran').modal('show');
+            getStatus();
+        }
+
+        function getStatus() {
+            $.ajax({
+                url: '/transaction/getstatus/{{ $data["order"]->invoice_number }}',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // console.log(data.status == 0);
+                    if(data.status == 1) {
+                        $('#prosesPembayaran').modal('hide');
+                        // Tampilkan SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Pembayaran Berhasil',
+                            text: 'Reloading in 5 seconds...',
+                            timer: 5000,
+                            timerProgressBar: true,
+                            willClose: () => {
+                                location.reload(); // Muat ulang halaman setelah 5 detik
+                            }
+                        });
+                    } else {
+                        // Jika status bukan 1, lanjutkan polling setelah 5 detik
+                        setTimeout(getStatus, 5000);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error polling status:', error);
+                    // Jika terjadi kesalahan, lanjutkan polling setelah 5 detik
+                    setTimeout(getStatus, 5000);
+                }
+            });
         }
 
         function copyText(inputId) {

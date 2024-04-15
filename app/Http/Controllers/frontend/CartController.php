@@ -127,7 +127,7 @@ class CartController extends Controller
                 $cart->save();                    
                 $i++;
             }
-            return redirect()->route('cart.index')->with('success',__('message.cart_update'));
+            // return redirect()->route('cart.index')->with('success',__('message.cart_update'));
         } catch (\Throwable $th) {
             dd($th);
         }
