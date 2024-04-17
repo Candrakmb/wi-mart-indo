@@ -190,16 +190,16 @@
                                                         Order Received</a>
                                                 @endif
                                             </div>
-                                            {{-- <button class="btn btn-warning btn-icon icon-left" id="btnPrint"><i
+                                            <a href="{{ route('print', $data['order']->invoice_number) }}"
+                                                class="btn btn-warning btn-icon icon-left"><i
                                                     class="fa fa-print"></i>
-                                                Print</button> --}}
+                                                Print</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\order\Order;
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use Carbon\Carbon;
 
 class PrintController extends Controller
 {
@@ -17,11 +17,12 @@ class PrintController extends Controller
 
         // Kirim data order ke view
         $data = ['order' => $order];
-        
+        $fileName ='invoice_'.$invoice_number . '_' . Carbon::now()->format('Ymd') . '.pdf';
         $pdf = Pdf::loadView('print.invoice', $data);
-        // return $pdf->download('invoice.pdf');
+        return $pdf->download($fileName);
 
-        return $pdf->stream();
-
+        // return $pdf->stream('invoice.pdf'); 
+        
+        // return view('print.invoice' ,$data);
     }
 }

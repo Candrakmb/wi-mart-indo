@@ -13,8 +13,9 @@
             <button type="button" class="btn btn-primary btn-icon icon-left" data-bs-toggle="modal"
                 data-bs-target="#inputResi"><i class="fa fa-print"></i> Input Resi</button>
         @endif
-        <button type="button" class="btn btn-warning btn-icon icon-left" id="btnPrint"><i class="fa fa-print"></i>
-            Print</button>
+        <a href="{{ route('print', $orders->invoice_number) }}"
+                class="btn btn-warning btn-icon icon-left"><i
+                    class="fa fa-print"></i>Print</a>
     </div>
 </div>
 {{-- <div class="card"> --}}

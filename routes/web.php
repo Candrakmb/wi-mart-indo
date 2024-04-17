@@ -139,6 +139,6 @@ Route::post('/notifikasi',function(){
     Notification::route('telegram', env('TELEGRAM_CHAT_ID'))->notify(new Notificationtele);
 });
 
-Route::get('/print-pdf/{invoice_number}', [PrintController::class, 'printPDF'])->name('print.pdf');
+Route::get('/print-pdf/{invoice_number}', [PrintController::class, 'printPDF'])->name('print');
 
 require __DIR__ . '/auth.php';

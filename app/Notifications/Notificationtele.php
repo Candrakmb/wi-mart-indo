@@ -29,6 +29,7 @@ class Notificationtele extends Notification
             $invoice = $request['invoice'];
             $order = Order::where('invoice_number', $invoice)->first();
             $url = url('https://wimartindo.com/order/lihat/'.$order->id);
+            $url2 = url('https://wimartindo.com/print-pdf/'.$invoice);
             $tipe = $request['tipe'];
             
             if ($tipe == '0') {
@@ -62,9 +63,10 @@ class Notificationtele extends Notification
             }
 
             return TelegramMessage::create()
-                    ->to(1104082522)
+                    ->to(6808550322)
                     ->content($content)
-                    ->button('View Invoice', $url);
+                    ->button('View Invoice', $url)
+                    ->button('Print Invoice', $url2);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
