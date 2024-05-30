@@ -263,7 +263,7 @@
                                         data-total="{{ $data['order']->total_pay }}"><img class="text-center" style="width:10%;" src="{{ asset('img/Pembayaran/'.strtolower($bank->nama_bank).'.png') }}" alt="">  {{ strtoupper($bank->nama_bank) }}</button>
                                 @endforeach
                             </div>
-                            {{-- <button class="down" id="pay-button">Transfer Online</button> --}}
+                            <button class="down" id="pay-button">Transfer Online</button>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -297,7 +297,7 @@
     <!-- Modal -->
 @endsection
 @push('js')
-    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
+    <script src="{{ config('midtrans.snap_url') }}" data-client-key="{{ config('midtrans.client_key') }}">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
         integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
@@ -365,7 +365,7 @@
                     if (statusMetodePembayaran === '1') {
                         manualPayButton.style.display = 'block';
                         listBank.innerHTML = '';
-                        // payButton.style.display = 'none';
+                        payButton.style.display = 'none';
                         const pembayaran = JSON.parse(localStorage.getItem('pembayaran'));
                         const statusMetodePembayaran = pembayaran.statusMetodePembayaran;
                         const idBank = pembayaran.idBank;
@@ -388,12 +388,12 @@
 
                         })
                     } else if (statusMetodePembayaran === '2') {
-                        // payButton.style.display = 'block';
+                        payButton.style.display = 'block';
                         manualPayButton.style.display = 'none';
                         listBank.style.display = 'none';
 
                     } else {
-                        // payButton.style.display = 'block';
+                        payButton.style.display = 'block';
                         manualPayButton.style.display = 'block';
                     }
                 });
@@ -653,10 +653,10 @@
             }, 1500);
         }
 
-        // payButton.addEventListener('click', function(e) {
-        //     $('#pilihMetodePay').modal('hide');
-        //     adminMidtrans();
-        // });
+        payButton.addEventListener('click', function(e) {
+            $('#pilihMetodePay').modal('hide');
+            adminMidtrans();
+        });
 
         function adminMidtrans() {
             var totalPay = parseInt('{{$data['order']->total_pay}}');

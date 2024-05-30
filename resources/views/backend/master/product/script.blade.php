@@ -208,7 +208,7 @@
             $('.btn-hapus-detail').unbind().click(function(){
                 $(this).parent().parent().remove();
                 var html = "";
-                var jmlrow = $('.spesifikasi').length;
+                var jmlrow = $('.spesifikasi').length;  
                 if(jmlrow == 0){
                     html += `<tr>
                                 <td colspan="99" class="text-center">klik add</td>

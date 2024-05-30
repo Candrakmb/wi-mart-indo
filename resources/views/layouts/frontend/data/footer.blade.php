@@ -32,17 +32,17 @@
             <div class="col-lg-3 col-md-12 pt-5">
                 <h2 class="h2 text-dark border-bottom pb-3 border-dark">Pembayaran</h2>
                 <div class="row gambar_pembayaran">
-                    {{-- <div class="col-lg-4 col-md-4 gambar">
+                    <div class="col-lg-4 col-md-4 gambar">
                         <div class="container_gambar">
                             <img src="{{ asset('img') }}/Pembayaran/danamon.png" alt="">
                         </div>
-                    </div> --}}
+                    </div>
                     <div class="col-lg-4 col-md-4 gambar">
                         <div class="container_gambar">
                             <img src="{{ asset('img') }}/Pembayaran/bca.png" alt="">
                         </div>
                     </div>
-                    {{-- <div class="col-lg-4 col-md-4 gambar">
+                    <div class="col-lg-4 col-md-4 gambar">
                         <div class="container_gambar">
                             <img src="{{ asset('img') }}/Pembayaran/bni.png" alt="">
                         </div>
@@ -76,7 +76,7 @@
                         <div class="container_gambar">
                             <img src="{{ asset('img') }}/Pembayaran/ovo.png" alt="">
                         </div>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
 

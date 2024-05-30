@@ -9,7 +9,7 @@
          </div>
      </div>
      @if ($type == 'create' || $type == 'update' || $type == 'lihat')
-         <div class="card p-3">
+         <div class="card p-3"> 
              <div class="card-body">
                  <form id="form-data" method="post" autocompleted="off" enctype="multipart/form-data">
                      @csrf
